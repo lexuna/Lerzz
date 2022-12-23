@@ -1,8 +1,8 @@
 package de.lexuna.lerzz.server.controller;
 
 import com.mongodb.MongoBulkWriteException;
-import de.lexuna.lerzz.modle.User;
-import de.lexuna.lerzz.modle.repository.UserRepository;
+import de.lexuna.lerzz.model.User;
+import de.lexuna.lerzz.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

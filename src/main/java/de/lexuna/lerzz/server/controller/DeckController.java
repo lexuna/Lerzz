@@ -1,17 +1,13 @@
 package de.lexuna.lerzz.server.controller;
 
-import com.mongodb.MongoBulkWriteException;
-import de.lexuna.lerzz.modle.CardDeck;
-import de.lexuna.lerzz.modle.User;
-import de.lexuna.lerzz.modle.repository.CardDeckRepository;
+import de.lexuna.lerzz.model.CardDeck;
+import de.lexuna.lerzz.model.repository.CardDeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/deck")

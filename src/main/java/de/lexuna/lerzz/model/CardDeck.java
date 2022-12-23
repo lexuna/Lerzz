@@ -1,4 +1,4 @@
-package de.lexuna.lerzz.modle;
+package de.lexuna.lerzz.model;
 
 import lombok.Setter;
 import lombok.Value;

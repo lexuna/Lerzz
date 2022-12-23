@@ -1,4 +1,4 @@
-package de.lexuna.lerzz.modle.repository;
+package de.lexuna.lerzz.model.repository;
 
 import org.springframework.stereotype.Repository;
 
