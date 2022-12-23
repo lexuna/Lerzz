@@ -1,9 +1,11 @@
 package de.lexuna.lerzz.modle.repository;
 
-import de.lexuna.lerzz.modle.Card;
+import de.lexuna.lerzz.modle.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CardRepository extends MongoRepository<Card, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
+
+
 }

@@ -12,7 +12,7 @@
     </parent>
 
     <scm>
-        <connection>scm:svn:git@github.com:lexuna/Lerzz.git</connection>
+        <connection>scm:svn:https://github.com/lexuna/Lerzz.git</connection>
         <developerConnection>scm:svn:https://github.com/lexuna/Lerzz</developerConnection>
         <url>https://github.com/lexuna/Lerzz</url>
     </scm>
