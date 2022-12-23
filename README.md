@@ -1,5 +1,5 @@
 # Lerzz
 Lern Quiz Projekt für die IU
 
-## Instalationen
+## Installationen
 MongoDB: https://www.mongodb.com/try/download/community 
