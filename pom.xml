@@ -17,6 +17,10 @@
         <url>https://github.com/lexuna/Lerzz</url>
     </scm>
 
+    <properties>
+        <mainClass>de.lexuna.lerzz.LerzzServiceMain</mainClass>
+    </properties>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -40,4 +44,51 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- Dockering -->
+            <plugin>
+                <!-- Or use it in a separate project (recommended) -->
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>docker-build</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>buildTar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <from>
+                        <image>openjdk:17-alpine</image>
+                    </from>
+                    <to>
+                        <image>registry.hub.docker.com/lexuna/${project.artifactId}:${project.version}</image>
+                    </to>
+                    <!-- We currently don't use HTTPS -> insecure -->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                    <container>
+<!--                        <jvmFlags>-->
+<!--                            <jvmFlag>-Dlogging.config=/config/log4j2.xml</jvmFlag>-->
+<!--                            <jvmFlag>-Dspring.config.additional-location=/config/</jvmFlag>-->
+<!--                        </jvmFlags>-->
+                        <mainClass>${mainClass}</mainClass>
+                        <!-- The ports that the application exposes -->
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                    </container>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
