@@ -30,14 +30,17 @@ public class DeckController {
 
     @PostMapping("")
     public ResponseEntity<DeckResponse> create() { //ToDo erstellen
+        return null;
     }
 
     @PutMapping("")
     public ResponseEntity<DeckResponse> update() {//ToDo erstellen
+        return null;
     }
 
     @PutMapping("/add")
     public ResponseEntity<DeckResponse> addCard() {//ToDo erstellen
+        return null;
     }
 
     @DeleteMapping("")
