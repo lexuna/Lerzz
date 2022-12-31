@@ -3,6 +3,8 @@ package de.lexuna.lerzz.server.controller;
 import com.mongodb.MongoBulkWriteException;
 import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.model.repository.UserRepository;
+import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,35 +12,48 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * https://www.bezkoder.com/spring-boot-login-example-mysql/
+ */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
+@Slf4j
 public class UserController {
 
     @Autowired
     private UserRepository repo;
 
-    @GetMapping("/login")
-    public ResponseEntity<UserResponse> login(@RequestParam(value = "mail") String mail, @RequestParam(value = "password") String password) {
-        Optional<User> result = repo.findById(mail);
+    @PostMapping("/signin")
+    public ResponseEntity<UserResponse> login(@RequestBody LoginRequest request) {
+        Optional<User> result = repo.findById(request.mail());
         if (result.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("Unknown user"));
         }
         User user = result.get();
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(request.password())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("Wrong password"));
         }
         return ResponseEntity.ok(new UserResponse(user));
     }
 
-    @PostMapping("")
-    public ResponseEntity<UserResponse> create(@RequestParam(value = "mail") String mail,
-                                               @RequestParam(value = "name") String name,
-                                               @RequestParam(value = "password") String password) {
+    @PostMapping("/signup")
+    public ResponseEntity<UserResponse> create(@RequestBody User user) {
+        log.info("Create new user");
         try {
-            return ResponseEntity.ok(new UserResponse(repo.insert(new User(mail, name, password))));
+            if (repo.findById(user.getMail()).isEmpty()) {
+                return ResponseEntity.ok(new UserResponse(repo.insert(user)));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("User already exists"));
+            }
         } catch (MongoBulkWriteException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("User already exists"));
+            log.error("Failed to create user", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("Failed to create User"));
         }
+    }
+
+    @PostMapping("/signout")
+    public ResponseEntity<UserResponse> logout(@RequestBody User user) {
+        return null; //TODO implement
     }
 
     @PutMapping("")
@@ -62,8 +77,8 @@ public class UserController {
         return ResponseEntity.ok(new UserResponse(user));
     }
 
-    @DeleteMapping("")
-    public void delete(@RequestParam(value = "mail") String mail) {
+    @DeleteMapping("/{mail}")
+    public void delete(@PathVariable String mail) {
         repo.deleteById(mail);
     }
 
@@ -75,5 +90,8 @@ public class UserController {
         UserResponse(User user) {
             this(null, user);
         }
+    }
+
+    record LoginRequest(String mail, String password) {
     }
 }
