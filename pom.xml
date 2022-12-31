@@ -22,6 +22,20 @@
     </properties>
 
     <dependencies>
+        <!--Web -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+
+        <!-- JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,6 +56,25 @@
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!--        Testing-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>4.3.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -76,10 +109,10 @@
                     <!-- We currently don't use HTTPS -> insecure -->
                     <allowInsecureRegistries>true</allowInsecureRegistries>
                     <container>
-<!--                        <jvmFlags>-->
-<!--                            <jvmFlag>-Dlogging.config=/config/log4j2.xml</jvmFlag>-->
-<!--                            <jvmFlag>-Dspring.config.additional-location=/config/</jvmFlag>-->
-<!--                        </jvmFlags>-->
+                        <!--                        <jvmFlags>-->
+                        <!--                            <jvmFlag>-Dlogging.config=/config/log4j2.xml</jvmFlag>-->
+                        <!--                            <jvmFlag>-Dspring.config.additional-location=/config/</jvmFlag>-->
+                        <!--                        </jvmFlags>-->
                         <mainClass>${mainClass}</mainClass>
                         <!-- The ports that the application exposes -->
                         <ports>
