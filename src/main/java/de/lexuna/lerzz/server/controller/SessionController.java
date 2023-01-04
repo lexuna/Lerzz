@@ -2,31 +2,31 @@ package de.lexuna.lerzz.server.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class SessionController {
 
-    @GetMapping("/")
+    @GetMapping({"/", "/index"})
     public String process(Model model, HttpSession session) {
         @SuppressWarnings("unchecked")
         List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
 
         if (messages == null) {
+            log.info("add new session");
             messages = new ArrayList<>();
         }
-        model.addAttribute("sessionMessages", messages);
 
-        return "index";
+        model.addAttribute("sessionMessages", messages);
+        return "home";
     }
 
     @PostMapping("/persistMessage")
