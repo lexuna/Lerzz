@@ -15,29 +15,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/", "/auth").permitAll()
-//                        .anyRequest().authenticated())
-//                .formLogin((form) -> form
-//                        .loginPage("/auth/signin")
-//                        .permitAll())
-//                .logout((logout) -> logout.permitAll());
-//
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("admin")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((requests) -> requests // "/", "/home", "/index"
+                        .requestMatchers("/home").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll())
+                .logout((logout) -> logout.permitAll());
+        return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("admin")
+                        .roles("USER")
+                        .build();
+        return new InMemoryUserDetailsManager(user);
+    }
 
 }
