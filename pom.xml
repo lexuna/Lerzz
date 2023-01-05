@@ -19,6 +19,7 @@
 
     <properties>
         <mainClass>de.lexuna.lerzz.LerzzServiceMain</mainClass>
+        <java>17</java>
     </properties>
 
     <dependencies>
