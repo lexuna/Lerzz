@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 public class SessionController {
 
-    @GetMapping({"/", "/index"})
+    @GetMapping({"/", "/index", "/home"})
     public String process(Model model, HttpSession session) {
         @SuppressWarnings("unchecked")
         List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
