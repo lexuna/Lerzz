@@ -3,6 +3,7 @@ package de.lexuna.lerzz.server.controller;
 import com.mongodb.MongoBulkWriteException;
 import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.model.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import java.util.Optional;
 
 /**
  * https://www.bezkoder.com/spring-boot-login-example-mysql/
+ *
+ * https://www.javainuse.com/spring/sprboot_sec
  */
 @RestController
 @RequestMapping("/auth")
@@ -23,16 +26,18 @@ public class UserController {
     @Autowired
     private UserRepository repo;
 
-    @PostMapping("/signin")
-    public ResponseEntity<UserResponse> login(@RequestBody LoginRequest request) {
-        Optional<User> result = repo.findById(request.mail());
+    @PostMapping("/login")
+    public ResponseEntity<UserResponse> login(@RequestBody LoginRequest body, HttpServletRequest request) {
+        Optional<User> result = repo.findById(body.mail());
         if (result.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("Unknown user"));
         }
         User user = result.get();
-        if (!user.getPassword().equals(request.password())) {
+        if (!user.getPassword().equals(body.password())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new UserResponse("Wrong password"));
         }
+        request.getSession().setAttribute("USER", body.mail);
+        request.getSession().setAttribute("LOGIN", true);
         return ResponseEntity.ok(new UserResponse(user));
     }
 
