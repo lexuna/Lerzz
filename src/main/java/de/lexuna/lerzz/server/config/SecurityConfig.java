@@ -18,10 +18,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests // "/", "/home", "/index"
-                        .requestMatchers("/home","/**").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/home","/*.css", "/*.js", "/images/*", "/Home.html", "/", "/Help.html").permitAll()
+                        .anyRequest()
+                        .authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .usernameParameter("email")
                         .permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();
@@ -31,7 +33,7 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("admin")
+                        .username("admin@lerzz.de")
                         .password("admin")
                         .roles("USER")
                         .build();
