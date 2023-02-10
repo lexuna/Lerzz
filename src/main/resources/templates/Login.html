@@ -80,6 +80,9 @@
           <div class="u-container-layout u-container-layout-1">
             <h3 class="u-align-center u-text u-text-default u-text-1">Sign In</h3>
             <div class="u-expanded-width u-form u-login-control u-form-1">
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
               <form th:action="@{/login}" method="post" class="u-clearfix u-form-custom-backend u-form-spacing-35 u-form-vertical u-inner-form" source="custom" name="form-2" style="padding: 10px;">
                 <div class="u-form-group u-form-name">
                   <label for="username-708d" class="u-form-control-hidden u-label"></label>

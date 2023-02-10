@@ -1,19 +1,22 @@
 package de.lexuna.lerzz.model;
 
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 import lombok.experimental.NonFinal;
 import org.springframework.data.annotation.Id;
 
-@Value
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
 
     @Id
-    String mail;
-    @NonFinal
-    @Setter
-    String name;
-    @NonFinal
-    @Setter
+    String email;
+    String username;
     String password;
+    List<String> roles = new ArrayList<>();
+
 }
