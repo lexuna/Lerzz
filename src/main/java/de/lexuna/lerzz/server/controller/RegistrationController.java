@@ -32,7 +32,7 @@ public class RegistrationController {
             model.addAttribute("error", "Passwords do not match.");
             return "register";
         }
-        user.setPassword(password);
+//        user.setPassword(password);
         try {
             userService.registerNewUserAccount(user);
         } catch (UserAlreadyExistException e) {
