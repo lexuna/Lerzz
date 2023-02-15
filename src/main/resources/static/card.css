@@ -1,0 +1,29 @@
+.card-Container {
+height : 100%;
+padding: 8px 16px 8px 16px;
+}
+.row-head{
+height : 30px;
+}
+
+.row-body-1{
+height : 56px;
+
+}
+.row-body-2{
+height : 50px;
+
+}
+.row-fooder{
+height : 30px;
+}
+.right{
+display : flex;
+justify-content: flex-end;
+}
+
+.bottom{
+display : flex;
+align-content: flex-end;
+flex-wrap: wrap;
+}
