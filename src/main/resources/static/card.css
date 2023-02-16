@@ -1,21 +1,29 @@
 .card-Container {
-height : 100%;
-padding: 8px 16px 8px 16px;
+    height: 100%;
+    padding: 8px 16px 8px 16px;
+    background: var(--page-header-bgColor);
+    box-shadow: 0px 0px 10px var(--page-header-bgColor);
+    border-radius: 18px;
 }
 .row-head{
+    fill: var(--page-header-txtColor);
 height : 30px;
 }
 
 .row-body-1{
-height : 56px;
+height : 45px;
 
 }
 .row-body-2{
-height : 50px;
+height : 61px;
+margin-bottom : 5px;
+    color: var(--page-header-txtColor);
 
 }
 .row-fooder{
+        color: var(--page-header-txtColor);
 height : 30px;
+font-size: 0.8rem
 }
 .right{
 display : flex;
@@ -26,4 +34,21 @@ justify-content: flex-end;
 display : flex;
 align-content: flex-end;
 flex-wrap: wrap;
+}
+.card-icon{
+width : 25px;
+height : 25px;
+    fill: var(--orange);
+}
+.right>.card-icon{
+    fill: var(--page-header-txtColor);
+}
+.card-titel{
+    font-size: 1.1rem;
+    font-weight: bold;
+        color: var(--orange);
+}
+.card-description{
+    font-size: 0.8rem;
+
 }

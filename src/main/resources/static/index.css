@@ -5,10 +5,10 @@
 :root {
   --page-header-bgColor: #078000;
   --page-header-bgColor-hover: #18853A;
-  --page-header-txtColor: #dde9f8;
+  --page-header-txtColor: #ffffff;
   --page-header-headingColor: #00000;
   --page-header-width: 220px;
-  --page-content-bgColor: #f0f1f6;
+  --page-content-bgColor: #ffffff;
   --page-content-txtColor: #171616;
   --page-content-blockColor: #fff;
   --white: #fff;
@@ -209,7 +209,7 @@ body {
 /* cards
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .cards>.col{
-      margin: auto;
+      margin-bottom: 10px;
       min-width: 300px;
       max-width: 370px;
       height: 200px;
@@ -218,8 +218,12 @@ body {
 .col> .card{
 height: 100%;
 width: 100%;
-box-shadow: 0px 0px 10px rgb(15 170 56 / 60%);
 }
+
+.row {
+justify-content: center;
+}
+
 
 /* PAGE CONTENT STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
