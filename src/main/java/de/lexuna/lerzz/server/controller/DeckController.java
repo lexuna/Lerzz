@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/deck")
 public class DeckController {
 
     @Autowired
@@ -21,7 +20,7 @@ public class DeckController {
 
     @GetMapping("/dashboard")
     public String home(Model model) {
-        CardDeck deck = new CardDeck(0, "", "", "");
+        CardDeck deck = new CardDeck("", "", "");
         model.addAttribute(deck);
         return "dashboard";
     }
