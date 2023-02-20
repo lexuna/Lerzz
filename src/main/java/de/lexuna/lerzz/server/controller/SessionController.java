@@ -15,19 +15,19 @@ import java.util.List;
 @Slf4j
 public class SessionController {
 
-    @GetMapping({"/", "/index", "/home", "/login"})
-    public String process(Model model,HttpServletRequest request) {
-        @SuppressWarnings("unchecked")
-        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
-        if (messages == null) {
-            log.info("add new session");
-            messages = new ArrayList<>();
-            request.getSession().setAttribute("MY_SESSION_MESSAGES", messages);
-        }
-
-        model.addAttribute("sessionMessages", messages);
-        return "home";
-    }
+//    @GetMapping({"/", "/index", "/home", "/login"})
+//    public String process(Model model,HttpServletRequest request) {
+//        @SuppressWarnings("unchecked")
+//        List<String> messages = (List<String>) request.getSession().getAttribute("MY_SESSION_MESSAGES");
+//        if (messages == null) {
+//            log.info("add new session");
+//            messages = new ArrayList<>();
+//            request.getSession().setAttribute("MY_SESSION_MESSAGES", messages);
+//        }
+//
+//        model.addAttribute("sessionMessages", messages);
+//        return "";
+//    }
 
 
     @PostMapping("/logout")

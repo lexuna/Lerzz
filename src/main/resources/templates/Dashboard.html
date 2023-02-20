@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -210,8 +211,10 @@
       <section class="grid">
         <article>
           <div class="container" style="width: 100%">
-            <div class="row row-cols-1 cards">
-              <div class="col"><div class="card"> <div class="container card-Container">
+              <div class="row row-cols-1 cards" >
+                  <div class="col" th:each="deck : ${allDecks}">
+                    <div class="card">
+                      <div class="container card-Container">
                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
                 <div class="row row-head">
                   <div class="col-6"><svg class="card-icon" aria-hidden="true">
@@ -224,12 +227,12 @@
 
                 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
                 <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
+                  <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
                 </div>
 
                 <!-- Columns are always 50% wide, on mobile and desktop -->
                 <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
+                  <div class="col-12 card-description" th:text="${deck.description}">Description</div>
                 </div>
 
                 <div class="row row-fooder">
@@ -237,170 +240,10 @@
                   <div class="col-6 right">Schwer</div>
                 </div>
 
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#choice"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#text"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#choice"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#text"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#text"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#text"></use>
-                  </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></div>
-                </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel">Title</div>
-                </div>
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description">Description</div>
-                </div>
-
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
-              </div></div></div>
-              <div class="col"><div class="card"> <div class="container add-card">
+              </div>
+                    </div>
+                  </div>
+                <div class="col"><div class="card"> <div class="container add-card">
                 <div class="row">
                   <div class="col-3"><p style="margin-top: 15px;"></p></div>
                   <div class="col-6"><svg class="card-add" aria-hidden="true">
