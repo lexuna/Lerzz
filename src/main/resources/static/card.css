@@ -59,10 +59,38 @@ height : 25px;
 
 }
 .card-add{
-    height: 160px;
+    height: 180px;
 
 fill: var(--orange);
+
 }
+
+.add-card:hover{
+    background-color: var(--page-header-bgColor);
+    cursor: pointer;
+
+}
+
 .add-card>.row {
     margin-top: 7px;
+}
+svg.card-add {
+    width: 160px;
+}
+button.btn.btn-primary.me-md-2.b1,button.btn.btn-primary.b2{
+background-color: var(--page-header-bgColor);
+
+}
+
+button.btn.btn-primary.me-md-2.b1:hover,button.btn.btn-primary.b2:hover{
+background-color: var(--orange);
+
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: var(--page-header-bgColor);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem #078000ba;
 }
