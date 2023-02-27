@@ -4,7 +4,6 @@ import de.lexuna.lerzz.model.CardDeck;
 import de.lexuna.lerzz.model.repository.CardDeckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
@@ -16,5 +15,9 @@ public class DeckService {
 
     public List<CardDeck> findAll() {
         return repo.findAll();
+    }
+
+    public void addDeck(CardDeck deck) {
+        repo.insert(deck);
     }
 }

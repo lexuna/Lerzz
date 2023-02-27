@@ -6,8 +6,8 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link href="bootstrap.css" rel="stylesheet" >
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/card.css">
 
   </head>
   <body>
@@ -198,14 +198,14 @@
             </svg>
           </button>
         </form>
-        <div class="admin-profile">
-          <span class="greeting">Hello admin</span>
-          <div class="notifications">
-            <span class="badge">1</span>
-            <svg>
-              <use xlink:href="#users"></use>
-            </svg>
-          </div>
+        <div class="admin-profile" >
+          <span class="greeting" th:text="${username}">admin</span>
+<!--          <div class="notifications">-->
+<!--            <span class="badge">1</span>-->
+<!--            <svg>-->
+<!--              <use xlink:href="#users"></use>-->
+<!--            </svg>-->
+<!--          </div>-->
         </div>
       </section>
       <section class="grid">
@@ -229,22 +229,20 @@
                 <div class="row row-body-1">
                   <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
                 </div>
+                        <div class="row row-body-1">
+                          <div class="col-12 bottom card-titel" th:text="${deck.userId}">Title</div>
+                        </div>
 
                 <!-- Columns are always 50% wide, on mobile and desktop -->
                 <div class="row row-body-2">
                   <div class="col-12 card-description" th:text="${deck.description}">Description</div>
                 </div>
 
-                <div class="row row-fooder">
-                  <div class="col-6">25 Fragen</div>
-                  <div class="col-6 right">Schwer</div>
-                </div>
-
               </div>
                     </div>
                   </div>
                 <div class="col"><div class="card"> <div class="container add-card">
-                  <a href="/create_stack">
+                  <a href="/create">
                 <div class="row">
                   <div class="col-3"><p style="margin-top: 15px;"></p></div>
                   <div class="col-6"><svg class="card-add" aria-hidden="true">
@@ -262,8 +260,8 @@
       <footer class="page-footer">
       </footer>
     </section>
-    <script src="index.js" charset="utf-8"></script>
-    <script src="bootstrap.js" ></script>
+    <script src="js/index.js" charset="utf-8"></script>
+    <script src="js/bootstrap.js" ></script>
 
 
   </body>

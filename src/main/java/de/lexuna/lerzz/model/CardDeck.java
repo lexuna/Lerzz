@@ -8,6 +8,7 @@ import lombok.experimental.NonFinal;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +26,15 @@ public class CardDeck {
     @Setter
     String description;
 
+    private final Instant creationTime;
+
     List<Card> cards = new ArrayList<>();
 
-    public CardDeck(String userId, String name, String description) {
+    public CardDeck(String userId, String name, String description, Instant creationTime) {
         this.userId = userId;
         this.name=name;
         this.description = description;
+        this.creationTime = creationTime;
     }
 
 }

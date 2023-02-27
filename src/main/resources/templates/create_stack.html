@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link href="bootstrap.css" rel="stylesheet" >
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/card.css">
 
   </head>
   <body>
@@ -211,18 +211,21 @@
       <section class="grid">
         <article>
           <div class="container" style="width: 100%; max-width: 750px">
+          <form th:action="@{/create}" method="post" class="container" style="width: 100%; max-width: 750px">
             <div class="mb-3">
               <label for="formGroupExampleInput" class="form-label">Stapelname</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bezeichnung des Kartenstapels">
+              <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Bezeichnung des Kartenstapels">
             </div>
             <div class="mb-3">
               <label for="formGroupExampleInput2" class="form-label">Stapelbeschreibung</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Details zum Kartenstapel">
+              <input type="text" name="description" class="form-control" id="formGroupExampleInput2" placeholder="Details zum Kartenstapel">
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary me-md-2 b1" type="button">Erstellen</button>
-              <button class="btn btn-primary  b2" type="button">Erstellen und Bearbeiten</button>
+              <input type="submit" value="Submit">
+<!--              <button class="btn btn-primary me-md-2 b1" type="button">Erstellen</button>-->
+<!--              <button class="btn btn-primary  b2" type="button">Erstellen und Bearbeiten</button>-->
             </div>
+          </form>
           </div>
         </article>
 
@@ -230,8 +233,8 @@
       <footer class="page-footer">
       </footer>
     </section>
-    <script src="index.js" charset="utf-8"></script>
-    <script src="bootstrap.js" ></script>
+    <script src="js/index.js" charset="utf-8"></script>
+    <script src="js/bootstrap.js" ></script>
 
 
   </body>

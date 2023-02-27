@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.Instant;
+
 @SpringBootTest
 public class CreateDB {
 
@@ -24,7 +26,7 @@ public class CreateDB {
     void createDB() {
         userRepo.insert(new User("admin@lerzz.de","admin", encoder.encode("admin")));
 
-        deckRepo.insert(new CardDeck("admin", "TestDeck", "Ein Stapel zum testen"));
-        deckRepo.insert(new CardDeck("admin", "TestDeck2", "Ein weiterer Stapel zum testen"));
+        deckRepo.insert(new CardDeck("admin", "TestDeck", "Ein Stapel zum testen", Instant.now()));
+        deckRepo.insert(new CardDeck("admin", "TestDeck2", "Ein weiterer Stapel zum testen", Instant.now()));
     }
 }

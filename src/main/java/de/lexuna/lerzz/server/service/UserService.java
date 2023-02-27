@@ -34,4 +34,8 @@ public class UserService  {
     private boolean emailExists(String email) {
         return repository.findByEmail(email) != null;
     }
+
+    public User findUserByEmail(String mail) {
+        return repository.findByEmail(mail);
+    }
 }

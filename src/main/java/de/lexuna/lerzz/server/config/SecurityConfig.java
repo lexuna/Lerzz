@@ -19,12 +19,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests // "/", "/home", "/index"
-                        .requestMatchers("/home","/*.css", "/kontakt", "/*.js", "/images/*", "/", "/help", "/register").permitAll()
+                        .requestMatchers("/home","/js/*", "/kontakt", "/css/*", "/images/*", "/", "/help", "/register").permitAll()
                         .anyRequest()
                         .authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .usernameParameter("email")
+                        .successForwardUrl("/dashboard")
                         .permitAll())
                 .logout((logout) -> logout.permitAll())
                 .httpBasic();
