@@ -66,9 +66,9 @@ fill: var(--orange);
 }
 
 .add-card:hover{
-    background-color: var(--page-header-bgColor);
+    background-color: #6DBC6C;
     cursor: pointer;
-
+box-shadow: 0px 0px 10px var(--page-header-bgColor);
 }
 
 .add-card>.row {

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/bootstrap.css" rel="stylesheet" >
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/card.css">
 
@@ -211,21 +211,58 @@
       <section class="grid">
         <article>
           <div class="container" style="width: 100%; max-width: 750px">
-          <form th:action="@{/create}" method="post" class="container" style="width: 100%; max-width: 750px">
             <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">Stapelname</label>
-              <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Bezeichnung des Kartenstapels">
+              <label for="exampleFormControlInput1" class="form-label">Name</label>
+              <input type="email" class="form-control readonly " id="exampleFormControlInput1" placeholder="Lorem ipsum dolor sit amet consectetur adip">
             </div>
             <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">Stapelbeschreibung</label>
-              <input type="text" name="description" class="form-control" id="formGroupExampleInput2" placeholder="Details zum Kartenstapel">
+              <label for="exampleFormControlTextarea1" class="form-label  ">Beschreibung</label>
+              <textarea class="form-control readonly" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="submit" value="submit">Speichern</button>
-<!--              <button class="btn btn-primary me-md-2 b1" type="button">Erstellen</button>-->
-<!--              <button class="btn btn-primary  b2" type="button">Erstellen und Bearbeiten</button>-->
+            <div class="row">
+              <div class="col-6">
+                <div class="d-grid gap-2 d-md-block">
+                  <button class="btn btn-outline-danger" id="delete" type="button">Löschen</button>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button onclick="window.location.href='/edit_stack'" class="btn btn-outline-warning" id="edit" type="button"> Bearbeiten</button>
+                  <button class="btn btn-outline-success" id="play" type="button">Spielen</button>
+                </div>
+              </div>
             </div>
-          </form>
+            <table class="table" style="margin-top: 3em">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Frage</th>
+                <th scope="col">Antwort</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,</td>
+                <td>Lorem ipsum dolor sit amet </td>
+
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,</td>
+                <td>Lorem ipsum dolor sit amet </td>
+
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>....</td>
+                <td>....</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-sm-12 center " style="text-align: center; margin-top: 3em;">Der Kartensatz wurde von "Lorem Ipsu" erstellt.</div>
+            </div>
           </div>
         </article>
 

@@ -225,6 +225,31 @@ justify-content: center;
 }
 
 
+/* Preview Page
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+
+.readonly{
+    pointer-events: none;
+}
+/* Edit Page
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.col-1.question_radio_width{
+max-width: 31.5px;
+}
+.questions_container {
+    background-color: #1987540a;
+}
+.question_container{
+background-color:white;
+}
+.question_container{
+background-color:white;
+}
+.new_question{
+background-color:white;
+
+}
 /* PAGE CONTENT STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-content {

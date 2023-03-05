@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/bootstrap.css" rel="stylesheet" >
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/card.css">
 
@@ -211,21 +211,88 @@
       <section class="grid">
         <article>
           <div class="container" style="width: 100%; max-width: 750px">
-          <form th:action="@{/create}" method="post" class="container" style="width: 100%; max-width: 750px">
             <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">Stapelname</label>
-              <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Bezeichnung des Kartenstapels">
+              <label for="exampleFormControlInput1" class="form-label">Name</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Lorem ipsum dolor sit amet consectetur adip">
             </div>
             <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">Stapelbeschreibung</label>
-              <input type="text" name="description" class="form-control" id="formGroupExampleInput2" placeholder="Details zum Kartenstapel">
+              <label for="exampleFormControlTextarea1" class="form-label  ">Beschreibung</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="submit" value="submit">Speichern</button>
-<!--              <button class="btn btn-primary me-md-2 b1" type="button">Erstellen</button>-->
-<!--              <button class="btn btn-primary  b2" type="button">Erstellen und Bearbeiten</button>-->
+
+            <div class="questions_container" style="padding : 25px;">
+            <div class="question_container" style="padding : 20px; border: 1px solid #ced4da; border-radius: 0.25rem;" >
+              <div class="row" style="margin-bottom: 20px" >
+                <div class="col-1 question_radio_width">
+                  <label>1.</label>
+                </div>
+                <div class="col-11">
+                  <blockquote contenteditable="true">
+                    <p>Frage1</p>
+                  </blockquote>
+                </div>
+              </div>
+
+              <div style="padding-left:20px">
+
+                <div class="row">
+                  <div class="col-1 question_radio_width">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  </div>
+                  <div class="col-11">
+                    <blockquote contenteditable="true">
+                      <p>Item1</p>
+                    </blockquote>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-1 question_radio_width">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                  </div>
+                  <div class="col-11">
+                    <blockquote contenteditable="true">
+                      <p>Item2</p>
+                    </blockquote>
+                  </div>
+                </div> <div class="row">
+                <div class="col-1 question_radio_width">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                </div>
+                <div class="col-11">
+                  <blockquote contenteditable="true">
+                    <p>Item3</p>
+                  </blockquote>
+                </div>
+              </div> <div class="row">
+                <div class="col-1 question_radio_width">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                </div>
+                <div class="col-11">
+                  <blockquote contenteditable="true">
+                    <p>Item4</p>
+                  </blockquote>
+                </div>
+              </div>
+
+              </div>
+              <div class="d-grid gap-2 d-md-flex right">
+                <button type="button" class="btn btn-outline-danger">Entfernen</button>
+              </div>
             </div>
-          </form>
+
+
+
+              <div class="d-grid gap-2" style="margin-top:3em">
+                <button type="button" class="btn btn-outline-secondary new_question">Neue Frage</button>
+              </div>
+
+
+
+
+            </div>
+            <div class="d-grid gap-2 d-flex right" style="margin-top: 3em;">
+              <button type="button" class="btn btn-outline-success">Speichern</button>
+            </div>
           </div>
         </article>
 

@@ -220,23 +220,24 @@
                   <div class="col-6"><svg class="card-icon" aria-hidden="true">
                     <use xlink:href="#text"></use>
                   </svg></div>
-                  <div class="col-6 right"><svg class="card-icon" aria-hidden="true">
+                  <div class="col-6 right"><a href="/stack_preview"><svg class="card-icon" aria-hidden="true">
                     <use xlink:href="#menu"></use>
-                  </svg></div>
+                  </svg></a></div>
                 </div>
 
                 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
                 <div class="row row-body-1">
                   <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
                 </div>
-                        <div class="row row-body-1">
-                          <div class="col-12 bottom card-titel" th:text="${deck.userId}">Title</div>
-                        </div>
+
 
                 <!-- Columns are always 50% wide, on mobile and desktop -->
                 <div class="row row-body-2">
                   <div class="col-12 card-description" th:text="${deck.description}">Description</div>
                 </div>
+                        <div class="row row-body-3">
+                          <div class="col-12 bottom card-titel right" style="font-size: 0.8em" th:text="${deck.userId}">Title</div>
+                        </div>
 
               </div>
                     </div>
