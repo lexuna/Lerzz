@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+    <link href="css/bootstrap.css" rel="stylesheet" >
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/nicepage.css">
+    <script src="js/index.js" charset="utf-8"></script>
+    <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+-->
+<body>
+<!--<header th:replace="~{layout.html :: header}"> </header>-->
+<header th:fragment="header" class="u-clearfix u-header u-valign-middle-md u-valign-middle-sm u-header" id="sec-a904" data-animation-name=""
+        data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+    <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-custom-sm u-layout-custom-xs u-layout-wrap u-layout-wrap-1">
+        <div class="u-layout">
+            <div class="u-layout-row">
+                <div class="u-container-style u-custom-color-1 u-layout-cell u-size-22-sm u-size-23-xs u-size-9-lg u-size-9-md u-size-9-xl u-layout-cell-1">
+                    <div class="u-border-1 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-light-3 u-container-layout u-container-layout-1">
+                        <a href="https://nicepage.com" class="u-align-center u-image u-logo u-image-1"
+                           data-image-width="352" data-image-height="124">
+                            <img th:src="@{~/images/Logo.png}" class="u-logo-image u-logo-image-1">
+                        </a>
+                    </div>
+                </div>
+                <div class="u-container-style u-custom-color-1 u-layout-cell u-size-17-xs u-size-18-sm u-size-36-lg u-size-36-md u-size-36-xl u-layout-cell-2">
+                    <div class="u-border-1 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-light-3 u-container-layout u-valign-middle-lg u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs u-container-layout-2">
+                        <nav class="u-align-left u-menu u-menu-one-level u-offcanvas u-menu-1"
+                             data-responsive-from="SM">
+                            <div class="menu-collapse" style="font-size: 1rem; font-weight: 400; letter-spacing: 2px;">
+                                <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-text-shadow u-custom-text-shadow-blur u-custom-text-shadow-color u-custom-text-shadow-transparency u-custom-text-shadow-x u-custom-text-shadow-y u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                                   href="#">
+                                    <svg class="u-svg-link" viewBox="0 0 24 24">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#menu-hamburger"></use>
+                                    </svg>
+                                    <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16"
+                                         x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <rect y="1" width="16" height="2"></rect>
+                                            <rect y="7" width="16" height="2"></rect>
+                                            <rect y="13" width="16" height="2"></rect>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="u-custom-menu u-nav-container">
+                                <ul class="u-nav u-unstyled u-nav-1">
+                                    <li class="u-nav-item"><a
+                                            class="u-button-style u-nav-link u-text-active-custom-color-2 u-text-hover-custom-color-2"
+                                            href="home" style="padding: 10px 20px;">Home</a>
+                                    </li>
+                                    <li class="u-nav-item"><a
+                                            class="u-button-style u-nav-link u-text-active-custom-color-2 u-text-hover-custom-color-2"
+                                            href="dashboard" style="padding: 10px 20px;">Dashboard</a>
+                                    </li>
+                                    <li class="u-nav-item"><a
+                                            class="u-button-style u-nav-link u-text-active-custom-color-2 u-text-hover-custom-color-2"
+                                            href="help" style="padding: 10px 20px;">Help</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="u-custom-menu u-nav-container-collapse">
+                                <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+                                    <div class="u-inner-container-layout u-sidenav-overflow">
+                                        <div class="u-menu-close"></div>
+                                        <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                                      href="home">Home</a>
+                                            </li>
+                                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                                      href="dashboard">Dashboard</a>
+                                            </li>
+                                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                                      href="help">Help</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="u-container-style u-custom-color-1 u-layout-cell u-size-15-lg u-size-15-md u-size-15-xl u-size-20-sm u-size-20-xs u-layout-cell-3">
+                    <div class="u-border-1 u-border-custom-color-1 u-border-no-right u-border-no-top u-container-layout u-valign-middle u-container-layout-3">
+                        <a class="u-align-center-sm u-align-center-xs u-align-right-lg u-align-right-md u-align-right-xl u-login u-text-body-alt-color u-text-hover-custom-color-2 u-login-1"
+                           href="login">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div th:fragment="content">
+    <!-- Hier wird der Inhalt der Seite eingefügt -->
+</div>
+
+<footer>
+</footer>
+</body>
+</html>
