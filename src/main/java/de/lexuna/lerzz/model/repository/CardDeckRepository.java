@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CardDeckRepository extends MongoRepository<CardDeck, Integer> {
+public interface CardDeckRepository extends MongoRepository<CardDeck, String> {
 
     List<CardDeck> findByUserId(String userId);
 

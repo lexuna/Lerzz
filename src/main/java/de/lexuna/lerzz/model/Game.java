@@ -1,16 +1,21 @@
 package de.lexuna.lerzz.model;
 
+import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
+import org.springframework.data.annotation.Id;
 
-@Value
+@Data
+@Getter
+@Setter
 public class Game {
 
-    int id;
+    @Id
+    private int id;
+    private String name;
+    private int deckId;
     @Setter
-    String name;
-    int deckId;
-    @Setter
-    String description;
+    private String description;
 
 }

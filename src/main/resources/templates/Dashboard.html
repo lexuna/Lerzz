@@ -43,15 +43,15 @@
                   <div class="col" th:each="deck : ${allDecks}">
                     <div class="card">
                       <div class="container card-Container">
-                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                <div class="row row-head">
-                  <div class="col-6"><svg class="card-icon" aria-hidden="true">
+                        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                        <div class="row row-head">
+                          <div class="col-6"><svg class="card-icon" aria-hidden="true">
 
-                  </svg></div>
-                  <div class="col-6 right"><a href="/stack_preview"><svg class="card-icon" aria-hidden="true">
-                    <use xlink:href="#menu"></use>
-                  </svg></a></div>
-                </div>
+                          </svg></div>
+                          <div class="col-6 right"><a th:href="@{/deck/{deckId}(deckId=${deck.id})}"><svg class="card-icon" aria-hidden="true">
+                            <use xlink:href="#menu"></use>
+                          </svg></a></div>
+                        </div>
 
                 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
                 <div class="row row-body-1">
