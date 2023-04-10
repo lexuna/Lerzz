@@ -3,17 +3,16 @@
       style="font-size: 16px;" lang="de">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Stapel Erstellung</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
+    <link rel="stylesheet" th:href="@{~/css/index.css}">
+    <link rel="stylesheet" th:href="@{~/css/card.css}">
 
-    <link rel="stylesheet" href="css/nicepage.css" media="screen">
-    <script class="u-script" type="text/javascript" src="js/boostrap.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="js/index.js" defer=""></script>
-    <meta name="generator" content="Nicepage 5.2.4, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
 
   </head>
   <body class="u-body u-xl-mode" data-lang="de">
@@ -44,5 +43,10 @@
       <footer class="page-footer">
       </footer>
     </section>
+
+  <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}"  defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
   </body>
 </html>

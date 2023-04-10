@@ -17704,34 +17704,7 @@ img.u-opacity-0,
   pointer-events: auto;
   opacity: 1;
 }
-blockquote {
-  padding: 10px 20px;
-  padding-left: 0;
-  margin: 0 0 20px;
-  border-left-width: 0;
-  border-top-width: 0 !important;
-  border-right-width: 0 !important;
-  border-bottom-width: 0 !important;
-  border-style: solid;
-}
-blockquote p:last-child,
-blockquote ul:last-child,
-blockquote ol:last-child {
-  margin-bottom: 0;
-}
-blockquote footer,
-blockquote small,
-blockquote .small {
-  display: block;
-  font-size: 80%;
-  line-height: 20px;
-  color: #eeeeee;
-}
-blockquote footer:before,
-blockquote small:before,
-blockquote .small:before {
-  content: '\2014   \A0';
-}
+
 .u-search {
   position: relative;
   display: flex;
@@ -39104,21 +39077,8 @@ a.u-link.u-text-hover-grey-90:hover {
         margin-top: 20px;
         margin-bottom: 20px;
         }
-        p:not(.u-text-variant)
-        {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        }
         .u-btn
         {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        }
-        blockquote
-        {
-        font-style: italic;
-        padding-left: 20px;
-        border-width: 4px;
         margin-top: 20px;
         margin-bottom: 20px;
         }

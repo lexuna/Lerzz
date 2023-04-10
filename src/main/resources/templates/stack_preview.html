@@ -2,23 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
       style="font-size: 16px;" lang="de">
   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
-    <link rel="stylesheet" th:href="@{~/css/index.css}">
-    <link rel="stylesheet" th:href="@{~/css/card.css}">
-    <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
+      <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
+      <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
+      <link rel="stylesheet" th:href="@{~/css/index.css}">
+      <link rel="stylesheet" th:href="@{~/css/card.css}">
 
-    <script th:src="@{~/js/index.js}" charset="utf-8"></script>
-    <script th:src="@{~/js/bootstrap.js}"></script>
-    <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
-    <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
+
   </head>
-  <body class="u-body u-xl-mode" data-lang="de">
+
 <header th:replace="~{layout.html :: header}"> </header>
-    <section >
+        <section class="page-content">
         <section class="grid">
         <article style="justify-content: center;">
             <div class="row">
@@ -138,10 +136,61 @@
                                 </td>
 
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,</td>
-                <td>Lorem ipsum dolor sit amet </td>
+                            <tr>
+                                <th scope="row"  style="width:45%;">1wte rwtre wtertetrwtre</th>
+                                <td style="width: 55%;"><div style=" width: 100%">
+                                    <div class="answer_text">
+
+                                        <div class="row">
+                                            <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault123">
+                                            </div>
+                                            <div class="col-11">
+                                                <blockquote contenteditable="true">
+                                                    <p>Item1</p>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault223">
+                                            </div>
+                                            <div class="col-11">
+                                                <blockquote contenteditable="true">
+                                                    <p>Item2</p>
+                                                </blockquote>
+                                            </div>
+                                        </div> <div class="row">
+                                        <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault323">
+                                        </div>
+                                        <div class="col-11">
+                                            <blockquote contenteditable="true">
+                                                <p>Item3</p>
+                                            </blockquote>
+                                        </div>
+                                    </div> <div class="row">
+                                        <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault423">
+                                        </div>
+                                        <div class="col-11">
+                                            <blockquote contenteditable="true">
+                                                <p>Item4</p>
+                                            </blockquote>
+                                        </div>
+                                    </div>
+
+                                    </div>
+
+                                </div></td>
+
+                                <td style="width: 25px ; position: relative">
+                                    <a href="add_card" style="position: absolute ; top: 2px ; right: 13px" >
+                                        <svg class="edit_stack" style="width:23px; height:30px;">
+                                            <use xlink:href="#menu"></use>
+                                        </svg>
+                                    </a>
+                                </td>
 
                             </tr>
                             <tr>
@@ -211,5 +260,9 @@
       <footer class="page-footer">
       </footer>
     </section>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
   </body>
 </html>

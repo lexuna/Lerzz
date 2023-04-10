@@ -227,8 +227,14 @@ justify-content: center;
 
 /* Preview Page
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-
+.u-header .u-container-layout-2 {
+  margin: auto;
+}
+.u-border-palette-5-light-3, .u-separator-palette-5-light-3:after {
+  border-color: #f5f7fa;
+  border: none;
+  stroke: #f5f7fa;
+}
 .readonly{
     pointer-events: none;
 }
@@ -288,8 +294,7 @@ background-color:white;
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-content {
   position: relative;
-  left: var(--page-header-width);
-  width: calc(100% - var(--page-header-width));
+  width: 100%;
   min-height: 100vh;
   padding: 30px;
   color: var(--page-content-txtColor);
@@ -645,4 +650,34 @@ background-color:white;
 
 .page-footer a {
   margin-left: 4px;
+}
+
+
+/* User-list
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.User-list{
+  border: 3px solid #11111138;
+  border-radius: 2rem;
+  height: 218.79px;
+}
+.list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 1.8rem;
+}
+.list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.list-group-item:nth-child(5):last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.User-icon-list{
+  width: 40px;
 }

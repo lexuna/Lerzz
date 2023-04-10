@@ -6,13 +6,12 @@
     <meta charset="utf-8">
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
     <link rel="stylesheet" th:href="@{~/css/index.css}">
     <link rel="stylesheet" th:href="@{~/css/card.css}">
-    <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
 
-    <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
-    <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+
   </head>
   <body class="u-body u-xl-mode" data-lang="de">
   <header th:replace="~{layout.html :: header}"> </header>
@@ -89,5 +88,9 @@
       <footer class="page-footer">
       </footer>
     </section>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
+  <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
   </body>
 </html>

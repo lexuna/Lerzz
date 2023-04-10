@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      style="font-size: 16px;" lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Stapel Erstellung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
+  <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
+  <link rel="stylesheet" th:href="@{~/css/index.css}">
+  <link rel="stylesheet" th:href="@{~/css/card.css}">
+
+
+
+</head>
+<body class="u-body u-xl-mode" data-lang="de">
+<header th:replace="~{layout.html :: header}"> </header>
+<section class="page-content">
+  <section class="grid">
+    <article>
+      <div class="container" style="width: 100%; max-width: 750px">
+        <!-- Begin Here-->
+
+
+        <form method="post" class="container" style="width: 100%">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="row">
+                    <div class="col" style="margin-bottom: 40px;">
+                      <h2>Create Quiz</h2>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-9" style="margin-bottom: 20px">
+                      <h4>Stapel name</h4>
+                    </div>
+                    <div class="col-sm-3 right" style="margin-bottom: 20px">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 100px">
+                          Mode
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">Solo</a></li>
+                          <li><a class="dropdown-item" href="#">Coop</a></li>
+                          <li><a class="dropdown-item" href="#"> Vs </a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-9" style="margin-bottom: 20px">
+                      <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                      </div>
+                    </div>
+                    <div class="col-sm-3 right" style="margin-bottom: 20px">
+                      <button type="button" class="btn btn-success" style="min-width: 100px">Invate</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom: 20px">
+                    <div class="col">
+                      <div class="User-list">
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action"><div class="row">
+
+                            <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
+                              <use xlink:href="#User-list"></use>
+                            </svg></div>
+                            <div class="col">
+                              Hannah Nischik
+                            </div>
+
+                          </div></a>
+                          <a href="#" class="list-group-item list-group-item-action"><div class="row">
+
+                            <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
+                              <use xlink:href="#User-list"></use>
+                            </svg></div>
+                            <div class="col">
+                              Dirk Pöppelbaum
+                            </div>
+
+                          </div></a>
+                          <a href="#" class="list-group-item list-group-item-action"><div class="row">
+
+                            <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
+                              <use xlink:href="#User-list"></use>
+                            </svg></div>
+                            <div class="col">
+                              Alaaddin Sagun
+                            </div>
+
+                          </div></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col right">
+                      <button type="button" class="btn btn-success" style="min-width: 100px">Start</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+
+        <!-- End -->
+      </div>
+    </article>
+
+  </section>
+  <footer class="page-footer">
+  </footer>
+</section>
+
+<script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+<script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
+<script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+</body>
+</html>
