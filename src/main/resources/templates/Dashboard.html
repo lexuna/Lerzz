@@ -1,96 +1,204 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       style="font-size: 16px;" lang="de">
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
-    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" >
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{~/css/index.css}">
     <link rel="stylesheet" th:href="@{~/css/card.css}">
 
 
-  </head>
-  <body class="u-body u-xl-mode" data-lang="de">
-  <header th:replace="~{layout.html :: header}"> </header>
-    <section class="page-content">
-      <section class="search-and-user">
+</head>
+<body class="u-body u-xl-mode" data-lang="de">
+<header th:replace="~{layout.html :: header}"></header>
+<section class="page-content">
+    <section class="search-and-user">
         <form>
-          <input type="search" placeholder="Search Pages...">
-          <button type="submit" aria-label="submit form">
-            <svg aria-hidden="true">
-              <use xlink:href="#search"></use>
-            </svg>
-          </button>
+            <input type="search" placeholder="Search Pages...">
+            <button type="submit" aria-label="submit form">
+                <svg aria-hidden="true">
+                    <use xlink:href="#search"></use>
+                </svg>
+            </button>
         </form>
-        <div class="admin-profile" >
-          <span class="greeting" th:text="${username}">admin</span>
-<!--          <div class="notifications">-->
-<!--            <span class="badge">1</span>-->
-<!--            <svg>-->
-<!--              <use xlink:href="#users"></use>-->
-<!--            </svg>-->
-<!--          </div>-->
+        <div class="admin-profile">
+            <span class="greeting" th:text="${username}">admin</span>
+            <!--          <div class="notifications">-->
+            <!--            <span class="badge">1</span>-->
+            <!--            <svg>-->
+            <!--              <use xlink:href="#users"></use>-->
+            <!--            </svg>-->
+            <!--          </div>-->
         </div>
-      </section>
-      <section class="grid">
+    </section>
+    <section class="grid">
         <article>
-          <div class="container" style="width: 100%">
-              <div class="row row-cols-1 cards" >
-                  <div class="col" th:each="deck : ${allDecks}">
-                    <div class="card">
-                      <div class="container card-Container">
-                        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                        <div class="row row-head">
-                          <div class="col-6"><svg class="card-icon" aria-hidden="true">
-
-                          </svg></div>
-                          <div class="col-6 right"><a th:href="@{/deck/{deckId}(deckId=${deck.id})}"><svg class="card-icon" aria-hidden="true">
-                            <use xlink:href="#menu"></use>
-                          </svg></a></div>
-                        </div>
-
-                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-                <div class="row row-body-1">
-                  <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
-                </div>
-
-
-                <!-- Columns are always 50% wide, on mobile and desktop -->
-                <div class="row row-body-2">
-                  <div class="col-12 card-description" th:text="${deck.description}">Description</div>
-                </div>
-                        <div class="row row-body-3">
-                          <div class="col-12 bottom card-titel right" style="font-size: 0.8em" th:text="${deck.userId}">Title</div>
-                        </div>
-
-              </div>
-                    </div>
-                  </div>
-                <div class="col"><div class="card"> <div class="container add-card">
-                  <a href="/create">
+            <div class="container" style="width: 100%">
                 <div class="row">
-                  <div class="col-3"><p style="margin-top: 15px;"></p></div>
-                  <div class="col-6"><svg class="card-add" aria-hidden="true">
-                    <use xlink:href="#add-card"></use>
-                  </svg></div><div class="col-3"><p style="margin-top: 15px;"></p></div>
-
+                    <div class="col" style="font-size: 1.5rem; color: #818181; margin-bottom: 2rem">
+                        My Decks
+                    </div>
                 </div>
-                  </a>
-              </div></div></div>
+                <div class="row row-cols-1 cards">
+                    <div class="col" th:each="deck : ${allDecks}">
+                        <div class="card">
+
+                            <div class="container card-Container" style="position: relative;">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <div class="row row-head">
+                                    <div class="col-6">
+                                        <svg class="card-icon" aria-hidden="true">
+
+                                        </svg>
+                                    </div>
+
+                                    <div class="col-6 right">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                           style=" z-index: 200">
+                                            <svg class="card-icon" aria-hidden="true">
+                                                <use xlink:href="#Card-delete"></use>
+                                            </svg>
+                                        </a></div>
+
+                                </div>
+
+                                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                                <div class="row row-body-1">
+                                    <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
+                                </div>
+
+
+                                <!-- Columns are always 50% wide, on mobile and desktop -->
+                                <div class="row row-body-2">
+                                    <div class="col-12 card-description" th:text="${deck.description}">Description</div>
+                                </div>
+                                <div class="row row-body-3">
+                                    <div class="col-12 bottom card-titel right" style="font-size: 0.8em"
+                                         th:text="${deck.userId}">Title
+                                    </div>
+                                </div>
+                                <div style="position: absolute; width: 100%; height: 100% ;     top: 0;    left: 0;"
+                                     th:attr="onclick=|window.location.href='@{/deck/{deckId}(deckId=${deck.id})}'|">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="container add-card" th:attr="onclick=|window.location.href='@{/create}'|">
+
+                                <div class="row">
+                                    <div class="col-3"><p style="margin-top: 15px;"></p></div>
+                                    <div class="col-6">
+                                        <svg class="card-add" aria-hidden="true">
+                                            <use xlink:href="#add-card"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="col-3"><p style="margin-top: 15px;"></p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </article>
 
-      </section>
-      <footer class="page-footer">
-      </footer>
+
     </section>
-  <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
-  <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
-  <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
-  <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
-  </body>
+    <section class="grid">
+        <article>
+
+            <div class="container" style="width: 100%">
+                <div class="row">
+                    <div class="col" style="font-size: 1.5rem; color: #818181; margin-bottom: 2rem">
+                        Community Decks
+                    </div>
+                </div>
+                <div class="row row-cols-1 cards">
+                    <div class="col" th:each="deck : ${allDecks}">
+                        <div class="card">
+
+                            <div class="container card-Container" style="position: relative;">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <div class="row row-head">
+                                    <div class="col-6">
+                                        <svg class="card-icon" aria-hidden="true">
+
+                                        </svg>
+                                    </div>
+
+                                    <div class="col-6 right">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                           style=" z-index: 200">
+                                            <svg class="card-icon" aria-hidden="true">
+                                                <use xlink:href="#Card-delete"></use>
+                                            </svg>
+                                        </a></div>
+
+                                </div>
+
+                                <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+                                <div class="row row-body-1">
+                                    <div class="col-12 bottom card-titel" th:text="${deck.name}">Title</div>
+                                </div>
+
+
+                                <!-- Columns are always 50% wide, on mobile and desktop -->
+                                <div class="row row-body-2">
+                                    <div class="col-12 card-description" th:text="${deck.description}">Description</div>
+                                </div>
+                                <div class="row row-body-3">
+                                    <div class="col-12 bottom card-titel right" style="font-size: 0.8em"
+                                         th:text="${deck.userId}">Title
+                                    </div>
+                                </div>
+                                <div style="position: absolute; width: 100%; height: 100% ;     top: 0;    left: 0;"
+                                     th:attr="onclick=|window.location.href='@{/deck/{deckId}(deckId=${deck.id})}'|">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <footer class="page-footer">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteCardModalLabel">Karte löschen</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Sind Sie sicher, dass Sie diese Karte unwiderruflich löschen möchten?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                        <button type="button" class="btn btn-danger delete-card-confirm">Löschen</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+</section>
+<script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
+<script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+<script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
+<script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+</body>
 </html>
