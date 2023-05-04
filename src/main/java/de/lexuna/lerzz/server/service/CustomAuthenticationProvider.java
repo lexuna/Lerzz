@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+/**
+ * Custom authentication provider for authenticating users against a third-party system.
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
@@ -24,6 +27,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         this.encoder = encoder;
     }
 
+    /**
+     * Authenticates a user based on the provided authentication information.
+     *
+     * @param authentication the authentication information
+     * @return the authentication token if the user was successfully authenticated, null otherwise
+     * @throws AuthenticationException if there was an error while authenticating the user
+     */
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
@@ -44,6 +54,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
     }
 
+    /**
+     * Indicates whether this authentication provider supports the specified authentication token.
+     *
+     * @param authentication the authentication token to check
+     * @return true if this authentication provider supports the specified authentication token, false otherwise
+     */
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);

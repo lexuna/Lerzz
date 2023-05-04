@@ -11,10 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for handling user sessions.
+ */
 @Controller
 @Slf4j
 public class SessionController {
 
+    /**
+     * Process GET requests for the index, home, and login pages.
+     * If there is an existing session, retrieve any session messages that have been saved to it.
+     * Otherwise, create a new session and initialize it with an empty list of messages.
+     *
+     * @param model   The model to which session messages will be added
+     * @param request The HTTP servlet request, which is used to retrieve and create the session
+     * @return The name of the template to be rendered
+     */
     @GetMapping({"/", "/index", "/home", "/login"})
     public String process(Model model,HttpServletRequest request) {
         @SuppressWarnings("unchecked")
@@ -29,7 +41,13 @@ public class SessionController {
         return "home";
     }
 
-
+    /**
+     * Process POST requests for logging out the user.
+     * This method invalidates the current session and redirects the user to the home page.
+     *
+     * @param request The HTTP servlet request, which is used to retrieve and invalidate the session
+     * @return A redirect to the home page
+     */
     @PostMapping("/logout")
     public String destroySession(HttpServletRequest request) {
         request.getSession().invalidate();
