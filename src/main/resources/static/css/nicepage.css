@@ -8572,7 +8572,7 @@ section.u-image:not(.u-hover-box),
     flex: 0 0 auto;
   }
 }
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1200px) and (max-width: 1440px) {
   .u-xxl-mode  .u-layout-row > .u-size-60-xl {
     flex: 0 0 100%;
     max-width: 100%;
@@ -9062,7 +9062,7 @@ section.u-image:not(.u-hover-box),
     flex: 0 0 auto;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 940px) and (max-width: 1440px) {
   .u-layout-row > .u-size-60-lg {
     flex: 0 0 100%;
     max-width: 100%;

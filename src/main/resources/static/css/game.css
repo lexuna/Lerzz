@@ -1,0 +1,73 @@
+.question_static {
+    width: 200px;
+    display: flex;
+    margin-right: 50px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.user_list {
+    width: 100%;
+    width: 200px;
+    display: flex;
+    margin-left: 50px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.container_1 {
+    display: flex;
+    align-items: flex-start;
+}
+.container_2 {
+    display: flex;
+    align-items: flex-start;
+    align-items: stretch;
+    margin-bottom: 15px;
+}
+.User-list{
+    border: 3px solid #11111138;
+    border-radius: 2rem;
+    height: 218.79px;
+}
+.container-right.list-group {
+    width: 200px;
+    display: flex;
+    margin-left: 50px;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 1.8rem;
+}
+.col.letter{
+    text-align: center;
+    padding: 0 5px;
+}
+.container-left.list-group {
+    width: 200px;
+    display: flex;
+    margin-right: 50px;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 1.8rem;
+}
+.question-number{
+    width: 100px;
+}
+.list-group-item:first-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.list-group-item:nth-child(5):last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
