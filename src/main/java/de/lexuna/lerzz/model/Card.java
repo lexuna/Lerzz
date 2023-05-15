@@ -10,20 +10,25 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card {
+public abstract class Card {
 
     @Id
     private int id;
     private String deckId;
+    private String author;
     private String question;
-    private List<String> answers;
+    private String rightAnswer;
     private CardType type = CardType.MULTIPLE_CHOICE;
 
-    public Card (int id, String deckId, String question, List<String> answers) {
+    public Card(int id, String deckId, String question, String author, String rightAnswer) {
         this.id = id;
         this.deckId = deckId;
         this.question = question;
-        this.answers = answers;
+        this.author = author;
+        this.rightAnswer = rightAnswer;
     }
 
+    public boolean checkAnswer(String answerText) {
+        return rightAnswer.equals(answerText);
+    }
 }

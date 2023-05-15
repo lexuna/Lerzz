@@ -22,78 +22,53 @@
     <article>
       <div class="container" style="width: 100%; max-width: 750px">
         <!-- Begin Here-->
-
-
-        <form method="post" class="container" style="width: 100%">
+        <div class="container" style="width: 100%">
           <div class="container">
             <div class="row">
               <div class="col">
                 <div class="row">
                   <div class="row">
                     <div class="col" style="margin-bottom: 40px;">
-                      <h2>Create Quiz</h2>
+                      <h2>Quiz Erstellen</h2>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-sm-9" style="margin-bottom: 20px">
-                      <h4>Stapel name</h4>
+                      <h4 th:text="${quiz.deckName}"></h4>
                     </div>
                     <div class="col-sm-3 right" style="margin-bottom: 20px">
                       <div class="dropdown">
                         <button class="btn btn-secondary btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 100px">
                           Mode
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="#">Solo</a></li>
+                        <ul th:value="${quiz.mode}" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           <li><a class="dropdown-item" href="#">Coop</a></li>
-                          <li><a class="dropdown-item" href="#"> Vs </a></li>
+                          <li><a class="dropdown-item" href="#">Vs</a></li>
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <form th:action="@{/deck/{deckId}/create_quiz/invite (deckId=${deckId})}" method="post" class="row">
                     <div class="col-sm-9" style="margin-bottom: 20px">
                       <div class="input-group flex-nowrap">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                        <input name="username" th:value="${username}" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
                       </div>
                     </div>
                     <div class="col-sm-3 right" style="margin-bottom: 20px">
-                      <button type="button" class="btn btn-success" style="min-width: 100px">Invate</button>
+                      <button type="submit" class="btn btn-success" style="min-width: 100px">Einladen</button>
                     </div>
-                  </div>
+                  </form>
                   <div class="row" style="margin-bottom: 20px">
                     <div class="col">
                       <div class="User-list">
-                        <div class="list-group">
+                        <div th:each="member : ${quiz.invited}" class="list-group">
                           <a href="#" class="list-group-item list-group-item-action"><div class="row">
 
                             <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
                               <use xlink:href="#User-list"></use>
                             </svg></div>
-                            <div class="col">
-                              Hannah Nischik
-                            </div>
-
-                          </div></a>
-                          <a href="#" class="list-group-item list-group-item-action"><div class="row">
-
-                            <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
-                              <use xlink:href="#User-list"></use>
-                            </svg></div>
-                            <div class="col">
-                              Dirk Pöppelbaum
-                            </div>
-
-                          </div></a>
-                          <a href="#" class="list-group-item list-group-item-action"><div class="row">
-
-                            <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
-                              <use xlink:href="#User-list"></use>
-                            </svg></div>
-                            <div class="col">
-                              Alaaddin Sagun
-                            </div>
+                            <div class="col" th:text="${member.name}"></div>
 
                           </div></a>
                         </div>
@@ -102,14 +77,14 @@
                   </div>
                   <div class="row">
                     <div class="col right">
-                      <button type="button" class="btn btn-success" style="min-width: 100px">Start</button>
+                      <button th:href="@{/deck/{deckId}/quiz (deckId=${deckId})}" type="button" class="btn btn-success" style="min-width: 100px">Start</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
 
 
 

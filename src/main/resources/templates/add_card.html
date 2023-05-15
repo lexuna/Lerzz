@@ -25,7 +25,7 @@
            <h3>Karte erstellen</h3>
             <br>
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label  ">Beschreibung</label>
+              <label for="exampleFormControlTextarea1" class="form-label  ">Frage</label>
               <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
             </div>
             <div class="mb-3">
@@ -35,21 +35,21 @@
 
                   <div class="row">
                     <div class="col-1 question_radio_width">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                      <input th:name="solution" th:value="0" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     </div>
                     <div class="col-11">
                       <blockquote contenteditable="true">
-                        <p name="answer1">Item1</p>
+                        <input name="answer2">Antwort 1</input>
                       </blockquote>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-1 question_radio_width">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                      <input th:name="solution" th:value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                     </div>
                     <div class="col-11">
                       <blockquote contenteditable="true">
-                        <p name="answer2">Item2</p>
+                        <input name="answer2">Antwort 2</input>
                       </blockquote>
                     </div>
                   </div> <div class="row">
@@ -58,7 +58,7 @@
                   </div>
                   <div class="col-11">
                     <blockquote contenteditable="true">
-                      <p name="answer3">Item3</p>
+                      <input name="answer2">Antwort 3</input>
                     </blockquote>
                   </div>
                 </div> <div class="row">
@@ -67,7 +67,7 @@
                   </div>
                   <div class="col-11">
                     <blockquote contenteditable="true">
-                      <p name="answer4">Item4</p>
+                      <input name="answer2">Antwort 4</input>
                     </blockquote>
                   </div>
                 </div>

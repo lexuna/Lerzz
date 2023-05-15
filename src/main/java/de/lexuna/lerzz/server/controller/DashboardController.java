@@ -1,6 +1,6 @@
 package de.lexuna.lerzz.server.controller;
 
-import de.lexuna.lerzz.model.CardDeck;
+import de.lexuna.lerzz.model.Deck;
 import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.UserService;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.util.List;
 
 @Controller
@@ -24,7 +23,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String home(Model model, Authentication authentication) {
-        CardDeck deck = new CardDeck("", "", "", null);
+        DeckService.DeckDTO deck = service.getEmptyDTO();
         model.addAttribute(deck);
         String mail = authentication.getName();
         User user = userService.findUserByEmail(mail);
@@ -42,8 +41,8 @@ public class DashboardController {
 
 
     @ModelAttribute("allDecks")
-    public List<CardDeck> populateSeedStarters() {
-        return this.service.findAll();
+    public List<DeckService.DeckDTO> getAllDecks() {
+        return service.asDTOs(this.service.findAll());
     }
 
 }

@@ -1,15 +1,14 @@
 package de.lexuna.lerzz.model.repository;
 
-import de.lexuna.lerzz.model.CardDeck;
-import de.lexuna.lerzz.model.User;
+import de.lexuna.lerzz.model.Deck;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CardDeckRepository extends MongoRepository<CardDeck, String> {
+public interface DeckRepository extends MongoRepository<Deck, String> {
 
-    List<CardDeck> findByUserId(String userId);
+    List<Deck> findByUserId(String userId);
 
 }

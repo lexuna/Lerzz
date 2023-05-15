@@ -25,9 +25,13 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .usernameParameter("email")
-                        .successForwardUrl("/dashboard")
+//                        .successForwardUrl("/dashboard")
                         .permitAll())
-                .logout((logout) -> logout.permitAll())
+                .logout((logout) -> logout.permitAll()
+                        .logoutUrl("/logout")
+//                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/home")
+                        .invalidateHttpSession(true))
                 .httpBasic();
         return http.build();
     }
