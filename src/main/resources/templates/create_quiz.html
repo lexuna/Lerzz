@@ -22,7 +22,7 @@
     <article>
       <div class="container" style="width: 100%; max-width: 750px">
         <!-- Begin Here-->
-        <div class="container" style="width: 100%">
+        <form th:action="@{/deck/{deckId}/quiz (deckId=${quiz.deckId})}" method="get" class="container" style="width: 100%">
           <div class="container">
             <div class="row">
               <div class="col">
@@ -49,16 +49,16 @@
                       </div>
                     </div>
                   </div>
-                  <form th:action="@{/deck/{deckId}/create_quiz/invite (deckId=${deckId})}" method="post" class="row">
+                  <div class="row">
                     <div class="col-sm-9" style="margin-bottom: 20px">
                       <div class="input-group flex-nowrap">
-                        <input name="username" th:value="${username}" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                        <input id="invitation" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
                       </div>
                     </div>
                     <div class="col-sm-3 right" style="margin-bottom: 20px">
-                      <button type="submit" class="btn btn-success" style="min-width: 100px">Einladen</button>
+                      <button id="invite" type="submit" class="btn btn-success" style="min-width: 100px">Einladen</button>
                     </div>
-                  </form>
+                  </div>
                   <div class="row" style="margin-bottom: 20px">
                     <div class="col">
                       <div class="User-list">
@@ -77,14 +77,14 @@
                   </div>
                   <div class="row">
                     <div class="col right">
-                      <button th:href="@{/deck/{deckId}/quiz (deckId=${deckId})}" type="button" class="btn btn-success" style="min-width: 100px">Start</button>
+                      <button type="submit" class="btn btn-success" style="min-width: 100px">Start</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
 
 
@@ -100,5 +100,16 @@
 <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script th:src="@{~/js/socket.js}"></script>
+<script th:inline="javascript">
+          var quiz = /*[[${quiz}]]*/ null;
+          var invite = document.getElementById('invite');
+          invite.addEventListener('click', function (){
+            sendInvitation(quiz);
+          });
+
+</script>
 </body>
 </html>

@@ -1,18 +1,31 @@
-
-var deck = /*[[${deck}]]*/ null;
-var socket = new SockJS('/editDeck');
-var stompClient = Stomp.over(socket);
-stompClient.connect({}, function(frame) {
+//Deck Bearbeitung
+var deckSocket = new SockJS('/editDeck');
+var deckStompClient = Stomp.over(deckSocket);
+deckStompClient.connect({}, function(frame) {
     console.log('Verbunden: ' + frame);
 });
-function sendData() {
+function sendData(deck) {
     var description = document.getElementById('description');
+    var name = document.getElementById('name');
     var data = description.value;
-    stompClient.send('/editDeck', {}, JSON.stringify(deck));
+    deck.description = description.value;
+    deckStompClient.send('/editDeck', {}, JSON.stringify(deck));
 }
-document.addEventListener('DOMContentLoaded', function() {
-    var description = document.getElementById('description');
-    description.addEventListener('input', function() {
-        sendData();
-    });
+
+//Quiz erstellen
+var inviteSocket = new SockJS('/invite');
+var inviteStompClient = Stomp.over(inviteSocket);
+inviteStompClient.connect({}, function(frame) {
+    console.log('Verbunden: ' + frame);
 });
+function sendInvitation(quiz) {
+    var invitation = document.getElementById('invitation');
+    inviteStompClient.send('/invite', {}, invitation.value);
+}
+
+stompClient.subscribe('/topic/notification', function(message) {
+        console.log('Nachricht empfangen: ' + message.body);
+        // Hier kannst du den empfangenen Inhalt verarbeiten
+    });
+
+

@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+
 @Service
 @Transactional
 public class UserService {
@@ -62,7 +64,7 @@ public class UserService {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class UserDTO {
+    public static class UserDTO implements Serializable {
         private String id;
         private String name;
         private String email;

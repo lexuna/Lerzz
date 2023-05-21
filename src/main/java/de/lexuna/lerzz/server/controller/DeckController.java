@@ -38,7 +38,7 @@ public class DeckController {
         UserService.UserDTO user = userService.toDTO(userService.findUserByEmail(mail));
         model.addAttribute(user);
         model.addAttribute("deckId", deckId);
-        model.addAttribute(card);
+        model.addAttribute("card", card);
         return "add_card";
     }
 
@@ -46,7 +46,7 @@ public class DeckController {
     public String addCardPost(@PathVariable("deckId") String deckId, @ModelAttribute DeckService.McCardDTO cardDto, Model model, Authentication authentication) {
         String mail = authentication.getName();
         User user = userService.findUserByEmail(mail);
-        service.addCard(deckId, user, cardDto);
+        service.addCard(user, cardDto);
         return "redirect:/deck/"+deckId;
     }
 

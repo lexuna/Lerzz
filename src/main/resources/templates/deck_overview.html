@@ -27,7 +27,7 @@
                     <div class="container" style="padding: 0">
                         <div>
                             <div class="row" style="justify-content: flex-start;">
-                                <div class="col-sm-8" style="position: relative; padding-right: 30px"><h3 style="margin-bottom: 40px" th:text="${deck.name}">Das hier ist die Überschrift</h3><div style="position: absolute; right: 5px; top: 0px; width: 30px; height: 30px;">
+                                <div class="col-sm-8" style="position: relative; padding-right: 30px"><h3 style="margin-bottom: 40px" id="name" th:text="${deck.name}"></h3><div style="position: absolute; right: 5px; top: 0px; width: 30px; height: 30px;">
                                     <a href="create" >
                                         <svg class="edit_stack" style="width:30px; height:30px;">
                                             <use xlink:href="#edit_stack"></use>
@@ -152,5 +152,13 @@
   <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
   <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
   <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+
+  <script th:inline="javascript">
+          var deck = /*[[${deck}]]*/ null;
+          var description = document.getElementById('description');
+          description.addEventListener('input', function(){
+              sendData(deck);
+          });
+      </script>
   </body>
 </html>

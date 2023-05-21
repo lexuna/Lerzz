@@ -12,7 +12,6 @@
     <link rel="stylesheet" th:href="@{~/css/index.css}">
     <link rel="stylesheet" th:href="@{~/css/card.css}">
 
-
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   </head>
   <body class="u-body u-xl-mode" data-lang="de">
@@ -25,8 +24,8 @@
            <h3>Karte erstellen</h3>
             <br>
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label  ">Frage</label>
-              <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
+              <label for="question" class="form-label  ">Frage</label>
+              <textarea id="question" name="question" class="form-control" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
             </div>
             <div class="mb-3">
               <label class="form-label  ">Antworten</label>
@@ -35,39 +34,39 @@
 
                   <div class="row">
                     <div class="col-1 question_radio_width">
-                      <input th:name="solution" th:value="0" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                      <input th:name="solution" th:value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     </div>
                     <div class="col-11">
                       <blockquote contenteditable="true">
-                        <input name="answer2">Antwort 1</input>
+                        <p id="answer0" th:name="answer1">Antwort 1</p>
                       </blockquote>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-1 question_radio_width">
-                      <input th:name="solution" th:value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                      <input th:name="solution" th:value="2" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                     </div>
                     <div class="col-11">
                       <blockquote contenteditable="true">
-                        <input name="answer2">Antwort 2</input>
+                        <p id="answer1" th:name="answer2">Antwort 2</p>
                       </blockquote>
                     </div>
                   </div> <div class="row">
                   <div class="col-1 question_radio_width">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                    <input th:name="solution" th:value="3" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
                   </div>
                   <div class="col-11">
                     <blockquote contenteditable="true">
-                      <input name="answer2">Antwort 3</input>
+                      <p id="answer2" th:name="answer3">Antwort 3</p>
                     </blockquote>
                   </div>
                 </div> <div class="row">
                   <div class="col-1 question_radio_width">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                    <input th:name="solution" th:value="4" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                   </div>
                   <div class="col-11">
                     <blockquote contenteditable="true">
-                      <input name="answer2">Antwort 4</input>
+                      <p id="answer3" th:name="answer4">Antwort 4</p>
                     </blockquote>
                   </div>
                 </div>
@@ -76,9 +75,8 @@
 
               </div>
             </div>
-
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-success" type="submit" value="submit">Erstellen</button>
+                <button id="submit" class="btn btn-success" type="submit" value="submit">Erstellen</button>
               </div>
             </form>
           </div>
@@ -93,5 +91,6 @@
   <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}"  defer=""></script>
   <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
   <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+
   </body>
 </html>

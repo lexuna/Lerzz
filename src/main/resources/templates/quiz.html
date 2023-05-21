@@ -12,7 +12,9 @@
     <link rel="stylesheet" th:href="@{~/css/index.css}">
     <link rel="stylesheet" th:href="@{~/css/card.css}">
     <link rel="stylesheet" th:href="@{~/css/game.css}">
-
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script th:src="@{~/js/socket.js}"></script>
 
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -69,14 +71,11 @@
 
                     <form th:action="@{/deck/add_card/{deckId} (deckId=${deckId})}" method="post" class="container"
                           style="width: 100%; max-width: 750px">
-                        <h3>Karte erstellen</h3>
                         <br>
+<!--                        <div class="mb-3">-->
+                            <p name="question" class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</p>
+<!--                        </div>-->
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label  ">Beschreibung</label>
-                            <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label  ">Antworten</label>
                             <div style="    border: 1px solid #ced4da;    border-radius: 0.25rem; width: 100% ; padding: 20px">
                                 <div class="answer_text">
 
@@ -86,9 +85,7 @@
                                                    id="flexRadioDefault1">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
                                                 <p name="answer1">Item1</p>
-                                            </blockquote>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -97,9 +94,7 @@
                                                    id="flexRadioDefault2">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
                                                 <p name="answer2">Item2</p>
-                                            </blockquote>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -108,9 +103,7 @@
                                                    id="flexRadioDefault3">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
                                                 <p name="answer3">Item3</p>
-                                            </blockquote>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -119,9 +112,7 @@
                                                    id="flexRadioDefault4">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
                                                 <p name="answer4">Item4</p>
-                                            </blockquote>
                                         </div>
                                     </div>
 
@@ -131,51 +122,19 @@
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-success" type="submit" value="submit">Erstellen</button>
+                            <button class="btn btn-success" type="submit" value="submit">Next</button>
                         </div>
                     </form>
                 </div>
-                <div class="container-right list-group">
+                <div th:each="player : ${quiz.invited}" class="container-right list-group">
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="row">
-
                             <div class="left User-icon-list">
                                 <svg style="width:24px; height:24px;">
                                     <use xlink:href="#User-list"></use>
                                 </svg>
                             </div>
-                            <div class="col">
-                                User A
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="row">
-
-                            <div class="left User-icon-list">
-                                <svg style="width:24px; height:24px;">
-                                    <use xlink:href="#User-list"></use>
-                                </svg>
-                            </div>
-                            <div class="col">
-                                User B
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="row">
-
-                            <div class="left User-icon-list">
-                                <svg style="width:24px; height:24px;">
-                                    <use xlink:href="#User-list"></use>
-                                </svg>
-                            </div>
-                            <div class="col">
-                                User C
-                            </div>
-
+                            <div class="col" th:text="${player.name}"></div>
                         </div>
                     </a>
                 </div>

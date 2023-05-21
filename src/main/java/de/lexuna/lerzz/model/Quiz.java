@@ -23,7 +23,7 @@ public class Quiz {
     private User owner;
     private Deck deck;
     private List<Card> questions;
-    private List<User> player;
+    private List<User> player = new ArrayList<>();
     private QuizMode mode;
     private final Stats stats = new Stats();
     private final List<Answer> answers = new ArrayList<>();

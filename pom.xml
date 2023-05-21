@@ -71,7 +71,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.14.1</version>
+<!--            <version>2.14.1</version>-->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
         <!-- Spring -->
@@ -107,6 +111,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+<!--            <version>6.0.9</version>-->
+        </dependency>
+
+
         <!-- Third party -->
         <dependency>
             <groupId>org.projectlombok</groupId>

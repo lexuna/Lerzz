@@ -43,8 +43,8 @@ public class DeckService {
         return repo.findById(stackId).get();
     }
 
-    public void addCard(String stackId, User user, McCardDTO cardDTO) {
-        Deck deck = getDeckDyId(stackId);
+    public void addCard(User user, McCardDTO cardDTO) {
+        Deck deck = getDeckDyId(cardDTO.getDeckId());
         int cardId = deck.getCards().size();
         List<String> answers = new ArrayList<>();
         answers.add(cardDTO.getAnswer1());
@@ -64,7 +64,7 @@ public class DeckService {
 
     public McCardDTO asDTO(Card card) {
         McCard mcCard= (McCard) card;
-        return new McCardDTO(mcCard.getId(), mcCard.getQuestion(), mcCard.getAnswers().get(0),
+        return new McCardDTO(mcCard.getId(), card.getDeckId(), mcCard.getQuestion(), mcCard.getAnswers().get(0),
                 mcCard.getAnswers().get(1), mcCard.getAnswers().get(2), mcCard.getAnswers().get(3), -1);
     }
 
@@ -74,7 +74,7 @@ public class DeckService {
 //            userName = userService.findUserById(deck.getUserId()).getUsername();
 //        }
        List<McCardDTO> cards = withCards? cardsAsDTOs(deck.getCards()) :null;
-       return new DeckDTO(deck.getId(),deck.getName(), deck.getDescription(), deck.getUserId(), deck.getCreationTime(), cards);
+       return new DeckDTO(deck.getId(),deck.getName(), deck.getDescription(), deck.getUserId(), deck.getCreationTime().toString(), cards);
     }
 
     public static DeckDTO getEmptyDTO() {
@@ -89,7 +89,7 @@ public class DeckService {
         Deck deck = repo.findById(deckDto.getId()).get();
         deck.setName(deckDto.getName());
         deck.setDescription(deckDto.getDescription());
-        repo.insert(deck);
+        repo.save(deck);
     }
 
     @Getter
@@ -101,7 +101,7 @@ public class DeckService {
         private String name;
         private String description;
         private String author;
-        private Instant creationDate;
+        private String creationDate;
 
         private List<McCardDTO> cards;
     }
@@ -112,6 +112,8 @@ public class DeckService {
     @AllArgsConstructor
     public static class McCardDTO {
         private int id;
+
+        private String deckId;
         private String question;
         private String answer1;
         private String answer2;
