@@ -70,7 +70,7 @@
                             <tr>
                                 <th colspan="3" style="text-align: center;color: white;background-color: green; position: relative">Karten
                                     <div style="position: absolute; right: 10px; top: 5px; width: 30px; height: 30px; ">
-                                        <a th:href="@{/deck/add_card/{deckId} (deckId=${deck.id})}" >
+                                        <a th:href="@{/deck/{deckId}/add_card/-1 (deckId=${deck.id})}" >
                                             <svg class="add_card" style="width:30px; height:30px;">
                                                 <use xlink:href="#add"></use>
                                             </svg>
@@ -85,43 +85,34 @@
                                 <th th:text="${card.question}" scope="row"  style="width:45%;" ></th>
                                 <td style="width: 55%;"><div style=" width: 100%">
                                     <div class="answer_text">
-
                                         <div class="row">
                                             <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault1">
+                                                <input th:name="${card.solution}" th:value="0" th:checked="${card.solution == 0}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault1">
                                             </div>
                                             <div class="col-11">
-                                                <blockquote contenteditable="true">
-                                                    <p th:text="${card.answer1}"></p>
-                                                </blockquote>
+                                                <p th:text="${card.answer0}"></p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault2">
+                                                <input th:name="${card.solution}" th:value="1" th:checked="${card.solution == 1}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault2">
                                             </div>
                                             <div class="col-11">
-                                                <blockquote contenteditable="true">
-                                                    <p th:text="${card.answer2}"></p>
-                                                </blockquote>
+                                                <p th:text="${card.answer1}"></p>
                                             </div>
                                         </div> <div class="row">
                                         <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault3">
+                                                <input th:name="${card.solution}" th:value="2" th:checked="${card.solution == 2}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault3">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
-                                                <p th:text="${card.answer3}"></p>
-                                            </blockquote>
+                                            <p th:text="${card.answer2}"></p>
                                         </div>
                                     </div> <div class="row">
                                         <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault4">
+                                            <input th:name="${card.solution}" th:value="3" th:checked="${card.solution == 3}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault4">
                                         </div>
                                         <div class="col-11">
-                                            <blockquote contenteditable="true">
-                                                <p th:text="${card.answer4}"></p>
-                                            </blockquote>
+                                            <p th:text="${card.answer3}"></p>
                                         </div>
                                     </div>
 
@@ -130,7 +121,7 @@
                                 </div></td>
 
                                 <td style="width: 25px ; position: relative">
-                                    <a href="add_card" style="position: absolute ; top: 2px ; right: 13px" >
+                                    <a th:href="@{/deck/{deckId}/add_card/{cardId} (deckId=${deck.id}, cardId=${card.id})}" style="position: absolute ; top: 2px ; right: 13px" >
                                     <svg class="edit_stack" style="width:23px; height:30px;">
                                         <use xlink:href="#menu"></use>
                                     </svg>

@@ -31,7 +31,7 @@ public class QuizService {
     public Quiz getNewQuiz(String ownerMail, String deckId) {
         Quiz quiz = new Quiz();
         User user = userService.findUserByEmail(ownerMail);
-        Deck deck = decService.getDeckDyId(deckId);
+        Deck deck = decService.getDeckById(deckId);
 
         quiz.setDeck(deck);
         quiz.setOwner(user);

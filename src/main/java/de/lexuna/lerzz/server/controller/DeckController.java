@@ -1,5 +1,7 @@
 package de.lexuna.lerzz.server.controller;
 
+import de.lexuna.lerzz.model.Card;
+import de.lexuna.lerzz.model.Deck;
 import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.UserService;
@@ -20,7 +22,7 @@ public class DeckController {
 
     @GetMapping("deck/{id}")
     public String getStack(@PathVariable("id") String stackId, Model model) {
-        DeckService.DeckDTO deck = service.asDTO(service.getDeckDyId(stackId), true);
+        DeckService.DeckDTO deck = service.asDTO(service.getDeckById(stackId), true);
         model.addAttribute("deck", deck);
         return "deck_overview";
     }
@@ -31,23 +33,29 @@ public class DeckController {
         return "redirect:/dashboard";
     }
 
-    @GetMapping("deck/add_card/{id}")
-    public String addCard(@PathVariable("id") String deckId, Model model, Authentication authentication) {
-        DeckService.McCardDTO card = service.getEmptyCardDTO();
-        String mail = authentication.getName();
-        UserService.UserDTO user = userService.toDTO(userService.findUserByEmail(mail));
-        model.addAttribute(user);
-        model.addAttribute("deckId", deckId);
+    @GetMapping("deck/{deckId}/add_card/{cardId}")
+    public String editCard(@PathVariable("deckId") String deckId, @PathVariable("cardId") int cardId, Model model) {
+        DeckService.McCardDTO card;
+        if(cardId == -1) {
+            card = service.getEmptyCardDTO();
+        } else {
+            Deck deck = service.getDeckById(deckId);
+            card = service.asDTO(deck.getCards().get(cardId));
+        }
         model.addAttribute("card", card);
         return "add_card";
     }
 
-    @PostMapping("deck/add_card/{deckId}")
-    public String addCardPost(@PathVariable("deckId") String deckId, @ModelAttribute DeckService.McCardDTO cardDto, Model model, Authentication authentication) {
+    @PostMapping("deck/{deckId}/add_card/{cardId}")
+    public String addCardPost(@PathVariable("deckId") String deckId, @PathVariable("cardId") int cardId, @ModelAttribute DeckService.McCardDTO cardDto, Model model, Authentication authentication) {
         String mail = authentication.getName();
-        User user = userService.findUserByEmail(mail);
-        service.addCard(user, cardDto);
-        return "redirect:/deck/"+deckId;
+        if (cardId != -1) {
+            service.editCard(deckId, cardId, cardDto);
+        } else {
+            User user = userService.findUserByEmail(mail);
+            service.addCard(deckId, user, cardDto);
+        }
+        return "redirect:/deck/" + deckId;
     }
 
     @GetMapping("/create")
