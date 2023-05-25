@@ -19,6 +19,7 @@ public class ControllerConfig implements WebMvcConfigurer {
         registry.addViewController("/create_quiz").setViewName("create_quiz");
         registry.addViewController("/quiz").setViewName("quiz");
         registry.addViewController("/quiz_results").setViewName("quiz_results");
+        registry.addViewController("/quiz_result_users").setViewName("quiz_result_users");
 
 //        registry.addViewController("/edit_stack").setViewName("edit_stack");
 

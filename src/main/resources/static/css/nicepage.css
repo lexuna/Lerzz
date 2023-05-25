@@ -39477,3 +39477,33 @@ a.u-link.u-text-hover-grey-90:hover {
  /*begin-variables base-font-size*/ 
  html { font-size: 16px; }
  /*end-variables base-font-size*/
+
+
+header {
+    transition: all 0.4s ease;
+    /* restliche Header-CSS */
+}
+
+header.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: #ffffff; /* oder eine andere Farbe Ihrer Wahl */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); /* optional, fügt einen Schatten hinzu */
+    animation: fadeInDown 0.5s ease-in-out forwards; /* Animation */
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+body {
+    padding-top: 81px;  /* Passen Sie diesen Wert an die tatsächliche Höhe Ihres Headers an */
+}
