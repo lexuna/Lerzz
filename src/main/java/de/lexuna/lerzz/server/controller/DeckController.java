@@ -20,6 +20,11 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The `DeckController` class is responsible for handling HTTP requests related to Card Decks. It provides endpoints for
+ * getting, creating, updating, adding, and deleting Card Decks. The class utilizes the `CardDeckRepository` interface
+ * to perform CRUD operations on the Card Decks.
+ */
 @Controller
 public class DeckController {
 
