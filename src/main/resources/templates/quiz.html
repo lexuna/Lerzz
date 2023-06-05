@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html id="quiz" xmlns:th="http://www.thymeleaf.org"
       style="font-size: 16px;" lang="de">
 <head>
     <meta charset="utf-8">
@@ -12,9 +12,6 @@
     <link rel="stylesheet" th:href="@{~/css/index.css}">
     <link rel="stylesheet" th:href="@{~/css/card.css}">
     <link rel="stylesheet" th:href="@{~/css/game.css}">
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script th:src="@{~/js/socket.js}"></script>
 
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -26,108 +23,70 @@
         <article style="justify-content: center;">
             <div class="container_1" ;>
                 <div class="container-left list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a class="list-group-item list-group-item-action" th:each=" i : ${#numbers.sequence(1, questionCount)}">
                         <div class="row">
-
-                            <div class="left question-number">Frage 1</div>
-                            <div class="col letter">
-                                A
-                            </div>
-                            <div class="col letter">
-                                B
-                            </div>
-                            <div class="col letter">
-                                C
-                            </div>
-                            <div class="col letter">
-                                D
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="row">
-
-                            <div class="left question-number">Frage 2</div>
-                            <div class="col letter">
-                                D
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="row">
-
-                            <div class="left question-number">Frage 3</div>
-                            <div class="col">
-                                A
-                            </div>
-
+                            <div name="questionList" class="left question-number" th:text="'Frage ' + ${i}"></div>
+                            <div th:id="'qu'+${i}+'pos0'" class="col letter"></div>
+                            <div th:id="'qu'+${i}+'pos1'" class="col letter"></div>
+                            <div th:id="'qu'+${i}+'pos2'" class="col letter"></div>
+                            <div th:id="'qu'+${i}+'pos3'" class="col letter"></div>
                         </div>
                     </a>
                 </div>
 
                 <div class="container" style="width: 600px">
-
-                    <form th:action="@{/deck/add_card/{deckId} (deckId=${deckId})}" method="post" class="container"
-                          style="width: 100%; max-width: 750px">
-                        <br>
+                    <div th:object="${card}" class="container" style="width: 100%; max-width: 750px">
+                        <h3 th:text="${quiz.deckName}"></h3>
+<!--                        <p id="questionNr" th:text="${questionNr}"></p>-->
 <!--                        <div class="mb-3">-->
-                            <p name="question" class="form-control" id="exampleFormControlTextarea1" rows="3">Lorem ipsum dolor sit amet consectetur adip</p>
+                           <p id="quizQuestion" class="form-control" rows="3"></p> <!-- th:text="*{question}"-->
 <!--                        </div>-->
                         <div class="mb-3">
                             <div style="    border: 1px solid #ced4da;    border-radius: 0.25rem; width: 100% ; padding: 20px">
                                 <div class="answer_text">
-
                                     <div class="row">
                                         <div class="col-1 question_radio_width">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                   id="flexRadioDefault1">
+                                            <input id="solution0" class="form-check-input" type="radio" name="flexRadioDefault">
                                         </div>
                                         <div class="col-11">
-                                                <p name="answer1">Item1</p>
+                                            <p id="answer0" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-1 question_radio_width">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                   id="flexRadioDefault2">
+                                            <input id="solution1" class="form-check-input" type="radio" name="flexRadioDefault">
                                         </div>
                                         <div class="col-11">
-                                                <p name="answer2">Item2</p>
+                                            <p id="answer1" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-1 question_radio_width">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                   id="flexRadioDefault3">
+                                            <input id="solution2" class="form-check-input" type="radio" name="flexRadioDefault">
                                         </div>
                                         <div class="col-11">
-                                                <p name="answer3">Item3</p>
+                                            <p id="answer2" />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-1 question_radio_width">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                   id="flexRadioDefault4">
-                                        </div>
-                                        <div class="col-11">
-                                                <p name="answer4">Item4</p>
-                                        </div>
-                                    </div>
-
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-1 question_radio_width">
+                                        <input id="solution3" class="form-check-input" type="radio" name="flexRadioDefault">
+                                    </div>
+                                    <div class="col-11">
+                                        <p id="answer3" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-success" type="submit" value="submit">Next</button>
+                            <button id="next" disabled class="btn btn-success">Next</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div th:each="player : ${quiz.invited}" class="container-right list-group">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a class="list-group-item list-group-item-action">
                         <div class="row">
                             <div class="left User-icon-list">
                                 <svg style="width:24px; height:24px;">
@@ -151,5 +110,20 @@
 <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script th:src="@{~/js/socket.js}"></script>
+<script th:src="@{~/js/quiz.js}"></script>
+
+
+<script th:inline="javascript">
+          var card = /*[[${card}]]*/ null;
+          var quiz = /*[[${quiz}]]*/ null;
+          var next = document.getElementById('next');
+          next.addEventListener('click', function(){
+            loadNext(quiz.deckId, quiz.id);
+          });
+  </script>
 </body>
 </html>

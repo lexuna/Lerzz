@@ -39,6 +39,7 @@ public class Deck {
                 i--;
                 continue;
             }
+            idSet.add(cardNr);
             cards.add(this.cards.get(cardNr));
         }
         return cards;

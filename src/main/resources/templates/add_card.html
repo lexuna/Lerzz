@@ -20,8 +20,8 @@
       <section class="grid">
         <article>
           <div class="container" style="width: 100%; max-width: 600px">
-            <form th:action="@{/deck/{deckId}/add_card/{cardId} (deckId=${deckId}, cardId=${card.id})}" method="post" class="container" style="width: 100%; max-width: 750px">
-           <h3>Karte erstellen</h3>
+            <form th:object="${card}" th:action="@{/deck/{deckId}/add_card/{cardId} (deckId=${deckId}, cardId=${card.id})}" method="post" class="container" style="width: 100%; max-width: 750px">
+           <h3>Karte erstellen/bearbeiten</h3>
             <br>
             <div class="mb-3">
               <label for="question" class="form-label  ">Frage</label>
@@ -30,40 +30,18 @@
             <div class="mb-3">
               <label class="form-label  ">Antworten</label>
               <div style="    border: 1px solid #ced4da;    border-radius: 0.25rem; width: 100% ; padding: 20px">
-                <div class="answer_text">
+                <div class="answer_text" th:each="answer, cardStat: ${card.answers}">
                   <div class="row">
                     <div class="col-1 question_radio_width">
-                      <input th:name="solution" th:value="0" th:checked="${card.solution == 0}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                      <input th:name="solution"
+                             th:value="${cardStat.index}"
+                             th:checked="${card.solution == cardStat.index}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     </div>
                     <div class="col-11">
-                      <input th:name="answer0" th:value="${card.answer0}" contenteditable="true" placeholder="Antwort 1"/>
+                      <input type="text" th:field="*{answers[__${cardStat.index}__]}" contenteditable="true" placeholder="Antwort"/>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-1 question_radio_width">
-                      <input th:name="solution" th:value="1" th:checked="${card.solution == 1}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    </div>
-                    <div class="col-11">
-                      <input th:name="answer1" th:value="${card.answer1}" placeholder="Antwort 2"/>
-                    </div>
-                  </div> <div class="row">
-                  <div class="col-1 question_radio_width">
-                    <input th:name="solution" th:value="2" th:checked="${card.solution == 2}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                  </div>
-                  <div class="col-11">
-                    <input th:name="answer2" th:value="${card.answer2}" placeholder="Antwort 3"/>
-                  </div>
-                </div> <div class="row">
-                  <div class="col-1 question_radio_width">
-                    <input th:name="solution" th:value="3" th:checked="${card.solution == 3}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                  </div>
-                  <div class="col-11">
-                    <input th:name="answer3" th:value="${card.answer3}" placeholder="Antwort 4"/>
                   </div>
                 </div>
-
-                </div>
-
               </div>
             </div>
 

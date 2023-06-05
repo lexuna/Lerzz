@@ -22,8 +22,8 @@
     <article>
       <div class="container" style="width: 100%; max-width: 750px">
         <!-- Begin Here-->
-        <form th:action="@{/deck/{deckId}/quiz (deckId=${quiz.deckId})}" method="get" class="container" style="width: 100%">
-          <div class="container">
+        <form th:action="@{/deck/{deckId}/quiz/{quizId}(deckId=${quiz.deckId}, quizId=${quiz.id})}" th:object="${quiz}" method="post" class="container" style="width: 100%">
+        <div class="container">
             <div class="row">
               <div class="col">
                 <div class="row">
@@ -35,14 +35,14 @@
 
                   <div class="row">
                     <div class="col-sm-9" style="margin-bottom: 20px">
-                      <h4 th:text="${quiz.deckName}"></h4>
+                      <h4 th:text="*{deckName}"></h4>
                     </div>
                     <div class="col-sm-3 right" style="margin-bottom: 20px">
                       <div class="dropdown">
                         <button class="btn btn-secondary btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 100px">
                           Mode
                         </button>
-                        <ul th:value="${quiz.mode}" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul th:value="*{mode}" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           <li><a class="dropdown-item" href="#">Coop</a></li>
                           <li><a class="dropdown-item" href="#">Vs</a></li>
                         </ul>
@@ -62,7 +62,7 @@
                   <div class="row" style="margin-bottom: 20px">
                     <div class="col">
                       <div class="User-list">
-                        <div th:each="member : ${quiz.invited}" class="list-group">
+                        <div th:each="member : *{invited}" class="list-group">
                           <a href="#" class="list-group-item list-group-item-action"><div class="row">
 
                             <div class="left User-icon-list"> <svg style="width:24px; height:24px;">
@@ -77,7 +77,7 @@
                   </div>
                   <div class="row">
                     <div class="col right">
-                      <button type="submit" class="btn btn-success" style="min-width: 100px">Start</button>
+                      <button id="start" type="submit" class="btn btn-success" style="min-width: 100px">Start</button>
                     </div>
                   </div>
                 </div>
@@ -85,8 +85,6 @@
             </div>
           </div>
         </form>
-
-
 
         <!-- End -->
       </div>
@@ -109,7 +107,6 @@
           invite.addEventListener('click', function (){
             sendInvitation(quiz);
           });
-
 </script>
 </body>
 </html>

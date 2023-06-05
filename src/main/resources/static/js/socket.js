@@ -1,31 +1,74 @@
+//Socket
+//var socket = new SockJS('/lerzz');
+//var client = Stomp.over(socket);
+//var sessionId = "";
+//
+//client.connect({}, function(frame) {
+//    var url = client.ws._transport.url;
+//    url = url.replace("ws://localhost:8080/lerzz",  "");
+//    url = url.replace("/websocket", "");
+//    url = url.replace(/^[0-9]+\//, "");
+//    console.log("Your current session is: " + url);
+//    sessionId = url;
+//});
+
 //Deck Bearbeitung
-var deckSocket = new SockJS('/editDeck');
-var deckStompClient = Stomp.over(deckSocket);
-deckStompClient.connect({}, function(frame) {
-    console.log('Verbunden: ' + frame);
-});
 function sendData(deck) {
     var description = document.getElementById('description');
-    var name = document.getElementById('name');
-    var data = description.value;
+    var name = document.getElementById('deckName');
     deck.description = description.value;
-    deckStompClient.send('/editDeck', {}, JSON.stringify(deck));
+    deck.name = name.value;
+    client.send('app/editDeck', {}, JSON.stringify(deck));
 }
 
 //Quiz erstellen
-var inviteSocket = new SockJS('/invite');
-var inviteStompClient = Stomp.over(inviteSocket);
-inviteStompClient.connect({}, function(frame) {
-    console.log('Verbunden: ' + frame);
-});
 function sendInvitation(quiz) {
     var invitation = document.getElementById('invitation');
-    inviteStompClient.send('/invite', {}, invitation.value);
+    client.send('app/invite', {}, invitation.value);
 }
 
-stompClient.subscribe('/topic/notification', function(message) {
-        console.log('Nachricht empfangen: ' + message.body);
-        // Hier kannst du den empfangenen Inhalt verarbeiten
-    });
+//var quizSocket = new SockJS('/lerzz');
+//var quizClient = Stomp.over(quizSocket);
+//quizClient.connect({}, function(frame) {
+//        console.log('Connected: ' + frame);
+//        quizClient.subscribe('/topic/question', function(message) {
+//                console.log('Nachricht empfangen: ' + message.body);
+//                var body = JSON.parse(message.body);
+//                document.getElementById('quizQuestion').textContent = body.question;
+//                document.getElementById('answer0').textContent = body.answers[0];
+//                document.getElementById('answer1').textContent = body.answers[1];
+//                document.getElementById('answer2').textContent = body.answers[2];
+//                document.getElementById('answer3').textContent = body.answers[3];
+//            });
+
+//        quizClient.subscribe('/user/quiz/positions' + '-user' + quiz.ownerId, function(message) {
+//                console.log('Nachricht empfangen: ' + message.body);
+//
+//                var pos0 = document.getElementById('qu'+message[0]+'pos0');
+//                pos0.value=1
+//                if(message.size() >= 2) {
+//                    var pos1 = document.getElementById('qu'+message[1]+'pos1');
+//                    pos1.value=2
+//                }
+//                if(message.size() >= 2) {
+//                    var pos2 = document.getElementById('qu'+message[2]+'pos2');
+//                    pos2.value=3
+//                }
+//                if(message.size() >= 2) {
+//                    var pos3 = document.getElementById('qu'+message[3]+'pos3');
+//                    pos3.value=4
+//                }
+//            });
+//    });
+
+//Quiz
+
+//function sendCard(card, deckId) {
+//
+//    var headers = {
+//      deckId: deckId
+//    };
+//    quizClient.send('/app/next', headers, JSON.stringify(card));
+//}
 
 

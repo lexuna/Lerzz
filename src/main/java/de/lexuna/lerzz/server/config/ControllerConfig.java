@@ -16,9 +16,7 @@ public class ControllerConfig implements WebMvcConfigurer {
         registry.addViewController("/about").setViewName("about");
         registry.addViewController("/kontakt").setViewName("kontakt");
         registry.addViewController("/help").setViewName("help");
-        registry.addViewController("/create_quiz").setViewName("create_quiz");
-        registry.addViewController("/quiz").setViewName("quiz");
-        registry.addViewController("/quiz_results").setViewName("quiz_results");
+        registry.addViewController("/deck/*/quiz").setViewName("dashboard");
 
 //        registry.addViewController("/edit_stack").setViewName("edit_stack");
 

@@ -27,13 +27,8 @@
                     <div class="container" style="padding: 0">
                         <div>
                             <div class="row" style="justify-content: flex-start;">
-                                <div class="col-sm-8" style="position: relative; padding-right: 30px"><h3 style="margin-bottom: 40px" id="name" th:text="${deck.name}"></h3><div style="position: absolute; right: 5px; top: 0px; width: 30px; height: 30px;">
-                                    <a href="create" >
-                                        <svg class="edit_stack" style="width:30px; height:30px;">
-                                            <use xlink:href="#edit_stack"></use>
-                                        </svg>
-                                    </a>
-                                </div>
+                                <div class="col-sm-8" style="position: relative; padding-right: 30px">
+                                    <input type="text" style="width:100%; height:30px; font-size:30px; margin-bottom: 40px" id="deckName" th:value="${deck.name}"/>
                                 </div>
                             </div>
                             <div class="row" style="justify-content: flex-start;">
@@ -52,11 +47,8 @@
                                         <div class="col-1"></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12"
-                                     style="display: flex;align-content: flex-end;justify-content: flex-end;align-items: flex-end; margin-top: 15px">
-                                    <form th:action="@{/deck/{deckId}/create_quiz (deckId=${deck.id})}" method="get" class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-                                        <button type="submit" class="btn btn-success">Quiz erstellen</button>
-                                    </form>
+                                <div class="col-sm-12" style="display: flex;align-content: flex-end;justify-content: flex-end;align-items: flex-end; margin-top: 15px">
+                                        <a th:href="@{/deck/{deckId}/create_quiz(deckId=${deck.id})}" class="btn btn-success">Quiz erstellen</a>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +68,6 @@
                                             </svg>
                                         </a>
                                     </div>
-
                                 </th>
                             </tr>
                             </thead>
@@ -84,42 +75,19 @@
                             <tr>
                                 <th th:text="${card.question}" scope="row"  style="width:45%;" ></th>
                                 <td style="width: 55%;"><div style=" width: 100%">
-                                    <div class="answer_text">
+                                    <div class="answer_text" th:each="answer, cardStat: ${card.answers}">
                                         <div class="row">
                                             <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                                <input th:name="${card.solution}" th:value="0" th:checked="${card.solution == 0}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault1">
+                                                <input  th:name="${card.id}"
+                                                        th:value="${cardStat.index}"
+                                                        th:checked="${card.solution == cardStat.index}"  class="form-check-input" type="radio" disabled="true" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault1">
                                             </div>
                                             <div class="col-11">
-                                                <p th:text="${card.answer0}"></p>
+                                                <p th:text="${answer}"></p>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                                <input th:name="${card.solution}" th:value="1" th:checked="${card.solution == 1}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault2">
-                                            </div>
-                                            <div class="col-11">
-                                                <p th:text="${card.answer1}"></p>
-                                            </div>
-                                        </div> <div class="row">
-                                        <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                                <input th:name="${card.solution}" th:value="2" th:checked="${card.solution == 2}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault3">
-                                        </div>
-                                        <div class="col-11">
-                                            <p th:text="${card.answer2}"></p>
-                                        </div>
-                                    </div> <div class="row">
-                                        <div class="col-1 question_radio_width" style="width: 1px;padding-right: 4px;">
-                                            <input th:name="${card.solution}" th:value="3" th:checked="${card.solution == 3}" class="form-check-input" type="radio" name="flexRadioDefault" style="transform: translateX(-9px);" id="flexRadioDefault4">
-                                        </div>
-                                        <div class="col-11">
-                                            <p th:text="${card.answer3}"></p>
                                         </div>
                                     </div>
-
-                                    </div>
-
                                 </div></td>
-
                                 <td style="width: 25px ; position: relative">
                                     <a th:href="@{/deck/{deckId}/add_card/{cardId} (deckId=${deck.id}, cardId=${card.id})}" style="position: absolute ; top: 2px ; right: 13px" >
                                     <svg class="edit_stack" style="width:23px; height:30px;">
@@ -127,8 +95,7 @@
                                     </svg>
                                 </a>
                                 </td>
-
-              </tr>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -150,6 +117,11 @@
           description.addEventListener('input', function(){
               sendData(deck);
           });
-      </script>
+
+          var deckName = document.getElementById('deckName');
+          deckName.addEventListener('input', function(){
+              sendData(deck);
+          });
+  </script>
   </body>
 </html>

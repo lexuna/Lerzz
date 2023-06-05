@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +43,10 @@ public class DeckService {
         return repo.findById(stackId).get();
     }
 
-    public void addCard(String deckId, User user, McCardDTO cardDTO) {
+    public void addCard(String deckId, User user, McCardDTO cardDto) {
         Deck deck = getDeckById(deckId);
         int cardId = deck.getCards().size();
-        List<String> answers = new ArrayList<>();
-        answers.add(cardDTO.getAnswer0());
-        answers.add(cardDTO.getAnswer1());
-        answers.add(cardDTO.getAnswer2());
-        answers.add(cardDTO.getAnswer3());
-        deck.getCards().add(new McCard(cardId, deck.getId(), cardDTO.getQuestion(), user.getId(), answers, answers.get(cardDTO.getSolution())));
+        deck.getCards().add(new McCard(cardId, deck.getId(), cardDto.getQuestion(), user.getId(), cardDto.getAnswers(), cardDto.getAnswers().get(cardDto.getSolution())));
         repo.save(deck);
     }
 
@@ -64,8 +60,12 @@ public class DeckService {
 
     public McCardDTO asDTO(Card card) {
         McCard mcCard = (McCard) card;
-        return new McCardDTO(mcCard.getId(), mcCard.getQuestion(), mcCard.getAnswers().get(0),
-                mcCard.getAnswers().get(1), mcCard.getAnswers().get(2), mcCard.getAnswers().get(3), mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
+        return new McCardDTO(mcCard.getId(), "", mcCard.getQuestion(), mcCard.getAnswers(), mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
+    }
+
+    public McCardDTO asDTO(Card card, String quizOwner) {
+        McCard mcCard = (McCard) card;
+        return new McCardDTO(mcCard.getId(), quizOwner, mcCard.getQuestion(), mcCard.getAnswers(), mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
     }
 
     public DeckDTO asDTO(Deck deck, boolean withCards) {
@@ -74,7 +74,7 @@ public class DeckService {
 //            userName = userService.findUserById(deck.getUserId()).getUsername();
 //        }
         List<McCardDTO> cards = withCards ? cardsAsDTOs(deck.getCards()) : null;
-        return new DeckDTO(deck.getId(), deck.getName(), deck.getDescription(), deck.getUserId(), deck.getCreationTime(), cards);
+        return new DeckDTO(deck.getId(), deck.getName(), deck.getDescription(), deck.getUserId(), deck.getCreationTime().toString(), cards);
     }
 
     public static DeckDTO getEmptyDTO() {
@@ -84,6 +84,10 @@ public class DeckService {
     public McCardDTO getEmptyCardDTO() {
         McCardDTO mcCardDTO = new McCardDTO();
         mcCardDTO.setId(-1);
+        mcCardDTO.answers.add("");
+        mcCardDTO.answers.add("");
+        mcCardDTO.answers.add("");
+        mcCardDTO.answers.add("");
         return mcCardDTO;
     }
 
@@ -91,20 +95,20 @@ public class DeckService {
         Deck deck = repo.findById(deckDto.getId()).get();
         deck.setName(deckDto.getName());
         deck.setDescription(deckDto.getDescription());
-        repo.insert(deck);
+        repo.save(deck);
     }
 
     public void editCard(String deckId, int cardId, McCardDTO cardDto) {
         Deck deck = repo.findById(deckId).get();
         McCard card = (McCard) deck.getCards().get(cardId);
         card.setQuestion(cardDto.getQuestion());
-        List<String> answers = new ArrayList<>();
-        answers.add(cardDto.getAnswer0());
-        answers.add(cardDto.getAnswer1());
-        answers.add(cardDto.getAnswer2());
-        answers.add(cardDto.getAnswer3());
-        card.setAnswers(answers);
-        card.setRightAnswer(answers.get(cardDto.solution));
+//        List<String> answers = new ArrayList<>();
+//        answers.add(cardDto.getAnswer0());
+//        answers.add(cardDto.getAnswer1());
+//        answers.add(cardDto.getAnswer2());
+//        answers.add(cardDto.getAnswer3());
+        card.setAnswers(cardDto.getAnswers());
+        card.setRightAnswer(cardDto.getAnswers().get(cardDto.solution));
         repo.save(deck);
     }
 
@@ -112,12 +116,12 @@ public class DeckService {
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class DeckDTO {
+    public static class DeckDTO implements Serializable {
         private String id;
         private String name;
         private String description;
         private String author;
-        private Instant creationDate;
+        private String creationDate;
 
         private List<McCardDTO> cards;
     }
@@ -126,13 +130,16 @@ public class DeckService {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class McCardDTO {
+    public static class McCardDTO implements Serializable {
         private int id;
+        private String quiz;
         private String question;
-        private String answer0;
-        private String answer1;
-        private String answer2;
-        private String answer3;
+
+        private List<String> answers = new ArrayList<>();
+//        private String answer0;
+//        private String answer1;
+//        private String answer2;
+//        private String answer3;
         private int solution;
     }
 }

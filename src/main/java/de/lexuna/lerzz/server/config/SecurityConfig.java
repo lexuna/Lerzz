@@ -32,6 +32,7 @@ public class SecurityConfig {
 //                        .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/home")
                         .invalidateHttpSession(true))
+                .csrf().disable()
                 .httpBasic();
         return http.build();
     }
