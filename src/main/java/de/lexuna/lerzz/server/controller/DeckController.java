@@ -11,6 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The `DeckController` class is responsible for handling HTTP requests related to Card Decks. It provides endpoints for
+ * getting, creating, updating, adding, and deleting Card Decks. The class utilizes the `CardDeckRepository` interface
+ * to perform CRUD operations on the Card Decks.
+ */
 @Controller
 public class DeckController {
 

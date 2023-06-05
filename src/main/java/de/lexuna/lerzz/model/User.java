@@ -3,6 +3,7 @@ package de.lexuna.lerzz.model;
 import lombok.*;
 import lombok.experimental.NonFinal;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a user in the application.
+ */
 @Data
 @NoArgsConstructor
 @Document

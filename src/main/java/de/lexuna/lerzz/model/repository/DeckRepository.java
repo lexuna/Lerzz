@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ *
+ * The CardDeckRepository extends the MongoRepository interface.
+ * It provides a repository for managing CardDeck in a MongoDB database.
+ *
+ */
 @Repository
 public interface DeckRepository extends MongoRepository<Deck, String> {
 

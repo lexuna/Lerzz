@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Custom implementation of the Spring Security UserDetailsService that retrieves user details from the database.
+ */
 @Service
 @Transactional
 public class LerzzUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -20,6 +23,13 @@ public class LerzzUserDetailsService implements org.springframework.security.cor
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Loads the user details for the specified email address.
+     *
+     * @param email the email address of the user to load
+     * @return the UserDetails object representing the specified user
+     * @throws UsernameNotFoundException if the specified user could not be found
+     */
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if (user == null) {
@@ -35,6 +45,12 @@ public class LerzzUserDetailsService implements org.springframework.security.cor
                 credentialsNonExpired, accountNonLocked, getAuthorities(user.getRoles()));
     }
 
+    /**
+     * Returns the authorities for the specified roles.
+     *
+     * @param roles the roles to retrieve authorities for
+     * @return a list of authorities representing the specified roles
+     */
     private static List<GrantedAuthority> getAuthorities (List<String> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
