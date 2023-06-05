@@ -88,7 +88,7 @@ public class QuizController {
 //            model.addAttribute("questionNr", 1);
 //            quizDTO.setStarted(true);
 //        }
-        socketController.updatePositions(quiz.getPositions(), quizDTO.getOwnerId());
+//        socketController.updatePositions(quiz.getPositions(), quizDTO.getOwnerId());
         return "/quiz";
     }
 

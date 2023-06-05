@@ -44,6 +44,8 @@ function loadNext(deckId, quizId) {
                  if(body.lastCard) {
                      nextButton.textContent = 'Beenden';
                  }
+
+                 updatePositions(body.positions);
              }
          }
     }
@@ -95,14 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                    var body = JSON.parse(xhttp.responseText);
-                    cardId = body.card.id;
-                    document.getElementById('quizQuestion').textContent = body.card.question;
-                    document.getElementById('answer0').textContent = body.card.answers[0];
-                    document.getElementById('answer1').textContent = body.card.answers[1];
-                    document.getElementById('answer2').textContent = body.card.answers[2];
-                    document.getElementById('answer3').textContent = body.card.answers[3];
-                }
+                var body = JSON.parse(xhttp.responseText);
+                cardId = body.card.id;
+                document.getElementById('quizQuestion').textContent = body.card.question;
+                document.getElementById('answer0').textContent = body.card.answers[0];
+                document.getElementById('answer1').textContent = body.card.answers[1];
+                document.getElementById('answer2').textContent = body.card.answers[2];
+                document.getElementById('answer3').textContent = body.card.answers[3];
+
+                updatePositions(body.positions);
+            }
         };
         xhttp.open("POST", "/card", true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
@@ -113,3 +117,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+function updatePositions(positions) {
+    var pos0 = document.getElementById('qu'+positions[0]+'pos0');
+    pos0.textContent = 1;
+    pos0 = document.getElementById('qu'+(positions[0]-1)+'pos0');
+    if(pos0 != null) {
+        pos0.textContent = '';
+    }
+    if(positions.length >= 2) {
+        var pos1 = document.getElementById('qu'+positions[1]+'pos1');
+        pos1.textContent=2;
+        pos1 = document.getElementById('qu'+(positions[1]-1)+'pos0');
+        if(pos1 != null) {
+            pos1.textContent = '';
+        }
+    }
+    if(positions.length >= 3) {
+        var pos2 = document.getElementById('qu'+positions[2]+'pos2');
+        pos2.textContent=3;
+        pos2 = document.getElementById('qu'+positions[0]-1+'pos0');
+        if(pos2 != null) {
+            pos2.textContent = '';
+        }
+    }
+    if(positions.length >= 4) {
+        var pos3 = document.getElementById('qu'+positions[3]+'pos3');
+        pos3.textContent=4;
+        pos3 = document.getElementById('qu'+positions[0]-1+'pos0');
+        if(pos3 != null) {
+            pos3.textContent = '';
+        }
+    }
+}

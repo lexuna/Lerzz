@@ -56,7 +56,7 @@ public class Quiz {
     public void updatePosition(User user, Card card) {
         Integer position = getPositions().get(getPlayer().indexOf(user));
         position += 1;
-        positions.add(player.indexOf(user), position);
+        positions.set(player.indexOf(user), position);
     }
 
     public void finish(String userId) {

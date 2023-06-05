@@ -37,11 +37,13 @@ public class QuizRestController {
     @ResponseBody
     public String startQuiz(@RequestBody String payload) throws JsonProcessingException {
         String quizId = (payload.substring(payload.lastIndexOf("/")+1)).replace("}","").replace("\"","");
-        QuizService.QuizDTO quizDTO = service.toDTO(service.getQuiz(quizId));
-        DeckService.McCardDTO cardDto = deckService.asDTO(service.getQuiz(quizId).getQuestions().get(0));
+        Quiz quiz = service.getQuiz(quizId);
+        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+        DeckService.McCardDTO cardDto = deckService.asDTO(quiz.getQuestions().get(0));
         quizDTO.setStarted(true);
         Map<String, Object> map= new HashMap<>();
         map.put("card", cardDto);
+        map.put("positions", quiz.getPositions());
         return objectMapper.writeValueAsString(map);
     }
 
@@ -62,7 +64,9 @@ public class QuizRestController {
         Map<String, Object> response= new HashMap<>();
         response.put("card", card);
         response.put("lastCard", quiz.isLastCard(card));
+        response.put("positions", quiz.getPositions());
 //        response.put("questionNr", questionNr+1);
+        socketController.updatePositions(quiz.getPositions(), quiz.getId());
         return objectMapper.writeValueAsString(response);
     }
 
