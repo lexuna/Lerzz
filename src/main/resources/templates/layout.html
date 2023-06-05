@@ -11,7 +11,7 @@
 -->
 <body>
 <!--<header th:replace="~{layout.html :: header}"> </header>-->
-<header th:fragment="header" class="u-clearfix u-header u-valign-middle-md u-valign-middle-sm u-header" id="sec-a904" data-animation-name=""
+<header th:fragment="header" class="u-clearfix u-header sticky u-valign-middle-md u-valign-middle-sm u-header" id="sec-a904" data-animation-name=""
         data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
     <svg style="display:none;">
         <symbol id="logo" viewBox="0 0 140 59">
@@ -170,6 +170,76 @@
             <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title/><g data-name="Layer 2" id="Layer_2"><path d="M16,29A13,13,0,1,1,29,16,13,13,0,0,1,16,29ZM16,5A11,11,0,1,0,27,16,11,11,0,0,0,16,5Z"/><path d="M22,17H10a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"/></g><g id="frame"><rect class="cls-1" height="32" width="32"/></g></svg>
         </symbol>
     </svg>
+    <style>
+        #invitation-banner.hidden {
+            display: none;
+        }
+
+
+        #invitation-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 300;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        #invitation-banner {
+            /*... restliche CSS Eigenschaften ...*/
+
+            /* Flexbox Eigenschaften hinzufügen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-content {
+            /* Flexbox Eigenschaften hinzufügen */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 60%;  /* Sie können die Breite an Ihre Bedürfnisse anpassen */
+        }
+
+        #accept-button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        #decline-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px;
+
+
+        }
+
+    </style>
     <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-custom-sm u-layout-custom-xs u-layout-wrap u-layout-wrap-1">
         <div class="u-layout">
             <div class="u-layout-row">
@@ -250,9 +320,79 @@
             </div>
         </div>
     </div>
+
+    <div id="invitation-banner" class="hidden">
+        <div class="banner-content">
+            <p id="invitation-text"> </p>
+            <div >
+                <button id="decline-button">Ablehnen</button>
+                <button id="accept-button">Akzeptieren</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        function hideInvitationBanner() {
+            let invitationBanner = document.getElementById("invitation-banner");
+
+            if (invitationBanner) {
+                invitationBanner.classList.add("hidden");
+            } else {
+                console.log("Einladungsbanner wurde nicht gefunden");
+            }
+        }
+        function showInvitationBanner(inviteUser, quizName) {
+            let invitationBanner = document.getElementById("invitation-banner");
+            let invitationText = document.getElementById("invitation-text");
+
+            if (invitationBanner && invitationText) {
+                invitationText.innerHTML = inviteUser + " lädt dich zu " + quizName + " ein.";
+                if (invitationBanner.classList.contains('hidden')) {
+                    invitationBanner.classList.remove("hidden");
+                } else {
+                    console.log("Das Einladungsbanner wird bereits angezeigt");
+                }
+            } else {
+                console.log("Ein oder mehrere Elemente wurden nicht gefunden");
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById("invitation-banner").classList.add("hidden");
+
+            let acceptButton = document.getElementById("accept-button");
+            let declineButton = document.getElementById("decline-button");
+
+            if (acceptButton && declineButton) {
+                acceptButton.addEventListener("click", function() {
+                    hideInvitationBanner();
+                });
+
+                declineButton.addEventListener("click", function() {
+                    hideInvitationBanner();
+                });
+            } else {
+                console.log("Ein oder mehrere Elemente wurden nicht gefunden");
+            }
+        };
+
+        function simulateInvitation() {
+            // Setzen Sie hier die Werte für inviteUser und quizName
+            let inviteUser = "Beispiel-Benutzer";
+            let quizName = "Beispiel-Quiz";
+
+            // Simulieren Sie eine Einladung, indem Sie showInvitationBanner() aufrufen
+            showInvitationBanner(inviteUser, quizName);
+        }
+
+    </script>
+
 </header>
 
 <div th:fragment="content">
+
     <!-- Hier wird der Inhalt der Seite eingefügt -->
 </div>
 
