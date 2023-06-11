@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-1 cards">
-                    <div class="col" th:each="deck : ${allDecks}">
+                    <div class="col" th:each="deck : ${userDecks}">
                         <div class="card">
 
                             <div class="container card-Container" style="position: relative;">
@@ -114,7 +114,6 @@
     </section>
     <section class="grid">
         <article>
-
             <div class="container" style="width: 100%">
                 <div class="row">
                     <div class="col" style="font-size: 1.5rem; color: #818181; margin-bottom: 2rem">
@@ -122,7 +121,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-1 cards">
-                    <div class="col" th:each="deck : ${allDecks}">
+                    <div class="col" th:each="deck : ${communityDecks}">
                         <div class="card">
 
                             <div class="container card-Container" style="position: relative;">
@@ -141,7 +140,6 @@
                                                 <use xlink:href="#Card-delete"></use>
                                             </svg>
                                         </a></div>
-
                                 </div>
 
                                 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -161,10 +159,8 @@
                                 </div>
                                 <div style="position: absolute; width: 100%; height: 100% ;     top: 0;    left: 0;"
                                      th:attr="onclick=|window.location.href='@{/deck/{deckId}(deckId=${deck.id})}'|">
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

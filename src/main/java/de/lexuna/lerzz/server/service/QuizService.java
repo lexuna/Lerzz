@@ -95,6 +95,10 @@ public class QuizService {
         return quizzesByOwner.get(card.getQuiz());
     }
 
+    public Quiz getQuizForInvited(User user) {
+        return quizzes.values().stream().filter(q-> q.getPlayer().contains(user)).findFirst().get();
+    }
+
     @Getter
     @Setter
     @AllArgsConstructor

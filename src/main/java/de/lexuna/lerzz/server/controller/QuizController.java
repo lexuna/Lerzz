@@ -49,13 +49,12 @@ public class QuizController {
         return "/create_quiz";
     }
 
-//    @PostMapping("deck/{deckId}/create_quiz/invite")
-//    public String invite(@PathVariable("deckId") String deckId, @ModelAttribute QuizService.QuizDTO quiz, @ModelAttribute String username, Model model, Authentication authentication) {
-////        String username = (String) model.getAttribute("username");
-//        quiz.getInvited().add(userService.toDTO(userService.findUserByName(username)));
-////        model.addAttribute("quiz", quiz);
-//        return "create_quiz";
-//    }
+    @GetMapping("/join/{ownerId}")
+    public String joinQuiz( @PathVariable("ownerId") String ownerId, Model model) {
+        QuizService.QuizDTO quiz = service.toDTO(service.getQuiz(ownerId));
+        model.addAttribute("quiz", quiz);
+        return "/create_quiz";
+    }
 
 //    @PostMapping("deck/{deckId}/quiz/{quizId}")
 //    public String quiz(@PathVariable("deckId") String deckId, Model model) {

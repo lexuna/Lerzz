@@ -112,6 +112,16 @@ public class DeckService {
         repo.save(deck);
     }
 
+    public List<Deck> getCommunityDecks(String mail) {
+        User user = userService.findUserByEmail(mail);
+        return findAll().stream().filter(d-> !d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
+    }
+
+    public List<Deck> getUserDecks(String mail) {
+        User user = userService.findUserByEmail(mail);
+        return findAll().stream().filter(d-> d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
+    }
+
     @Getter
     @Setter
     @AllArgsConstructor

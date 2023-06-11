@@ -21,11 +21,11 @@ function sendData(deck) {
     client.send('app/editDeck', {}, JSON.stringify(deck));
 }
 
-//Quiz erstellen
-function sendInvitation(quiz) {
-    var invitation = document.getElementById('invitation');
-    client.send('app/invite', {}, invitation.value);
-}
+////Quiz erstellen
+//function sendInvitation(quiz) {
+//    var invitation = document.getElementById('invitation');
+//    client.send('app/invite', {}, invitation.value);
+//}
 
 
 

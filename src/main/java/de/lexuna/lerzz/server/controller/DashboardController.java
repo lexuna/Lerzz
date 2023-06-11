@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class DashboardController {
@@ -40,9 +41,14 @@ public class DashboardController {
     }
 
 
-    @ModelAttribute("allDecks")
-    public List<DeckService.DeckDTO> getAllDecks() {
-        return service.asDTOs(this.service.findAll());
+    @ModelAttribute("userDecks")
+    public List<DeckService.DeckDTO> getUserDecks(Authentication authentication) {
+        return service.asDTOs(this.service.getUserDecks(authentication.getName()));
+    }
+
+    @ModelAttribute("communityDecks")
+    public List<DeckService.DeckDTO> getCommunityDecks(Authentication authentication) {
+        return service.asDTOs(this.service.getCommunityDecks(authentication.getName()));
     }
 
 }

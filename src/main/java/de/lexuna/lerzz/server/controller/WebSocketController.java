@@ -48,38 +48,25 @@ public class WebSocketController {
         return "Nachricht empfangen: " + payload;
     }
 
-    @MessageMapping("/invite")
-    public String invite(@Payload String payload, Authentication authentication) {
-        System.out.println("Nachricht empfangen: " + payload);
-//        quiz.getInvited().add(userService.toDTO(userService.findUserByName(payload)));
-
-        return "Nachricht empfangen: " + payload;
+//    @MessageMapping("/topic/quiz/invite")
+    public void invite(@Payload String payload, String user) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/invite", payload);
     }
 
-//    @MessageMapping("/next")
-//    @SendTo("/topic/question")
-//    public DeckService.McCardDTO next(DeckService.McCardDTO card, Principal principal, @Header("deckId") String deckId) throws JsonProcessingException {
-//        System.out.println("next " + card);
-////        DeckService.McCardDTO card = objectMapper.readValue(payload, DeckService.McCardDTO.class);
-//        DeckService.McCardDTO next = quizService.next(userService.findUserByEmail(principal.getName()), card, deckId);
-////        messagingTemplate.convertAndSendToUser(principal.getName(), "/secured/user/queue", objectMapper.writeValueAsString(next));
-////        messagingTemplate.convertAndSend( "/topic/next", next);
-//        Quiz quiz = quizService.updatePosition(principal.getName(), card);
-//        quiz.getPlayer().forEach(p -> updatePositions(quiz.getPositions(), quiz.getOwner().getId()));
-//        return next;
-//    }
-
-    @MessageMapping("/quiz/positions")
-    public void updatePositions(List<Integer> positions, String quiz) {
-        try {
-            messagingTemplate.convertAndSendToUser(quiz, "/quiz/positions", objectMapper.writeValueAsString(positions));
-//            return objectMapper.writeValueAsString(positions);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//    @MessageMapping("/topic/quiz/invitationAccepted")
+    public void invitationAccepted(@Payload String payload, String user) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/invitationAccepted", payload);
     }
 
-//    public void sendMessageToDestination(String destination, String message) {
-//        messagingTemplate.convertAndSend(destination, message);
+
+//    @MessageMapping("/quiz/positions")
+//    public void updatePositions(List<Integer> positions, String user) {
+//        try {
+//            messagingTemplate.convertAndSendToUser(user, "/topic/quiz/positions", objectMapper.writeValueAsString(positions));
+////            return objectMapper.writeValueAsString(positions);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
 //    }
+
 }

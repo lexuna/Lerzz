@@ -75,6 +75,10 @@ public class Quiz {
         return questions.get(questions.size()-1).getId() == card.getId();
     }
 
+    public String getLink() {
+        return "deck/"+deck.getId()+"/quiz/"+id;
+    }
+
     @Getter
     public class Stats {
         private Instant begin;

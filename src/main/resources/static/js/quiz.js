@@ -24,29 +24,27 @@ function loadNext(deckId, quizId) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-         if (this.readyState == 4 && this.status == 200) {
-             if(xhttp.responseText == '') {
-                endQuiz();
-             } else {
-                 var body = JSON.parse(xhttp.responseText);
-                 cardId = body.card.id;
-                 document.getElementById('quizQuestion').textContent = body.card.question;
-                 document.getElementById('answer0').textContent = body.card.answers[0];
-                 document.getElementById('answer1').textContent = body.card.answers[1];
-                 document.getElementById('answer2').textContent = body.card.answers[2];
-                 document.getElementById('answer3').textContent = body.card.answers[3];
+         if(xhttp.responseText == '') {
+            endQuiz();
+         } else {
+             var body = JSON.parse(xhttp.responseText);
+             cardId = body.card.id;
+             document.getElementById('quizQuestion').textContent = body.card.question;
+             document.getElementById('answer0').textContent = body.card.answers[0];
+             document.getElementById('answer1').textContent = body.card.answers[1];
+             document.getElementById('answer2').textContent = body.card.answers[2];
+             document.getElementById('answer3').textContent = body.card.answers[3];
 
-                 radioButtons.forEach(radio => {
-                   radio.checked = false;
-                 });
-                 nextButton.disabled = true;
+             radioButtons.forEach(radio => {
+               radio.checked = false;
+             });
+             nextButton.disabled = true;
 
-                 if(body.lastCard) {
-                     nextButton.textContent = 'Beenden';
-                 }
-
-                 updatePositions(body.positions);
+             if(body.lastCard) {
+                 nextButton.textContent = 'Beenden';
              }
+
+             updatePositions(body.positions);
          }
     }
   };
