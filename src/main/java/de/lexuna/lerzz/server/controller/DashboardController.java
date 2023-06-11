@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class to handle dashboard related operations
+ */
 @Controller
 public class DashboardController {
 
@@ -21,6 +24,13 @@ public class DashboardController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Method to return the dashboard view
+     *
+     * @param model the model object
+     * @param authentication the object representing the authenticated user
+     * @return the String with the name of the view "dashboard"
+     */
     @GetMapping("/dashboard")
     public String home(Model model, Authentication authentication) {
         DeckService.DeckDTO deck = service.getEmptyDTO();
@@ -31,6 +41,14 @@ public class DashboardController {
         return "dashboard";
     }
 
+    /**
+     * Method to delete a deck
+     *
+     * @param deckId the ID of the deck that should be deleted
+     * @param model the model object
+     * @param authentication the object representing the authenticated user
+     * @return the String with the name of the view "dashboard"
+     */
     @DeleteMapping("delete/{id}")
     public String deleteCardStack(@PathVariable("id") String deckId, Model model, Authentication authentication) {
         String mail = authentication.getName();
@@ -39,7 +57,11 @@ public class DashboardController {
         return "dashboard";
     }
 
-
+    /**
+     *  Method to get all deck DTOs
+     *
+     * @return a list of all DTO objects
+     */
     @ModelAttribute("allDecks")
     public List<DeckService.DeckDTO> getAllDecks() {
         return service.asDTOs(this.service.findAll());

@@ -18,6 +18,9 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller class for a REST controller to handle the operations for the quiz
+ */
 @RestController
 public class QuizRestController {
 
@@ -33,6 +36,13 @@ public class QuizRestController {
     @Autowired
     private WebSocketController socketController;
 
+    /**
+     * Method to start the quiz
+     *
+     * @param payload the payload with the quiz ID
+     * @return a JSON string of the first card and the quiz positions
+     * @throws JsonProcessingException if an error while procession JSON occurs
+     */
     @PostMapping("/card")
     @ResponseBody
     public String startQuiz(@RequestBody String payload) throws JsonProcessingException {
@@ -47,6 +57,14 @@ public class QuizRestController {
         return objectMapper.writeValueAsString(map);
     }
 
+    /**
+     * Method to go to the next card
+     *
+     * @param payload the payload with the deck ID, quiz ID, card ID and the solution
+     * @param principal the object representing the current user
+     * @return a JSON string of the next card and the quiz positions
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/next")
     @ResponseBody
     public String next(@RequestBody String payload, Principal principal) throws JsonProcessingException {
@@ -70,6 +88,14 @@ public class QuizRestController {
         return objectMapper.writeValueAsString(response);
     }
 
+    /**
+     * Method to end a quiz
+     *
+     * @param payload the payload with the quiz ID, card ID and the solution
+     * @param principal the object representing the current user
+     * @return an empty string ""
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/end")
     @ResponseBody
     public String end(@RequestBody String payload, Principal principal) throws JsonProcessingException {

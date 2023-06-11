@@ -13,6 +13,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class to initiate a quiz with a method to return the quiz statistics
+ */
 @Controller
 public class StartsController {
 
@@ -21,6 +24,15 @@ public class StartsController {
     @Autowired
     private DeckService deckService;
 
+    /**
+     * Method to return the quiz statistics
+     *
+     * @param deckId the ID of the deck with the questions of the quiz
+     * @param quizId the ID of the quiz
+     * @param principal the principal object representing the current user
+     * @param model the model object with the data for the view
+     * @return the view name for displaying the quiz results
+     */
     @GetMapping("/deck/{deckId}/quiz/{quizId}/stats")
     public String getStats(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Principal principal, Model model) {
         Quiz quiz = service.getQuiz(quizId);

@@ -26,6 +26,9 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * Class for a Websocket controller to handle Websocket messages
+ */
 @Controller
 public class WebSocketController {
 
@@ -40,6 +43,13 @@ public class WebSocketController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+    /**
+     * Method to handle a WebSocket message for editing a deck
+     *
+     * @param payload the payload of the Websocket message
+     * @return the String "Nachricht empfangen: " + the information in the given payload
+     * @throws JsonProcessingException if there is an error processing the JSON payload
+     */
     @MessageMapping("/editDeck")
     public String editDeck(@Payload String payload) throws JsonProcessingException {
         System.out.println("Nachricht empfangen: " + payload);
@@ -48,6 +58,13 @@ public class WebSocketController {
         return "Nachricht empfangen: " + payload;
     }
 
+    /**
+     * Method to handle a Websocket message for editing a deck
+     *
+     * @param payload the payload of the websocket message
+     * @param authentication the authentication object representing the user
+     * @return the String "Nachricht empfangen: " + the information in the given payload
+     */
     @MessageMapping("/invite")
     public String invite(@Payload String payload, Authentication authentication) {
         System.out.println("Nachricht empfangen: " + payload);
@@ -69,6 +86,12 @@ public class WebSocketController {
 //        return next;
 //    }
 
+    /**
+     * Method to handle a websocket message to update the position of the players in the quiz
+     *
+     * @param positions the position of the players in the quiz
+     * @param quiz the ID of the quiz
+     */
     @MessageMapping("/quiz/positions")
     public void updatePositions(List<Integer> positions, String quiz) {
         try {

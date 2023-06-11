@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ *  Class to manage quizzes
+ */
 @Service
 public class QuizService {
 
@@ -26,6 +29,13 @@ public class QuizService {
     @Autowired
     private DeckService deckService;
 
+    /**
+     * Method to create a new quiz with a given owner and deck
+     *
+     * @param ownerMail the email of the quiz owner
+     * @param deckId the ID of the deck
+     * @return a new quiz
+     */
     public Quiz getNewQuiz(String ownerMail, String deckId) {
         Quiz quiz = new Quiz();
         User user = userService.findUserByEmail(ownerMail);
@@ -40,14 +50,31 @@ public class QuizService {
         return quiz;
     }
 
+    /**
+     * Method to get a quiz by the given ID
+     *
+     * @param id the ID of the quiz
+     * @return the quiz with the given ID
+     */
     public Quiz getQuiz(String id) {
         return quizzes.get(id);
     }
 
+    /**
+     * Method to get a new empty quiz DTO
+     *
+     * @return an empty quiz DTO
+     */
     public static QuizService.QuizDTO getEmptyDTO() {
         return new QuizDTO();
     }
 
+    /**
+     * Method to convert a quiz into a quiz DTO
+     *
+     * @param quiz the quiz that should be converted
+     * @return the converted quiz as DTO
+     */
     public QuizService.QuizDTO toDTO(Quiz quiz) {
         return new QuizDTO(quiz.getId(),
                 quiz.getDeck().getId(),
@@ -58,6 +85,12 @@ public class QuizService {
                 quiz.getPlayer().stream().map(userService::toDTO).collect(Collectors.toList()));
     }
 
+    /**
+     * Method to start a quiz with the given quiz DTO
+     *
+     * @param quizDto the quiz DTO witch contains the quiz information
+     * @return the method to start the quiz
+     */
     public Card start(QuizDTO quizDto) {
         Quiz quiz = quizzesByOwner.get(quizDto.getOwnerId());
         quiz.setMode(quizDto.getMode());
@@ -67,6 +100,15 @@ public class QuizService {
         return quiz.start();
     }
 
+    /**
+     * Method to go to the next question of the quiz
+     *
+     * @param user the user answering the quiz
+     * @param cardId the ID ot the current card
+     * @param solution the chosen answer
+     * @param quiz the quiz object
+     * @return the card DTO of the next question
+     */
     public DeckService.McCardDTO next(User user, int cardId, int solution, Quiz quiz) {
         McCard card = (McCard) quiz.getDeck().getCards().get(cardId);
 //        McCard card =  quiz.getQuestions().get(questionNr);
@@ -76,6 +118,14 @@ public class QuizService {
         return deckService.asDTO(quiz.nextQuestion(card), quiz.getId());
     }
 
+    /**
+     * Method to end the quiz
+     *
+     * @param user the user answering the quiz
+     * @param cardId the ID of the current card
+     * @param solution the chosen answer
+     * @param quiz the quiz object
+     */
     public void end(User user, int cardId, int solution, Quiz quiz) {
         McCard card = (McCard) quiz.getDeck().getCards().get(cardId);
 //        McCard card =  quiz.getQuestions().get(questionNr);
@@ -83,18 +133,40 @@ public class QuizService {
         quiz.addAnswer(user.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
     }
 
+    /**
+     * Method to update the users position in the quiz
+     *
+     * @param user the user answering the quiz
+     * @param quiz the quiz object
+     * @param card the current card
+     */
     public void updatePosition(User user, Quiz quiz, Card card) {
         quiz.updatePosition(user, card);
     }
 
+    /**
+     * Method to count the questions of a quiz DTO
+     *
+     * @param quiz the quiz DTO with the quiz information
+     * @return the number of questions in the quiz
+     */
     public int getQuestionCount(QuizDTO quiz) {
         return quizzesByOwner.get(quiz.getOwnerId()).getQuestions().size();
     }
 
+    /**
+     *
+     *
+     * @param card
+     * @return
+     */
     public Quiz getQuiz(DeckService.McCardDTO card) {
         return quizzesByOwner.get(card.getQuiz());
     }
 
+    /**
+     * Class of a DTO representing a quiz
+     */
     @Getter
     @Setter
     @AllArgsConstructor

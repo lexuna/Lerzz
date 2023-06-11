@@ -23,17 +23,30 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.Map;
 
+/**
+ * Websocket config class to implement a Websocket
+ */
 @Configuration
 @EnableWebSocketMessageBroker
 @EnableMongoHttpSession
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    /**
+     * Method to register STOMP endpoints.
+     *
+     * @param registry the StompEndpointRegistry
+     */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 //        registry.addEndpoint("/secured/quiz").withSockJS();
         registry.addEndpoint("/lerzz").withSockJS();
     }
 
+    /**
+     *  Method to configure the message broker
+     *
+     * @param registry the MessageBrokerRegistry
+     */
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic");
