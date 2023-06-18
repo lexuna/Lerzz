@@ -657,7 +657,7 @@ background-color:white;
 .User-list{
   border: 3px solid #11111138;
   border-radius: 2rem;
-  height: 218.79px;
+  height: 172px;
 }
 .list-group {
   display: flex;
@@ -671,7 +671,7 @@ background-color:white;
   border-bottom-left-radius: 0;
 }
 
-.list-group-item:nth-child(5):last-child {
+.list-group-item:nth-child(4):last-child {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
@@ -683,3 +683,6 @@ section {
   margin-bottom: 2rem;
 }
 
+a.list-group-item.list-group-item-action.hidden {
+  display: none;
+}
