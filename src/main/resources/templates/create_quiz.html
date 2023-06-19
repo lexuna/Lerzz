@@ -42,9 +42,9 @@
                         <button id="mode" class="btn btn-secondary btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 100px">
                           Mode
                         </button>
-                        <ul th:value="*{mode}" class="dropdown-menu" aria-labelledby="mode">
-                          <li><a class="dropdown-item" href="#">Coop</a></li>
-                          <li><a class="dropdown-item" href="#">Vs</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="mode">
+                          <li><a id="coopMode" class="dropdown-item">Coop</a></li>
+                          <li><a id="vsMode" class="dropdown-item">Vs</a></li>
                         </ul>
                       </div>
                     </div>
@@ -105,7 +105,7 @@
                       </div>
                     </div>
                   </div>
-                  <form th:action="@{/deck/{deckId}/quiz/{quizId}(deckId=${quiz.deckId}, quizId=${quiz.id})}" th:object="${quiz}" method="post" class="row">
+                  <form th:action="@{/deck/{deckId}/quiz/{quizId}(deckId=${quiz.deckId}, quizId=${quiz.id})}" method="get" class="row">
                     <div class="col right">
                       <button id="start" type="submit" class="btn btn-success" style="min-width: 100px">Start</button>
                     </div>
@@ -133,13 +133,6 @@
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <!--<script th:src="@{~/js/socket.js}"></script>-->
-<script th:inline="javascript">
-          var quiz = /*[[${quiz}]]*/ null;
-          var invite = document.getElementById('invite');
-          var invitation = document.getElementById('invitation');
-          invite.addEventListener('click', function (){
-            invite(invitation.value);
-          });
-</script>
+
 </body>
 </html>

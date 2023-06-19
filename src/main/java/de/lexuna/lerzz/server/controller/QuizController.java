@@ -50,71 +50,31 @@ public class QuizController {
     }
 
     @GetMapping("/join/{ownerId}")
-    public String joinQuiz( @PathVariable("ownerId") String ownerId, Model model) {
+    public String joinQuiz(@PathVariable("ownerId") String ownerId, Model model) {
         QuizService.QuizDTO quiz = service.toDTO(service.getQuiz(ownerId));
         model.addAttribute("quiz", quiz);
         return "/create_quiz";
     }
 
-//    @PostMapping("deck/{deckId}/quiz/{quizId}")
-//    public String quiz(@PathVariable("deckId") String deckId, Model model) {
-//        QuizService.QuizDTO quiz = (QuizService.QuizDTO) model.getAttribute("quiz");
-////        DeckService.McCardDTO card;
-//        DeckService.McCardDTO cardDto = deckService.asDTO(service.start(quiz), quiz.getOwnerId());
-//        model.addAttribute("questionCount", service.getQuestionCount(quiz));
-//        model.addAttribute("card", cardDto);
-//        quiz.setStarted(true);
-//        socketController.updatePositions(service.getQuiz(cardDto).getPositions(), quiz.getOwnerId());
-//        return "redirect:/quiz/" + quiz.getId();
-//    }
-
-    @PostMapping("deck/{deckId}/quiz/{quizId}")
-    public String quiz(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, @ModelAttribute DeckService.McCardDTO cardDto, Model model, Principal principal) {
-//        QuizService.QuizDTO quiz = (QuizService.QuizDTO) model.getAttribute("quiz");
-//        DeckService.McCardDTO card;
-        QuizService.QuizDTO quizDTO = service.toDTO(service.getQuiz(quizId));
+    @GetMapping("deck/{deckId}/quiz/{quizId}")
+    public String quiz(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Model model, Principal principal) {
         Quiz quiz = service.getQuiz(quizId);
-//        if (quizDTO.isStarted()) {
-//            cardDto = service.next(userService.findUserByEmail(principal.getName()), cardDto, deckId, quizId);
-//            model.addAttribute("questionCount", service.getQuestionCount(quizDTO));
-//            model.addAttribute("card", cardDto);
-//            model.addAttribute("quiz", quizDTO);
-//        } else {
-            cardDto = deckService.asDTO(service.start(quizDTO), quizDTO.getOwnerId());
-            model.addAttribute("questionCount", quiz.getQuestions().size());
-//            model.addAttribute("card", cardDto);
-            model.addAttribute("quiz", quizDTO);
-//            model.addAttribute("questionNr", 1);
-//            quizDTO.setStarted(true);
-//        }
-//        socketController.updatePositions(quiz.getPositions(), quizDTO.getOwnerId());
+        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+        if(quiz.getOwner().getEmail().equals(principal.getName())) {
+            service.start(quiz);
+            quiz.getPlayer().stream().filter(p-> !p.getEmail().equals(principal.getName())).forEach(p -> socketController.start(p.getEmail(), deckId, quizId));
+        }
+        model.addAttribute("questionCount", quiz.getQuestions().size());
+        model.addAttribute("quiz", quizDTO);
         return "/quiz";
     }
 
-//    @PostMapping("/next")
-//    public DeckService.McCardDTO next(@RequestBody String payload, Model model, Principal principal, @Header("deckId") String deckId) throws JsonProcessingException {
-//        DeckService.McCardDTO card = objectMapper.readValue(payload, DeckService.McCardDTO.class);
-//        DeckService.McCardDTO next = service.next(userService.findUserByEmail(principal.getName()), card, deckId);
-////        messagingTemplate.convertAndSendToUser(principal.getName(), "/secured/user/queue", objectMapper.writeValueAsString(next));
-////        messagingTemplate.convertAndSend( "/topic/next", next);
-//        Quiz quiz = service.updatePosition(principal.getName(), card);
-//        quiz.getPlayer().forEach(p -> socketController.updatePositions(quiz.getPositions(), quiz.getOwner().getId()));
-//        model.addAttribute("card", next);
-//        return next;
-//    }
-
-//    @PostMapping("/next")
-//    @ResponseBody
-//    public String next(@RequestBody String payload) throws JsonProcessingException {
-//        Map<String, Object> map = objectMapper.readValue(payload, Map.class);
-//        String deckId = (String) map.get("deckId");
-//        String quizId = (String) map.get("quizId");
-//        int cardId = (int) map.get("cardId");
-//        int questionNr = Integer.parseInt((String) map.get("questionNr"));
-//        int solution = (int) map.get("solution");
-//
-//        DeckService.McCardDTO card = deckService.asDTO(service.getQuiz(quizId).getQuestions().get(questionNr));
-////        model.addAttribute("card", card);
-//        return objectMapper.writeValueAsString(card);
+//    @GetMapping("deck/{deckId}/quiz/{quizId}")
+//    public String getStart(@PathVariable("quizId") String quizId, Model model) {
+//        Quiz quiz = service.getQuiz(quizId);
+//        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+//        model.addAttribute("questionCount", quiz.getQuestions().size());
+//        model.addAttribute("quiz", quizDTO);
+//        return "/quiz";
 //    }
 }

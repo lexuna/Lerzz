@@ -58,15 +58,24 @@ public class WebSocketController {
         messagingTemplate.convertAndSendToUser(user, "/queue/quiz/invitationAccepted", payload);
     }
 
+    public void start(String user, String deckId, String quizId) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/start", "/deck/"+deckId+"/quiz/"+quizId);
+    }
 
-//    @MessageMapping("/quiz/positions")
-//    public void updatePositions(List<Integer> positions, String user) {
-//        try {
-//            messagingTemplate.convertAndSendToUser(user, "/topic/quiz/positions", objectMapper.writeValueAsString(positions));
-////            return objectMapper.writeValueAsString(positions);
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void next(String user, String cardDto) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/next", cardDto);
+    }
 
+    public void chose(String email, String radioId) {
+        messagingTemplate.convertAndSendToUser(email, "/queue/quiz/chose", radioId);
+    }
+
+
+    public void updatePositions(String user, String positions) {
+            messagingTemplate.convertAndSendToUser(user, "/queue/quiz/positions", positions);
+    }
+
+    public void end(String user) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/end", "");
+    }
 }

@@ -1,194 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      style="font-size: 16px;" lang="de">
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" th:href="@{~/css/nicepage.css}">
-  <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
-  <link rel="stylesheet" th:href="@{~/css/index.css}">
-  <link rel="stylesheet" th:href="@{~/css/card.css}">
-  <link rel="stylesheet" th:href="@{~/css/game.css}">
-  <link rel="stylesheet" th:href="@{~/css/quiz_result.css}">
-
-
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 16px" lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" th:href="@{~/css/nicepage.css}" />
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{~/css/index.css}" />
+    <link rel="stylesheet" th:href="@{~/css/card.css}" />
+    <link rel="stylesheet" th:href="@{~/css/game.css}" />
+    <link rel="stylesheet" th:href="@{~/css/quiz_result.css}" />
   </head>
-<body class="u-body u-xl-mode" data-lang="de">
-<header th:replace="~{layout.html :: header}"></header>
-<section class="page-content">
-  <section class="grid">
-    <article style="justify-content: center;">
-      <div class="container_1" style="    flex-direction: column;">
-        <div class="container_1" style="    flex-direction: column;">
-
-
-          <div class="container_2" style="align-items: stretch">
-            <div class="questions"><p class="title_quiz" style="color: black">1</p></div>
-            <div class="border-123">
-              <div class="container width-600">
-
-                <div class="container width-750"
-                >
-
-                  <div class="mb-3 margin-0" style="
-    position: relative;
-    min-height: 50px;
-">
-                   <div class="user_container left" style="    border: 1px solid #ced4da;
-    position: absolute;
-    padding: 5px 10px;
-    left: -13px;
-    top: -1px;
-}"><div class="left User-icon-list"> <svg style="width:24px; height:24px;">
-                     <use xlink:href="#User-list"></use>
-                   </svg></div>
-                     <div class="col User-Name">
-                       Dirk Pöppelbaum
-                     </div></div>
-
-                  </div>
-                  <div class="mb-3 margin-0" style="    margin-top: 15px;
-">
-                    <div class="row row-cols-2" style="    text-align: center;">
-                      <div class="col-6 " style="max-width: 200px"><p>Zeit</p></div>
-                      <div class="col-6"><p> Richtige Antworten</p></div>
-                      <div class="col-6 " style="max-width: 200px"><p>5:46</p></div>
-                      <div class="col-6"><p>9/10</p></div>
+  <body class="u-body u-xl-mode" data-lang="de">
+    <header th:replace="~{layout.html :: header}"></header>
+    <section class="page-content">
+      <section class="grid">
+        <article style="justify-content: center">
+          <div class="container_1" style="flex-direction: column">
+            <div class="container_1" style="flex-direction: column">
+              <div th:each="user, userStat: ${users}" class="container_2" style="align-items: stretch">
+                <div class="questions">
+                  <p class="title_quiz" style="color: black" th:text="${userStat.index}">1</p>
+                </div>
+                <div class="border-123">
+                  <div class="container width-600">
+                    <div class="container width-750">
+                      <div
+                        class="mb-3 margin-0"
+                        style="position: relative; min-height: 50px"
+                      >
+                        <div
+                          class="user_container left"
+                          style="    border: 1px solid #ced4da;
+                                      position: absolute;
+                                      padding: 5px 10px;
+                                      left: -13px;
+                                      top: -1px;
+                                  "
+                        >
+                          <div class="left User-icon-list">
+                            <svg style="width: 24px; height: 24px">
+                              <use xlink:href="#User-list"></use>
+                            </svg>
+                          </div>
+                          <div class="col User-Name" th:text="${user}"></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0" style="margin-top: 15px">
+                        <div class="row row-cols-2" style="text-align: center">
+                          <div class="col-6" style="max-width: 200px">
+                            <p>Zeit</p>
+                          </div>
+                          <div class="col-6"><p>Richtige Antworten</p></div>
+                          <div class="col-6" style="max-width: 200px">
+                            <p th:text="${time[__${userStat.index}__]}"></p>
+                          </div>
+                          <div class="col-6"><p th:text="${rightAnswers[__${userStat.index}__]}+'/'+${#lists.size(users)}"></p></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0">
+                        <div class="details-button right" style="padding: 10px">
+                          <button 
+                            class="btn btn-success"
+                            style="width: 100px"
+                            type="button">
+                            Details
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="mb-3 margin-0">
-                    <div class="details-button right" style="    padding: 10px;"><button class="btn btn-success" style=" width: 100px" type="button">Details
-                    </button></div>
-
                   </div>
                 </div>
               </div>
-
-
             </div>
-
-          </div>
-          <div class="container_2" style="align-items: stretch">
-            <div class="questions"><p class="title_quiz" style="color: black">2</p></div>
-            <div class="border-123">
-              <div class="container width-600">
-
-                <div class="container width-750"
-                >
-
-                  <div class="mb-3 margin-0" style="
-    position: relative;
-    min-height: 50px;
-">
-                    <div class="user_container left" style="    border: 1px solid #ced4da;
-    position: absolute;
-    padding: 5px 10px;
-    left: -13px;
-    top: -1px;
-}"><div class="left User-icon-list"> <svg style="width:24px; height:24px;">
-                      <use xlink:href="#User-list"></use>
-                    </svg></div>
-                      <div class="col User-Name">
-                        Hannah Nischik
-                      </div></div>
-
-                  </div>
-                  <div class="mb-3 margin-0" style="    margin-top: 15px;
-">
-                    <div class="row row-cols-2" style="    text-align: center;">
-                      <div class="col-6 " style="max-width: 200px"><p>Zeit</p></div>
-                      <div class="col-6"><p> Richtige Antworten</p></div>
-                      <div class="col-6 " style="max-width: 200px"><p>5:46</p></div>
-                      <div class="col-6"><p>9/10</p></div>
-                    </div>
-                  </div>
-                  <div class="mb-3 margin-0">
-                    <div class="details-button right" style="    padding: 10px;"><button class="btn btn-success" style=" width: 100px" type="button">Details
-                    </button></div>
-
-                  </div>
-                </div>
-              </div>
-
-
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                width: 100%;
+              "
+            >
+              <button
+                class="btn btn-success"
+                style="margin-top: 20px; width: 100px; margin-right: 20px"
+                type="button"
+              >
+                New Quiz
+              </button>
+              <button
+                class="btn btn-success"
+                style="margin-top: 20px; width: 100px"
+                type="button"
+              >
+                Back
+              </button>
             </div>
-
           </div>
-          <div class="container_2" style="align-items: stretch">
-            <div class="questions"><p class="title_quiz" style="color: black">3</p></div>
-            <div class="border-123">
-              <div class="container width-600">
+        </article>
+      </section>
+      <footer class="page-footer"></footer>
+    </section>
 
-                <div class="container width-750"
-                >
-
-                  <div class="mb-3 margin-0" style="
-    position: relative;
-    min-height: 50px;
-">
-                    <div class="user_container left" style="    border: 1px solid #ced4da;
-    position: absolute;
-    padding: 5px 10px;
-    left: -13px;
-    top: -1px;
-}"><div class="left User-icon-list"> <svg style="width:24px; height:24px;">
-                      <use xlink:href="#User-list"></use>
-                    </svg></div>
-                      <div class="col User-Name">
-                        Alaaddin Sagun
-                      </div></div>
-
-                  </div>
-                  <div class="mb-3 margin-0" style="    margin-top: 15px;
-">
-                    <div class="row row-cols-2" style="    text-align: center;">
-                      <div class="col-6 " style="max-width: 200px"><p>Zeit</p></div>
-                      <div class="col-6"><p> Richtige Antworten</p></div>
-                      <div class="col-6 " style="max-width: 200px"><p>5:46</p></div>
-                      <div class="col-6"><p>9/10</p></div>
-                    </div>
-                  </div>
-                  <div class="mb-3 margin-0">
-                    <div class="details-button right" style="    padding: 10px;"><button class="btn btn-success" style=" width: 100px" type="button">Details
-                    </button></div>
-
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-
-          </div>
-
-
-        </div>
-        <div style="    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;">
-          <button class="btn btn-success" style="margin-top: 20px; width: 100px ;margin-right: 20px" type="button">New Quiz
-          </button>
-          <button class="btn btn-success" style="margin-top: 20px; width: 100px" type="button">Back
-          </button>
-        </div>
-
-      </div>
-
-    </article>
-
-  </section>
-  <footer class="page-footer">
-  </footer>
-</section>
-
-
-
-<script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
-<script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
-<script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
-<script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
-</body>
+    <script
+      class="u-script"
+      type="text/javascript"
+      th:src="@{~/js/bootstrap.js}"
+      defer=""
+    ></script>
+    <script
+      class="u-script"
+      type="text/javascript"
+      th:src="@{~/js/index.js}"
+      defer=""
+    ></script>
+    <script
+      class="u-script"
+      type="text/javascript"
+      th:src="@{~/js/jquery.js}"
+      defer=""
+    ></script>
+    <script
+      class="u-script"
+      type="text/javascript"
+      th:src="@{~/js/nicepage.js}"
+      defer=""
+    ></script>
+  </body>
 </html>
