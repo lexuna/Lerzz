@@ -22,17 +22,8 @@ window.onload = function() {
             
             for(var i=0; i<message.length; i++) {
                 document.getElementById('invited'+i).textContent = message[i];
+                document.getElementById('invited'+i+'Parent').classList.remove("hidden");
             }
-            // document.getElementById('invited0').textContent = message[0];
-            // if(message.length>=2) {
-            //     document.getElementById('invited1').textContent = message[1];
-            // }
-            // if(message.length>=3) {
-            //     document.getElementById('invited2').textContent = message[2];
-            // }
-            // if(message.length>=4) {
-            //     document.getElementById('invited3').textContent = message[3];
-            // }
         }
     };
     xhttp.open("POST", "/invitedPlayer", true);
@@ -59,10 +50,11 @@ client.connect({}, function(frame) {
     sessionId = url;
 
     client.subscribe('/user/queue/quiz/invitationAccepted', function(response) {
-        var message = response.body;
+        var message = JSON.parse(response.body);
         // Verarbeite die empfangene Nachricht
         console.log(message);
-        document.getElementById('invited1').textContent = message;
+        document.getElementById('invited'+message.count).textContent = message.player;
+        document.getElementById('invited'+message.count+'Parent').classList.remove("hidden");
     });
 
     client.subscribe('/user/queue/quiz/start', function(response) {

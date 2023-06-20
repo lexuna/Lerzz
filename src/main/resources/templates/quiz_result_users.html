@@ -22,24 +22,21 @@
         <article style="justify-content: center">
           <div class="container_1" style="flex-direction: column">
             <div class="container_1" style="flex-direction: column">
-              <div th:each="user, userStat: ${users}" class="container_2" style="align-items: stretch">
+              <div class="container_2" style="align-items: stretch">
                 <div class="questions">
-                  <p class="title_quiz" style="color: black" th:text="${userStat.index+1}">1</p>
+                  <p class="title_quiz" style="color: black">1</p>
                 </div>
                 <div class="border-123">
                   <div class="container width-600">
                     <div class="container width-750">
-                      <div
-                        class="mb-3 margin-0"
-                        style="position: relative; min-height: 50px"
-                      >
+                      <div class="mb-3 margin-0" style="position: relative; min-height: 50px">
                         <div class="user_container left" style="border: 1px solid #ced4da; position: absolute; padding: 5px 10px; left: -13px; top: -1px;">
                           <div class="left User-icon-list">
                             <svg style="width: 24px; height: 24px">
                               <use xlink:href="#User-list"></use>
                             </svg>
                           </div>
-                          <div class="col User-Name" th:text="${user}"></div>
+                          <div class="col User-Name" th:text="${users[0]}"></div>
                         </div>
                       </div>
                       <div class="mb-3 margin-0" style="margin-top: 15px">
@@ -49,9 +46,129 @@
                           </div>
                           <div class="col-6"><p>Richtige Antworten</p></div>
                           <div class="col-6" style="max-width: 200px">
-                            <p th:text="${times[__${userStat.index}__]}"></p>
+                            <p th:text="${times[0]}"></p>
                           </div>
-                          <div class="col-6"><p th:text="${rightAnswers[__${userStat.index}__]}+'/'+10"></p></div>
+                          <div class="col-6"><p th:text="${rightAnswers[0]}+'/'+10"></p></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0">
+                        <div class="details-button right" style="padding: 10px">
+                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                            Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div th:if="${#lists.size(users)>=2}" class="container_2" style="align-items: stretch">
+                <div class="questions">
+                  <p class="title_quiz" style="color: black">2</p>
+                </div>
+                <div class="border-123">
+                  <div class="container width-600">
+                    <div class="container width-750">
+                      <div class="mb-3 margin-0" style="position: relative; min-height: 50px">
+                        <div class="user_container left" style="border: 1px solid #ced4da; position: absolute; padding: 5px 10px; left: -13px; top: -1px;">
+                          <div class="left User-icon-list">
+                            <svg style="width: 24px; height: 24px">
+                              <use xlink:href="#User-list"></use>
+                            </svg>
+                          </div>
+                          <div class="col User-Name" id="user1" th:text="${users[1]}"></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0" style="margin-top: 15px">
+                        <div class="row row-cols-2" style="text-align: center">
+                          <div class="col-6" style="max-width: 200px">
+                            <p>Zeit</p>
+                          </div>
+                          <div class="col-6"><p>Richtige Antworten</p></div>
+                          <div class="col-6" style="max-width: 200px">
+                            <p id="time1" th:text="${times[1]}"></p>
+                          </div>
+                          <div class="col-6"><p id="answers1" th:text="${rightAnswers[1]}+'/'+10"></p></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0">
+                        <div class="details-button right" style="padding: 10px">
+                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                            Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div th:if="${#lists.size(users)>=3}" class="container_2 hidden" style="align-items: stretch">
+                <div class="questions">
+                  <p class="title_quiz" style="color: black">3</p>
+                </div>
+                <div class="border-123">
+                  <div class="container width-600">
+                    <div class="container width-750">
+                      <div class="mb-3 margin-0" style="position: relative; min-height: 50px">
+                        <div class="user_container left" style="border: 1px solid #ced4da; position: absolute; padding: 5px 10px; left: -13px; top: -1px;">
+                          <div class="left User-icon-list">
+                            <svg style="width: 24px; height: 24px">
+                              <use xlink:href="#User-list"></use>
+                            </svg>
+                          </div>
+                          <div class="col User-Name" id="user2" th:text="${users[2]}"></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0" style="margin-top: 15px">
+                        <div class="row row-cols-2" style="text-align: center">
+                          <div class="col-6" style="max-width: 200px">
+                            <p>Zeit</p>
+                          </div>
+                          <div class="col-6"><p>Richtige Antworten</p></div>
+                          <div class="col-6" style="max-width: 200px">
+                            <p id="time2" th:text="${times[2]}"></p>
+                          </div>
+                          <div class="col-6"><p id="answers2" th:text="${rightAnswers[2]}+'/'+10"></p></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0">
+                        <div class="details-button right" style="padding: 10px">
+                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                            Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div th:if="${#lists.size(users)>=4}" id="container3" class="container_2 hidden" style="align-items: stretch">
+                <div class="questions">
+                  <p class="title_quiz" style="color: black">4</p>
+                </div>
+                <div class="border-123">
+                  <div class="container width-600">
+                    <div class="container width-750">
+                      <div class="mb-3 margin-0" style="position: relative; min-height: 50px">
+                        <div class="user_container left" style="border: 1px solid #ced4da; position: absolute; padding: 5px 10px; left: -13px; top: -1px;">
+                          <div class="left User-icon-list">
+                            <svg style="width: 24px; height: 24px">
+                              <use xlink:href="#User-list"></use>
+                            </svg>
+                          </div>
+                          <div class="col User-Name" id="user3" th:text="${users[3]}"></div>
+                        </div>
+                      </div>
+                      <div class="mb-3 margin-0" style="margin-top: 15px">
+                        <div class="row row-cols-2" style="text-align: center">
+                          <div class="col-6" style="max-width: 200px">
+                            <p>Zeit</p>
+                          </div>
+                          <div class="col-6"><p>Richtige Antworten</p></div>
+                          <div class="col-6" style="max-width: 200px">
+                            <p id="time3" th:text="${times[3]}"></p>
+                          </div>
+                          <div class="col-6"><p id="answers3" th:text="${rightAnswers[3]}+'/'+10"></p></div>
                         </div>
                       </div>
                       <div class="mb-3 margin-0">
@@ -84,31 +201,36 @@
     <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
     <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}"  defer=""></script>
     <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
-   <script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+   <script inline="javascript">
       var details = document.getElementById("details");
       details.addEventListener("click", loadDetails);
       function loadDetails () {
         window.location.href = window.location.href+'/details';
-        // var xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function () {
-        //   if (this.readyState == 4 && this.status == 200) {
-        //     if (xhttp.responseText == "") {
-        //       endQuiz();
-        //     } else {
-        //       nextCard(JSON.parse(xhttp.responseText));
-        //     }
-        //   }
-        // };
-
-        // var body = {
-        //   quizId: quizId,
-        //   cardId: cardId,
-        //   solution: getSolution(),
-        // };
-        // xhttp.open("GET", "/details", true);
-        // xhttp.setRequestHeader("Content-Type", "application/json");
-        // xhttp.send(JSON.stringify(body));
       }
+
+      //Socket
+      var socket = new SockJS('/lerzz');
+      var client = Stomp.over(socket);
+      var sessionId = "";
+
+      client.connect({}, function(frame) {
+          var url = client.ws._transport.url;
+          url = url.replace("ws://localhost:8080/lerzz",  "");
+          url = url.replace("/websocket", "");
+          url = url.replace(/^[0-9]+\//, "");
+          console.log("Your current session is: " + url);
+          sessionId = url;
+
+          client.subscribe('/user/queue/quiz/newStats', function(response) {
+            var message = JSON.parse(response.body);
+            document.getElementById("user"+message.nr).textContent = message.user;
+            document.getElementById("time"+message.nr).textContent = message.time;
+            document.getElementById("answers"+message.nr).textContent = message.rightAnswer+"/10";
+          });
+      });
     </script> 
   </body>
 </html>

@@ -69,10 +69,13 @@ public class QuizRestController {
     }
 
     @PostMapping("/invitationAccepted")
-    public void invitationAccepted(@RequestBody String payload, Principal principal) {
+    public void invitationAccepted(@RequestBody String payload, Principal principal) throws JsonProcessingException {
         Quiz quiz = service.getQuiz(userService.findUserByEmail(payload).getId());
         quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
-        socketController.invitationAccepted(userService.findUserByEmail(principal.getName()).getUsername(), payload);
+        Map<String, String> map= new HashMap<>();
+        map.put("player", userService.findUserByEmail(principal.getName()).getUsername());
+        map.put("count", quiz.getPlayer().size()+"");
+        socketController.invitationAccepted(objectMapper.writeValueAsString(map), payload);
     }
 
     @PostMapping("/card")

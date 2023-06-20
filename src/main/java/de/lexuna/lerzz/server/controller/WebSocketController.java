@@ -48,12 +48,10 @@ public class WebSocketController {
         return "Nachricht empfangen: " + payload;
     }
 
-//    @MessageMapping("/topic/quiz/invite")
     public void invite(@Payload String payload, String user) {
         messagingTemplate.convertAndSendToUser(user, "/queue/quiz/invite", payload);
     }
 
-//    @MessageMapping("/topic/quiz/invitationAccepted")
     public void invitationAccepted(@Payload String payload, String user) {
         messagingTemplate.convertAndSendToUser(user, "/queue/quiz/invitationAccepted", payload);
     }
@@ -77,5 +75,9 @@ public class WebSocketController {
 
     public void end(String user) {
         messagingTemplate.convertAndSendToUser(user, "/queue/quiz/end", "");
+    }
+
+    public void addStats(String user, String payload) {
+        messagingTemplate.convertAndSendToUser(user, "/queue/quiz/newStats", payload);
     }
 }
