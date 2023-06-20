@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class for a REST controller to handle the operations for the quiz
+ */
 @RestController
 public class QuizRestController {
 
@@ -36,6 +39,7 @@ public class QuizRestController {
 
     @Autowired
     private WebSocketController socketController;
+
 
     @PostMapping("/invite")
     public void invite(@RequestBody String payload, Principal principal) throws JsonProcessingException {
@@ -78,6 +82,13 @@ public class QuizRestController {
         socketController.invitationAccepted(objectMapper.writeValueAsString(map), payload);
     }
 
+    /**
+     * Method to start the quiz
+     *
+     * @param payload the payload with the quiz ID
+     * @return a JSON string of the first card and the quiz positions
+     * @throws JsonProcessingException if an error while procession JSON occurs
+     */
     @PostMapping("/card")
     @ResponseBody
     public String startQuiz(@RequestBody String payload, Principal principal) throws JsonProcessingException {
@@ -117,23 +128,27 @@ public class QuizRestController {
         }
     }
 
+    /**
+     * Method to go to the next card
+     *
+     * @param payload the payload with the deck ID, quiz ID, card ID and the solution
+     * @param principal the object representing the current user
+     * @return a JSON string of the next card and the quiz positions
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/next")
     @ResponseBody
     public String next(@RequestBody String payload, Principal principal) throws JsonProcessingException {
         Map<String, Object> map = objectMapper.readValue(payload, Map.class);
         String quizId = (String) map.get("quizId");
         int cardId = (int) map.get("cardId");
-//        int questionNr = Integer.parseInt((String) map.get("questionNr"));
         int solution = (int) map.get("solution");
         Quiz quiz = service.getQuiz(quizId);
         DeckService.McCardDTO card = service.next(userService.findUserByEmail(principal.getName()), cardId, solution, quiz);
 
-//        DeckService.McCardDTO card = deckService.asDTO(service.getQuiz(quizId).getQuestions().get(questionNr));
         Map<String, Object> response = new HashMap<>();
         response.put("card", card);
         response.put("lastCard", quiz.isLastCard(card));
-//        response.put("questionNr", questionNr+1);
-//        socketController.updatePositions(quiz.getPositions(), quiz.getId());
         for (User player : quiz.getPlayer()) {
             socketController.updatePositions(player.getEmail(), objectMapper.writeValueAsString(quiz.getPositions()));
         }
@@ -147,6 +162,14 @@ public class QuizRestController {
         return objectMapper.writeValueAsString(response);
     }
 
+    /**
+     * Method to end a quiz
+     *
+     * @param payload the payload with the quiz ID, card ID and the solution
+     * @param principal the object representing the current user
+     * @return an empty string ""
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/end")
     @ResponseBody
     public String end(@RequestBody String payload, Principal principal) throws JsonProcessingException {

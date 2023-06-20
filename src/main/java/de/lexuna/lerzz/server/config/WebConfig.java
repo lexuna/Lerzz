@@ -4,9 +4,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Configuration class for the Webservice
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    /**
+     * Method to configure the Cross-Origin Resource Sharing for specific endpoints
+     *
+     * @param registry the CORS-object to add cors-configuration
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/deck/**")

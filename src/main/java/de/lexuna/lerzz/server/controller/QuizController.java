@@ -23,8 +23,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller class to handle quiz operations
+ */
 @Controller
-//@SessionAttributes({"quiz"})
 public class QuizController {
 
 
@@ -40,6 +42,14 @@ public class QuizController {
     @Autowired
     private WebSocketController socketController;
 
+    /**
+     * Method to create a quiz out of a deck
+     *
+     * @param deckId the ID of the deck
+     * @param model the Model object for the view
+     * @param authentication the object representing the authenticated user
+     * @return String with the name of the view "/create_quiz"
+     */
     @GetMapping("deck/{deckId}/create_quiz")
     public String createQuiz(@PathVariable("deckId") String deckId, Model model, Authentication authentication) {
         String mail = authentication.getName();
@@ -56,6 +66,16 @@ public class QuizController {
         return "/create_quiz";
     }
 
+    /**
+     * Method to start the quiz and return the view
+     *
+     * @param deckId the ID of the deck
+     * @param quizId the ID of the quiz
+     * @param cardDto the DTO of the cards from the deck
+     * @param model
+     * @param principal the object representing the authenticated user
+     * @return String with the name of the view "/quiz"
+     */
     @GetMapping("deck/{deckId}/quiz/{quizId}")
     public String quiz(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Model model, Principal principal) {
         Quiz quiz = service.getQuiz(quizId);
@@ -69,12 +89,5 @@ public class QuizController {
         return "/quiz";
     }
 
-//    @GetMapping("deck/{deckId}/quiz/{quizId}")
-//    public String getStart(@PathVariable("quizId") String quizId, Model model) {
-//        Quiz quiz = service.getQuiz(quizId);
-//        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
-//        model.addAttribute("questionCount", quiz.getQuestions().size());
-//        model.addAttribute("quiz", quizDTO);
-//        return "/quiz";
-//    }
+
 }
