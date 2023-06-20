@@ -18,7 +18,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class Quiz {
-    private static final int NR_OF_QUESTIONS = 2;
+    private static final int NR_OF_QUESTIONS = 10;
 
     @Id
     private String id;

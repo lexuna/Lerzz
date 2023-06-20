@@ -24,7 +24,7 @@
             <div class="container_1" style="flex-direction: column">
               <div th:each="user, userStat: ${users}" class="container_2" style="align-items: stretch">
                 <div class="questions">
-                  <p class="title_quiz" style="color: black" th:text="${userStat.index}">1</p>
+                  <p class="title_quiz" style="color: black" th:text="${userStat.index+1}">1</p>
                 </div>
                 <div class="border-123">
                   <div class="container width-600">
@@ -33,15 +33,7 @@
                         class="mb-3 margin-0"
                         style="position: relative; min-height: 50px"
                       >
-                        <div
-                          class="user_container left"
-                          style="    border: 1px solid #ced4da;
-                                      position: absolute;
-                                      padding: 5px 10px;
-                                      left: -13px;
-                                      top: -1px;
-                                  "
-                        >
+                        <div class="user_container left" style="border: 1px solid #ced4da; position: absolute; padding: 5px 10px; left: -13px; top: -1px;">
                           <div class="left User-icon-list">
                             <svg style="width: 24px; height: 24px">
                               <use xlink:href="#User-list"></use>
@@ -57,17 +49,14 @@
                           </div>
                           <div class="col-6"><p>Richtige Antworten</p></div>
                           <div class="col-6" style="max-width: 200px">
-                            <p th:text="${time[__${userStat.index}__]}"></p>
+                            <p th:text="${times[__${userStat.index}__]}"></p>
                           </div>
-                          <div class="col-6"><p th:text="${rightAnswers[__${userStat.index}__]}+'/'+${#lists.size(users)}"></p></div>
+                          <div class="col-6"><p th:text="${rightAnswers[__${userStat.index}__]}+'/'+10"></p></div>
                         </div>
                       </div>
                       <div class="mb-3 margin-0">
                         <div class="details-button right" style="padding: 10px">
-                          <button 
-                            class="btn btn-success"
-                            style="width: 100px"
-                            type="button">
+                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
                             Details
                           </button>
                         </div>
@@ -77,26 +66,11 @@
                 </div>
               </div>
             </div>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                width: 100%;
-              "
-            >
-              <button
-                class="btn btn-success"
-                style="margin-top: 20px; width: 100px; margin-right: 20px"
-                type="button"
-              >
+            <div style="display: flex; align-items: center; justify-content: flex-end; width: 100%;">
+              <button class="btn btn-success" style="margin-top: 20px; width: 100px; margin-right: 20px" type="button">
                 New Quiz
               </button>
-              <button
-                class="btn btn-success"
-                style="margin-top: 20px; width: 100px"
-                type="button"
-              >
+              <button class="btn btn-success" style="margin-top: 20px; width: 100px" type="button">
                 Back
               </button>
             </div>
@@ -106,29 +80,35 @@
       <footer class="page-footer"></footer>
     </section>
 
-    <script
-      class="u-script"
-      type="text/javascript"
-      th:src="@{~/js/bootstrap.js}"
-      defer=""
-    ></script>
-    <script
-      class="u-script"
-      type="text/javascript"
-      th:src="@{~/js/index.js}"
-      defer=""
-    ></script>
-    <script
-      class="u-script"
-      type="text/javascript"
-      th:src="@{~/js/jquery.js}"
-      defer=""
-    ></script>
-    <script
-      class="u-script"
-      type="text/javascript"
-      th:src="@{~/js/nicepage.js}"
-      defer=""
-    ></script>
+    <script class="u-script" type="text/javascript" th:src="@{~/js/bootstrap.js}" defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}"  defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+   <script>
+      var details = document.getElementById("details");
+      details.addEventListener("click", loadDetails);
+      function loadDetails () {
+        window.location.href = window.location.href+'/details';
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function () {
+        //   if (this.readyState == 4 && this.status == 200) {
+        //     if (xhttp.responseText == "") {
+        //       endQuiz();
+        //     } else {
+        //       nextCard(JSON.parse(xhttp.responseText));
+        //     }
+        //   }
+        // };
+
+        // var body = {
+        //   quizId: quizId,
+        //   cardId: cardId,
+        //   solution: getSolution(),
+        // };
+        // xhttp.open("GET", "/details", true);
+        // xhttp.setRequestHeader("Content-Type", "application/json");
+        // xhttp.send(JSON.stringify(body));
+      }
+    </script> 
   </body>
 </html>
