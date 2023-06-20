@@ -24,7 +24,7 @@ public class CreateDB {
 
     @Test
     void createDB() {
-//        userRepo.insert(new User("admin@lerzz.de","admin", encoder.encode("admin")));
+        userRepo.insert(new User("admin@lerzz.de","admin", encoder.encode("admin")));
 
         deckRepo.insert(new Deck("admin", "TestDeck", "Ein Stapel zum testen", Instant.now()));
         deckRepo.insert(new Deck("admin", "TestDeck2", "Ein weiterer Stapel zum testen", Instant.now()));

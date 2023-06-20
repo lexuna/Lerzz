@@ -14436,7 +14436,6 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
   9417: function (t, e) {},
 });
 $(".dropdown-menu li a").click(function(event){
-    event.stopPropagation(); // Stoppt den Event-Handler, bevor er sich auf den Button auswirkt
     $(this).closest(".dropdown").find(".btn:first-child").html($(this).text()+' <span class="caret"></span>');
 });
 
