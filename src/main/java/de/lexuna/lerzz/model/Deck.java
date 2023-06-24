@@ -7,8 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
+/**
+ * Data class for a card deck.
+ */
 @Data
 @Document
 @Getter
@@ -22,16 +29,31 @@ public class Deck {
     private Instant creationTime;
     private List<Card> cards = new ArrayList<>();
 
-    public Deck(String userId, String name, String description, Instant creationTime) {
+    /**
+     * @param userId of the author
+     * @param name of the deck
+     * @param description of th deck
+     * @param creationTime of the deck
+     */
+    public Deck(final String userId,
+                final String name,
+                final String description,
+                final Instant creationTime) {
         this.userId = userId;
         this.name = name;
         this.description = description;
         this.creationTime = creationTime;
     }
 
-    public List<Card> getRandomQuestions(int nrOfQuestions) {
+    /**
+     * Chooses a number of random cards of the deck
+     * @param nrOfQuestions the number of cards that are needed
+     *
+     * @return a list of random cards from the deck
+     */
+    public final List<Card> getRandomQuestions(final int nrOfQuestions) {
         Random rand = new Random();
-        List<Card> cards = new ArrayList<>();
+        List<Card> randomCards = new ArrayList<>();
         Set<Integer> idSet = new HashSet<>();
         for (int i = 0; i < nrOfQuestions; i++) {
             int cardNr = rand.nextInt(0, this.cards.size() - 1);
@@ -40,8 +62,8 @@ public class Deck {
                 continue;
             }
             idSet.add(cardNr);
-            cards.add(this.cards.get(cardNr));
+            randomCards.add(this.cards.get(cardNr));
         }
-        return cards;
+        return randomCards;
     }
 }

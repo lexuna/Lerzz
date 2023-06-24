@@ -30,11 +30,11 @@ public class UserService {
      *
      * @param userDto the user data to register
      * @return the registered user object
-     * @throws UserAlreadyExistException if a user with the same email address already exists in the system
+     *
      */
-    public User registerNewUserAccount(User userDto) throws UserAlreadyExistException {
+    public User registerNewUserAccount(User userDto) {
         if (emailExists(userDto.getEmail())) {
-            throw new UserAlreadyExistException("There is an account with that email address: "
+            throw new IllegalArgumentException("There is an account with that email address: "
                     + userDto.getEmail());
         }
 
@@ -57,25 +57,45 @@ public class UserService {
         return repository.findByEmail(email) != null;
     }
 
+    /**
+     * Finds the user with the given email
+     * @param mail the email address to find
+     * @return User
+     */
     public User findUserByEmail(String mail) {
         return repository.findByEmail(mail);
     }
 
+    /**
+     * Finds the user with the given id
+     * @param userId String
+     * @return user
+     */
     public User findUserById(String userId) {
         return repository.findById(userId).get();
     }
-    public static UserDTO getEmptyDTO() {
-        return new UserDTO();
-    }
 
+    /**
+     * turs a User to a UserDTO
+     * @param user User
+     * @return UserDTO
+     */
     public UserDTO toDTO(User user) {
         return new UserDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 
+    /**
+     * finds a user by name
+     * @param username String
+     * @return User
+     */
     public User findUserByName(String username) {
         return repository.findByUsername(username);
     }
 
+    /**
+     * User DTO
+     */
     @Getter
     @Setter
     @AllArgsConstructor

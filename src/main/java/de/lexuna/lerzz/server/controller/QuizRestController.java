@@ -2,7 +2,6 @@ package de.lexuna.lerzz.server.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.lexuna.lerzz.model.Card;
 import de.lexuna.lerzz.model.Quiz;
 import de.lexuna.lerzz.model.QuizMode;
 import de.lexuna.lerzz.model.User;
@@ -10,11 +9,10 @@ import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.QuizService;
 import de.lexuna.lerzz.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -41,8 +39,16 @@ public class QuizRestController {
     private WebSocketController socketController;
 
 
+    /**
+     * Controller to receive an invitation
+     *
+     * @param payload   with the username to invite
+     * @param principal the object representing the current user
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/invite")
-    public void invite(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final void invite(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
         Quiz quiz = service.getQuiz(userService.findUserByEmail(principal.getName()).getId());
         Map<String, String> map = new HashMap<>();
         map.put("quiz", quiz.getDeck().getName());
@@ -51,9 +57,18 @@ public class QuizRestController {
         socketController.invite(objectMapper.writeValueAsString(map), userService.findUserByName(payload).getEmail());
     }
 
+    /**
+     * Controller to receive the invitation answer
+     *
+     * @param payload   with boolean if the invitation is accepted
+     * @param principal the object representing the current user
+     * @return a list of player for the quiz
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/invitedPlayer")
     @ResponseBody
-    public String getInvited(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final String getInvited(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
         boolean invited = Boolean.parseBoolean(payload);
         Quiz quiz;
         if (invited) {
@@ -65,20 +80,34 @@ public class QuizRestController {
         return objectMapper.writeValueAsString(collect);
     }
 
+    /**
+     * Controller to get a mode change
+     *
+     * @param payload   with the new game mode
+     * @param principal the object representing the current user
+     */
     @PostMapping("/changeMode")
-    public void changeMode(@RequestBody String payload, Principal principal) {
+    public final void changeMode(@RequestBody final String payload, final Principal principal) {
         QuizMode mode = QuizMode.valueOf(payload);
         Quiz quiz = service.getQuiz(userService.findUserByEmail(principal.getName()).getId());
         quiz.setMode(mode);
     }
 
+    /**
+     * Controller to receive the invitation answer
+     *
+     * @param payload   with the quiz owner
+     * @param principal the object representing the current user
+     * @throws JsonProcessingException if an error while procession JSON occurs
+     */
     @PostMapping("/invitationAccepted")
-    public void invitationAccepted(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final void invitationAccepted(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
         Quiz quiz = service.getQuiz(userService.findUserByEmail(payload).getId());
         quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
-        Map<String, String> map= new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("player", userService.findUserByEmail(principal.getName()).getUsername());
-        map.put("count", quiz.getPlayer().size()+"");
+        map.put("count", quiz.getPlayer().size() + "");
         socketController.invitationAccepted(objectMapper.writeValueAsString(map), payload);
     }
 
@@ -91,8 +120,10 @@ public class QuizRestController {
      */
     @PostMapping("/card")
     @ResponseBody
-    public String startQuiz(@RequestBody String payload, Principal principal) throws JsonProcessingException {
-        String quizId = (payload.substring(payload.lastIndexOf("/") + 1)).replace("}", "").replace("\"", "");
+    public final String startQuiz(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
+        String quizId = (payload.substring(payload.lastIndexOf("/") + 1)).replace("}", "")
+                .replace("\"", "");
         Quiz quiz = service.getQuiz(quizId);
         DeckService.McCardDTO cardDto = deckService.asDTO(quiz.getQuestions().get(0));
         Map<String, Object> map = new HashMap<>();
@@ -114,8 +145,16 @@ public class QuizRestController {
         return objectMapper.writeValueAsString(map);
     }
 
+    /**
+     * Controller method to receive a users choice
+     *
+     * @param payload   the payload with the quiz ID
+     * @param principal the object representing the current user
+     * @throws JsonProcessingException if an error while processing JSON occurs
+     */
     @PostMapping("/chose")
-    public void chose(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final void chose(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
         Map<String, Object> map = objectMapper.readValue(payload, Map.class);
         String quizId = (String) map.get("quizId");
         Quiz quiz = service.getQuiz(quizId);
@@ -129,22 +168,24 @@ public class QuizRestController {
     }
 
     /**
-     * Method to go to the next card
+     * Controller to go to the next card
      *
-     * @param payload the payload with the deck ID, quiz ID, card ID and the solution
+     * @param payload   the payload with the deck ID, quiz ID, card ID and the solution
      * @param principal the object representing the current user
      * @return a JSON string of the next card and the quiz positions
      * @throws JsonProcessingException if an error while processing JSON occurs
      */
     @PostMapping("/next")
     @ResponseBody
-    public String next(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final String next(@RequestBody final String payload, final Principal principal)
+            throws JsonProcessingException {
         Map<String, Object> map = objectMapper.readValue(payload, Map.class);
         String quizId = (String) map.get("quizId");
         int cardId = (int) map.get("cardId");
         int solution = (int) map.get("solution");
         Quiz quiz = service.getQuiz(quizId);
-        DeckService.McCardDTO card = service.next(userService.findUserByEmail(principal.getName()), cardId, solution, quiz);
+        DeckService.McCardDTO card = service.next(userService.findUserByEmail(principal.getName()),
+                cardId, solution, quiz);
 
         Map<String, Object> response = new HashMap<>();
         response.put("card", card);
@@ -165,20 +206,18 @@ public class QuizRestController {
     /**
      * Method to end a quiz
      *
-     * @param payload the payload with the quiz ID, card ID and the solution
+     * @param payload   the payload with the quiz ID, card ID and the solution
      * @param principal the object representing the current user
-     * @return an empty string ""
      * @throws JsonProcessingException if an error while processing JSON occurs
      */
     @PostMapping("/end")
     @ResponseBody
-    public String end(@RequestBody String payload, Principal principal) throws JsonProcessingException {
+    public final void end(@RequestBody final String payload, final Principal principal) throws JsonProcessingException {
         Map<String, Object> map = objectMapper.readValue(payload, Map.class);
         String quizId = (String) map.get("quizId");
         int cardId = (int) map.get("cardId");
         int solution = (int) map.get("solution");
         Quiz quiz = service.getQuiz(quizId);
         service.end(userService.findUserByEmail(principal.getName()), cardId, solution, quiz);
-        return "";
     }
 }

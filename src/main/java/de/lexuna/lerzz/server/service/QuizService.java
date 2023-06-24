@@ -1,6 +1,11 @@
 package de.lexuna.lerzz.server.service;
 
-import de.lexuna.lerzz.model.*;
+import de.lexuna.lerzz.model.Card;
+import de.lexuna.lerzz.model.Deck;
+import de.lexuna.lerzz.model.McCard;
+import de.lexuna.lerzz.model.Quiz;
+import de.lexuna.lerzz.model.QuizMode;
+import de.lexuna.lerzz.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +21,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- *  Class to manage quizzes
+ * Class to manage quizzes
  */
 @Service
 public class QuizService {
 
     private Map<String, Quiz> quizzes = new HashMap<>();
-    private Map<String, Quiz> quizzesByOwner = new HashMap<>();
 
     @Autowired
     private UserService userService;
@@ -33,7 +37,7 @@ public class QuizService {
      * Method to create a new quiz with a given owner and deck
      *
      * @param ownerMail the email of the quiz owner
-     * @param deckId the ID of the deck
+     * @param deckId    the ID of the deck
      * @return a new quiz
      */
     public Quiz getNewQuiz(String ownerMail, String deckId) {
@@ -46,7 +50,6 @@ public class QuizService {
         quiz.setOwner(user);
         quiz.getPlayer().add(user);
         quizzes.put(quiz.getId(), quiz);
-        quizzesByOwner.put(user.getId(), quiz);
         return quiz;
     }
 
@@ -98,7 +101,8 @@ public class QuizService {
      */
     public Card start(Quiz quiz) {
         quiz.setMode(quiz.getMode());
-        quiz.setPlayer(quiz.getPlayer().stream().map(i -> userService.findUserById(i.getId())).collect(Collectors.toList()));
+        quiz.setPlayer(quiz.getPlayer().stream().map(i -> userService.findUserById(i.getId()))
+                .collect(Collectors.toList()));
         quiz.getPlayer().forEach(p -> quiz.getPositions().add(1));
         return quiz.start();
     }
@@ -106,10 +110,10 @@ public class QuizService {
     /**
      * Method to go to the next question of the quiz
      *
-     * @param user the user answering the quiz
-     * @param cardId the ID ot the current card
+     * @param user     the user answering the quiz
+     * @param cardId   the ID ot the current card
      * @param solution the chosen answer
-     * @param quiz the quiz object
+     * @param quiz     the quiz object
      * @return the card DTO of the next question
      */
     public DeckService.McCardDTO next(User user, int cardId, int solution, Quiz quiz) {
@@ -117,36 +121,36 @@ public class QuizService {
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
             for (User player : quiz.getPlayer()) {
-                boolean right = quiz.addAnswer(player.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
+                boolean right = quiz.addAnswer(player.getEmail(), card, answer);
                 if (player.getEmail().equals(quiz.getOwner().getEmail()) && right) {
                     quiz.getStats().get(user.getEmail()).addRightAnswer();
                 }
             }
         } else {
-            boolean right = quiz.addAnswer(user.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
-            if(right) {
+            boolean right = quiz.addAnswer(user.getEmail(), card, answer);
+            if (right) {
                 quiz.getStats().get(user.getEmail()).addRightAnswer();
             }
         }
-        updatePosition(user, quiz, card);
+        updatePosition(user, quiz);
         return deckService.asDTO(quiz.nextQuestion(card), quiz.getId());
     }
 
     /**
      * Method to end the quiz
      *
-     * @param user the user answering the quiz
-     * @param cardId the ID of the current card
+     * @param user     the user answering the quiz
+     * @param cardId   the ID of the current card
      * @param solution the chosen answer
-     * @param quiz the quiz object
+     * @param quiz     the quiz object
      */
     public void end(User user, int cardId, int solution, Quiz quiz) {
         McCard card = (McCard) quiz.getDeck().getCards().get(cardId);
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
-            quiz.getPlayer().forEach(p -> quiz.addAnswer(p.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer));
+            quiz.getPlayer().forEach(p -> quiz.addAnswer(p.getEmail(), card, answer));
         } else {
-            quiz.addAnswer(user.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
+            quiz.addAnswer(user.getEmail(), card, answer);
         }
     }
 
@@ -155,38 +159,19 @@ public class QuizService {
      *
      * @param user the user answering the quiz
      * @param quiz the quiz object
-     * @param card the current card
      */
-    public void updatePosition(User user, Quiz quiz, Card card) {
-        quiz.updatePosition(user, card);
+    public void updatePosition(User user, Quiz quiz) {
+        quiz.updatePosition(user);
     }
+
 
     /**
-     * Method to count the questions of a quiz DTO
-     *
-     * @param quiz the quiz DTO with the quiz information
-     * @return the number of questions in the quiz
+     * get the quiz with the given user as player
+     * @param user User
+     * @return quiz
      */
-    public int getQuestionCount(QuizDTO quiz) {
-        return quizzesByOwner.get(quiz.getOwnerId()).getQuestions().size();
-    }
-
-    /**
-     *
-     *
-     * @param card
-     * @return
-     */
-    public Quiz getQuiz(DeckService.McCardDTO card) {
-        return quizzesByOwner.get(card.getQuiz());
-    }
-
     public Quiz getQuizForInvited(User user) {
         return quizzes.values().stream().filter(q -> q.getPlayer().contains(user)).findFirst().get();
-    }
-
-    public Quiz getQuizByOwner(String mail) {
-        return quizzes.get(userService.findUserByEmail(mail).getId());
     }
 
     /**

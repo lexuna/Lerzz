@@ -72,14 +72,15 @@ public class DeckService {
     /**
      * Method to add a card to a deck
      *
-     * @param deckId the ID of the deck
-     * @param user the user who owns the deck
+     * @param deckId  the ID of the deck
+     * @param user    the user who owns the deck
      * @param cardDto the card DTP witch contains the card details
      */
     public void addCard(String deckId, User user, McCardDTO cardDto) {
         Deck deck = getDeckById(deckId);
         int cardId = deck.getCards().size();
-        deck.getCards().add(new McCard(cardId, deck.getId(), cardDto.getQuestion(), user.getId(), cardDto.getAnswers(), cardDto.getAnswers().get(cardDto.getSolution())));
+        deck.getCards().add(new McCard(cardId, deck.getId(), cardDto.getQuestion(), user.getId(),
+                cardDto.getAnswers(), cardDto.getAnswers().get(cardDto.getSolution())));
         repo.save(deck);
     }
 
@@ -111,31 +112,34 @@ public class DeckService {
      */
     public McCardDTO asDTO(Card card) {
         McCard mcCard = (McCard) card;
-        return new McCardDTO(mcCard.getId(), "", mcCard.getQuestion(), mcCard.getAnswers(), mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
+        return new McCardDTO(mcCard.getId(), "", mcCard.getQuestion(), mcCard.getAnswers(),
+                mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
     }
 
     /**
      * Method to turn a card into a multiple choice card DTO with an owner (data transfer object)
      *
-     * @param card the card that should be turned into a multiple choice card DTO
+     * @param card      the card that should be turned into a multiple choice card DTO
      * @param quizOwner the owner of the quiz
      * @return the multiple choice card DTO
      */
     public McCardDTO asDTO(Card card, String quizOwner) {
         McCard mcCard = (McCard) card;
-        return new McCardDTO(mcCard.getId(), quizOwner, mcCard.getQuestion(), mcCard.getAnswers(), mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
+        return new McCardDTO(mcCard.getId(), quizOwner, mcCard.getQuestion(), mcCard.getAnswers(),
+                mcCard.getAnswers().indexOf(mcCard.getRightAnswer()));
     }
 
     /**
      * Method to convert a deck into a deck DTO
      *
-     * @param deck the deck that should be converted
+     * @param deck      the deck that should be converted
      * @param withCards boolean indicating if the deck has any cards
      * @return the deck DTO of the given deck
      */
     public DeckDTO asDTO(Deck deck, boolean withCards) {
         List<McCardDTO> cards = withCards ? cardsAsDTOs(deck.getCards()) : null;
-        return new DeckDTO(deck.getId(), deck.getName(), deck.getDescription(), deck.getUserId(), deck.getCreationTime().toString(), cards);
+        return new DeckDTO(deck.getId(), deck.getName(), deck.getDescription(), deck.getUserId(),
+                deck.getCreationTime().toString(), cards);
     }
 
     /**
@@ -177,8 +181,8 @@ public class DeckService {
     /**
      * Method to edit the card within a deck
      *
-     * @param deckId the ID of the deck with the card to edit
-     * @param cardId the ID of the card that should be edited
+     * @param deckId  the ID of the deck with the card to edit
+     * @param cardId  the ID of the card that should be edited
      * @param cardDto the card DTO of the multiple choice question
      */
     public void editCard(String deckId, int cardId, McCardDTO cardDto) {
@@ -190,18 +194,28 @@ public class DeckService {
         repo.save(deck);
     }
 
+    /**
+     * get all decks that are not from the given user
+     * @param mail String
+     * @return all decks that are not from the given user
+     */
     public List<Deck> getCommunityDecks(String mail) {
         User user = userService.findUserByEmail(mail);
-        return findAll().stream().filter(d-> !d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
-    }
-
-    public List<Deck> getUserDecks(String mail) {
-        User user = userService.findUserByEmail(mail);
-        return findAll().stream().filter(d-> d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
+        return findAll().stream().filter(d -> !d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
     }
 
     /**
-     *  DTO class of a deck
+     * get all decks that are from the given user
+     * @param mail String
+     * @return all decks that are from the given user
+     */
+    public List<Deck> getUserDecks(String mail) {
+        User user = userService.findUserByEmail(mail);
+        return findAll().stream().filter(d -> d.getUserId().equals(user.getUsername())).collect(Collectors.toList());
+    }
+
+    /**
+     * DTO class of a deck
      */
     @Getter
     @Setter
@@ -230,7 +244,7 @@ public class DeckService {
         private String question;
 
         private List<String> answers = new ArrayList<>();
-//        private String answer0;
+        //        private String answer0;
 //        private String answer1;
 //        private String answer2;
 //        private String answer3;

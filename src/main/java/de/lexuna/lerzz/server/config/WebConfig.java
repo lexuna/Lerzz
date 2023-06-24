@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
      * @param registry the CORS-object to add cors-configuration
      */
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public final void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/deck/**")
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST")

@@ -24,8 +24,14 @@ public class McCard extends Card {
      * @param answers the list of possible answers
      * @param rightAnswer the correct answer
      */
-    public McCard(int id, String deckId, String question, String author, List<String> answers, String rightAnswer) {
-        super(id, deckId, question, author, rightAnswer);
+    public McCard(final int id,
+                  final String deckId,
+                  final String question,
+                  final String author,
+                  final List<String> answers,
+                  final String rightAnswer) {
+        super(id, deckId, question,
+                author, rightAnswer, CardType.MULTIPLE_CHOICE);
         this.answers = answers;
     }
 }

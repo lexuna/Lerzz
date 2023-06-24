@@ -4,11 +4,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+/**
+ * Main class
+ */
 @SpringBootApplication
 @EnableMongoRepositories
-public class LerzzServiceMain {
+public abstract class LerzzServiceMain {
 
-    public static void main(String[] args) {
+    /**
+     * main method to run SpringBootApplication
+     * @param args run args
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(LerzzServiceMain.class, args);
     }
+
+    /**
+     * private constructor
+     */
+    private LerzzServiceMain() { }
 }

@@ -18,7 +18,8 @@ public class ControllerConfig implements WebMvcConfigurer {
      * @param registry the {@link ViewControllerRegistry} to register view controllers with
      */
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public final void addViewControllers(
+            final ViewControllerRegistry registry) {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
