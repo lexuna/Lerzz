@@ -7,8 +7,8 @@
     <meta name="keywords" content="Sample Headline, Sample Headline">
     <meta name="description" content="">
     <title>Home</title>
-    <link rel="stylesheet" href="css/nicepage.css" media="screen">
-    <link rel="stylesheet" href="css/Home.css" media="screen">
+    <link rel="stylesheet" th:href="@{~/css/nicepage.css}" media="screen">
+    <link rel="stylesheet" th:href="@{~/css/Home.css}" media="screen">
     <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 5.2.4, nicepage.com">
@@ -29,131 +29,75 @@
 </head>
 <body class="u-body u-xl-mode" data-lang="de">
 <header th:replace="~{layout.html :: header}"> </header>
-<section class="u-clearfix u-grey-5 u-section-1" id="sec-d6f0">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-gutter-10 u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout" style="">
-                <div class="u-layout-row" style="">
-                    <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-layout-cell-1"
-                         src="">
-                        <div class="u-container-layout u-valign-middle u-container-layout-1">
-                            <h2 class="u-align-center u-text u-text-default u-text-1">Sample Headline</h2>
-                            <p class="u-align-center u-text u-text-2">Sample text. Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-                            <a href="#" class="u-btn u-btn-round u-button-style u-radius-50 u-btn-1">learn more</a>
-                        </div>
-                    </div>
-                    <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1"
-                         src="" data-image-width="1080" data-image-height="1080">
-                        <div class="u-container-layout u-valign-middle u-container-layout-2" src=""></div>
-                    </div>
-                </div>
-            </div>
+<section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="1280" data-image-height="719" id="sec-a877">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <h1 class="u-text u-text-custom-color-2 u-text-default u-title u-text-1">Lerzz</h1>
+        <p class="u-large-text u-text u-text-default u-text-variant u-text-2">Herzlich willkommen bei Lerzz!<br>Die Lernkartenwebsite die weiter denkt!
+        </p>
+        <a href="/login" class="u-btn u-btn-round u-button-style u-custom-color-1 u-radius-12 u-btn-1">Einloggen</a>
+    </div>
+</section>
+<section class="u-align-left u-clearfix u-white u-section-2" id="sec-4dde">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="fr-view u-clearfix u-rich-text u-text u-text-1" data-animation-name="" data-animation-duration="0" data-animation-direction="">
+            <h3 style="text-align: center;">
+                <span class="u-text-body-color">Warum Lerzz?</span>
+            </h3>
+            <p style="text-align: center;">
+                <span class="u-text-body-color">Lerzz ist nicht irgendeine weitere langweilige Website wo du deine Karteikarten erstellen und pauken kannst. Lerzz ist mehr! Es ist eine Community.</span>
+            </p>
+            <p style="text-align: center;">
+            <span class="u-text-body-color">
+              <br>
+            </span>
+            </p>
+            <h3 style="text-align: center;">
+                <span class="u-text-body-color">Wofür eine Community?</span>
+            </h3>
+            <p style="text-align: center;">
+                <span class="u-text-body-color">Wir als Studenten wissen nur zu gut wie schwer es sein kann sich zum lernen zu motivieren. Deshalb setzen wir auf eine gegenseitige Motivation unter Freunden.</span>
+            </p>
+            <p style="text-align: center;">
+            <span class="u-text-body-color">
+              <br>
+            </span>
+            </p>
+            <p id="isPasted" style="text-align: center;">
+            <h3 style="text-align: center;">
+              <span class="u-text-body-color">Was bietet ihr noch?</span>
+            </h3>
+            </p>
+            <p style="text-align: center;">
+                <span class="u-text-body-color">Natürlich hilft es an einigen Tagen auch nicht nur mit anderen zu lernen. Lernen muss Spaß machen, damit man sich langfristig dazu motivieren kann. Deshalb haben wir bei Lerzz die Funktionen von Quizzen eingebaut. Damit könnt ihr zusammen besonders knifflige Fragen bearbeiten oder in einem Wettkampf gegeneinander antreten.</span>
+            </p>
         </div>
     </div>
 </section>
-<section class="u-align-center u-clearfix u-section-2" id="sec-c913">
+<section class="u-align-center u-clearfix u-grey-10 u-section-3" id="sec-4c8b">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-expanded-width u-list u-list-1">
             <div class="u-repeater u-repeater-1">
                 <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1"><span
-                            class="u-icon u-icon-circle u-icon-1"><svg class="u-svg-link"
-                                                                       preserveAspectRatio="xMidYMin slice"
-                                                                       viewBox="0 0 128 128" style=""><use
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-3fa8"></use></svg><svg
-                            class="u-svg-content" viewBox="0 0 128 128" id="svg-3fa8"><path
-                            d="m118.6 47.8h-61.2c-5.2 0-9.4 4.2-9.4 9.3v35.7c0 5.1 4.2 9.3 9.4 9.3h37.5l16.8 16.8c2.5 2.5 6.8 0.7 6.8-2.8v-10-3.9h0.1c5.2 0 9.4-4.2 9.4-9.3v-35.8c0-5.1-4.2-9.3-9.4-9.3zm1.2 45c0 0.7-0.5 1.2-1.2 1.2h-5.2c-1.6 0-2.9 1.2-3.1 2.8v9.2l-11.2-11.2c-0.5-0.5-1.3-0.8-2-0.8h-39.7c-0.7 0-1.2-0.5-1.2-1.2v-35.7c0-0.7 0.5-1.2 1.2-1.2h61.3c0.7 0 1.2 0.5 1.2 1.2v35.7z"></path><path
-                            d="m38.1 67.7c-1 0-2 0.4-2.7 1-0.1 0-0.1 0.1-0.2 0.2l-14.7 15.1v-12.5c-0.2-2.1-1.9-3.8-4-3.8h-6.9c-0.9 0-1.6-0.7-1.6-1.6v-48.3c0-0.9 0.7-1.6 1.6-1.6h80.8c0.9 0 1.6 0.7 1.6 1.6v30.1h8v-30.1c0-5.4-4.3-9.8-9.6-9.8h-80.8c-5.3 0-9.6 4.4-9.6 9.8v48.3c0 5.4 4.3 9.8 9.6 9.8h2.9v8.1 10c0 3.6 4.4 5.3 6.9 2.8l6.8-7 13.6-13.9h8.2v-8.2h-9.9z"></path></svg></span>
-                        <h3 class="u-text u-text-1">Support</h3>
-                        <p class="u-text u-text-default u-text-2">Sample text. Click to select the text box. Click again
-                            or double click to start editing the text.</p>
+                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1"><span class="u-file-icon u-icon u-icon-1"><img th:src="@{~/images/2734719.png}" alt=""></span>
+                        <h3 class="u-text u-text-1">Coop Modus</h3>
+                        <p class="u-text u-text-default u-text-2"> Arbeite mit Freunden oder Community-Mitgliedern zusammen, bearbeitet gemeinsam Fragen und fördert soziale Interaktionen und Zusammenarbeit.</p>
                     </div>
                 </div>
                 <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2"><span
-                            class="u-icon u-icon-circle u-icon-2"><svg class="u-svg-link"
-                                                                       preserveAspectRatio="xMidYMin slice"
-                                                                       viewBox="0 0 128 128" style=""><use
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1dc9"></use></svg><svg
-                            class="u-svg-content" viewBox="0 0 128 128" id="svg-1dc9"><path
-                            d="m102.7 39.2c0.8 0 1.5 0.3 2.1 0.9l7.8 7.8c4.8 4.8 7.7 11.5 7.4 18.3-0.6 12.6-11 22.6-23.7 22.6h-29c-0.1 0-0.1-0.1-0.1-0.2 1.1-3 4.1-5.2 7.5-5.2h10.5c0.9 0 1.8-0.4 2.3-1.1 0.8-1.1 0.7-2.6-0.3-3.5l-24.9-24.8c-0.6-0.6-0.9-1.3-0.9-2.1s0.3-1.5 0.9-2.1 1.3-0.8 2.1-0.8 1.5 0.3 2.1 0.8l16.9 16.9c0.5 0.5 1.2 0.8 1.9 0.8s1.4-0.3 1.9-0.8 0.8-1.2 0.8-1.9-0.3-1.4-0.8-1.9l-6.7-6.7c-0.6-0.6-0.9-1.3-0.9-2.1s0.3-1.5 0.9-2.1 1.3-0.8 2.1-0.8 1.5 0.3 2.1 0.8l4 4c0.5 0.5 1.2 0.8 1.9 0.8s1.4-0.3 1.9-0.8 0.8-1.2 0.8-1.9-0.3-1.4-0.8-1.9l-2.7-2.7c-0.5-0.5-0.8-1.2-0.8-2s0.3-1.5 0.9-2.1 1.3-0.9 2.1-0.9 1.5 0.3 2.1 0.9l2.7 2.7c0.5 0.5 1.2 0.8 1.9 0.8s1.4-0.3 1.9-0.8 0.8-1.2 0.8-1.9-0.2-1.3-0.7-1.8c-0.8-0.9-1.2-2.1-0.8-3.3 0.5-1.3 1.6-1.9 2.8-1.9m0-8c-2.9 0-5.7 1.1-7.8 3.2-0.7 0.7-1.2 1.4-1.7 2.1 0 0-0.1 0.1-0.1 0-0.4 0-0.8-0.1-1.1-0.1-2.9 0-5.7 1.1-7.8 3.2-1 1-1.8 2.2-2.3 3.4 0 0 0 0.1-0.1 0.1-2.6 0.2-5.1 1.3-6.9 3.2l-0.2 0.2-2.5-2.5c-2-2-4.9-3.2-7.8-3.2s-5.7 1.1-7.8 3.2-3.2 4.9-3.2 7.8c0 3 1.2 5.7 3.2 7.8l15.8 15.8c0.1 0.1 0 0.2-0.1 0.2-5.8 0.8-10.8 4.8-12.8 10.5-1.9 5.2 2 10.7 7.5 10.7h29.1c8.5 0 16.4-3.3 22.4-9.3 6.1-6.1 9.4-14.3 9.3-23-0.1-8.4-3.8-16.4-9.8-22.4l-7.8-7.8c-1.8-2-4.6-3.1-7.5-3.1z"></path><path
-                            d="m82.1 118c0 1.1-0.9 2-2 2h-70.2c-1.1 0-2-0.9-2-2v-108c0-1.1 0.9-2 2-2h70.1c1.1 0 2 0.9 2 2v16.9c0 2.2 1.8 4 4 4s4-1.8 4-4v-16.9c0-5.5-4.5-10-9.9-10h-70.2c-5.4 0-9.9 4.5-9.9 10v108c0 5.5 4.5 10 9.9 10h70.1c5.5 0 9.9-4.5 9.9-10v-10.6c0-2.2-1.8-4-4-4s-4 1.8-4 4v10.6z"></path></svg></span>
-                        <h3 class="u-text u-text-3">No Coding</h3>
-                        <p class="u-text u-text-default u-text-4">Sample text. Click to select the text box. Click again
-                            or double click to start editing the text.</p>
+                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2"><span class="u-file-icon u-icon u-icon-2"><img th:src="@{~/images/4473853.png}" alt=""></span>
+                        <h3 class="u-text u-text-3">VS Modus</h3>
+                        <p class="u-text u-text-default u-text-4"> Tritt in direkten Wettbewerb mit anderen Lerzz-Nutzern, stelle dein Wissen auf die Probe und steige in den Ranglisten auf.</p>
                     </div>
                 </div>
                 <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3"><span
-                            class="u-icon u-icon-circle u-icon-3"><svg class="u-svg-link"
-                                                                       preserveAspectRatio="xMidYMin slice"
-                                                                       viewBox="0 0 128 128" style=""><use
-                            xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-6916"></use></svg><svg
-                            class="u-svg-content" viewBox="0 0 128 128" id="svg-6916"><path
-                            d="m78.9 15.9c2.1 0 3.7 1.7 3.7 3.7v3.7h-37.2v-3.7c0-2 1.7-3.7 3.7-3.7h29.8m39.7 14.8-11.6 34.5c-0.5 1.5-1.9 2.5-3.5 2.5h-20.9v-3.7c0-2-1.7-3.7-3.7-3.7h-29.8c-2.1 0-3.7 1.7-3.7 3.7v3.7h-20.9c-1.6 0-3-1-3.5-2.5l-11.6-34.5h109.2m1.5 19.1v58.6c0 2-1.7 3.7-3.7 3.7h-104.7c-2.1 0-3.7-1.7-3.7-3.7v-58.6l5.9 17.7c1.5 4.5 5.8 7.6 10.6 7.6h20.9v3.7c0 2 1.7 3.7 3.7 3.7h29.8c2.1 0 3.7-1.7 3.7-3.7v-3.7h20.9c4.8 0 9.1-3 10.6-7.6l6-17.7m-44.9 17.9v7.4h-22.4v-7.4h22.4m15.3-44.9v-3.2c0-6.4-5.2-11.6-11.6-11.6h-29.8c-6.4 0-11.7 5.2-11.7 11.6v3.2h-29.5c-4.4 0-7.9 3.5-7.9 7.9v77.7c0 6.4 5.2 11.6 11.7 11.6h104.7c6.4 0 11.7-5.2 11.7-11.6v-77.7c0-4.4-3.6-7.9-7.9-7.9h-29.7z"></path></svg></span>
-                        <h3 class="u-text u-text-5">Skills</h3>
-                        <p class="u-text u-text-default u-text-6">Sample text. Click to select the text box. Click again
-                            or double click to start editing the text.</p>
+                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3"><span class="u-file-icon u-icon u-icon-3"><img th:src="@{~/images/105620.png}" alt=""></span>
+                        <h3 class="u-text u-text-5">Solo Modus</h3>
+                        <p class="u-text u-text-default u-text-6"> Lerne in deinem eigenen Tempo, wiederhole Quizze nach Bedarf und verfolge deinen Fortschritt.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="u-align-center u-clearfix u-grey-5 u-section-3" id="sec-fca9">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-expanded-width u-list u-list-1">
-            <div class="u-repeater u-repeater-1">
-                <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                        <img alt="" class="u-expanded-width u-image u-image-default u-image-1" data-image-width="500"
-                             data-image-height="500"
-                             src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJtYW4iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBzdHlsZT0id2lkdGg6IDI1NnB4OyBoZWlnaHQ6IDI1NnB4OyI+CjxyZWN0IGZpbGw9IiNDNkQ4RTEiIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2Ii8+CjxwYXRoIGZpbGw9IiM3Rjk2QTYiIGQ9Ik0xNzIuNiw5My40YzExLjYtNDQuNy0xMS4yLTQ4LjYtMTEuNy00OC4xYy0yMi40LTMxLjMtOTAuMy0xNi44LTc3LjQsNDguMWMtMTMuMy0yLjQtMS44LDMxLjYsMy43LDMyLjEKCWMwLDAsMCwwLDAsMGMwLjIsMCwwLjMsMCwwLjUtMC4xYzE0LjQsNDkuNyw2Mi43LDUwLjIsODAuNywwQzE3Mi4zLDEyNy4zLDE4Ni41LDkzLjMsMTcyLjYsOTMuNHoiLz4KPHBhdGggZmlsbD0iIzdGOTZBNiIgZD0iTTIwNS40LDE3Ny45Yy0yNC02LjEtNDMuNS0xOS44LTQzLjUtMTkuOGwtMjAuNiw2NC44bC04LTIyLjhjMTkuNy0yNy41LTMwLjMtMjcuNS0xMC42LDBsLTgsMjIuOEw5NCwxNTguMQoJYzAsMC0xOS41LDEzLjctNDMuNSwxOS44QzMyLjcsMTgyLjUsMzAsMjU2LDMwLDI1NmgxOTZDMjI2LDI1NiwyMjMuMywxODIuNSwyMDUuNCwxNzcuOXoiLz4KPC9zdmc+Cg==">
-                        <h5 class="u-text u-text-1">Samuel Schick</h5>
-                        <p class="u-text u-text-2">Sales Manager</p>
-                    </div>
-                </div>
-                <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
-                        <img alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="500"
-                             data-image-height="500"
-                             src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJ3b21hbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI1NiAyNTYiIHN0eWxlPSJ3aWR0aDogMjU2cHg7IGhlaWdodDogMjU2cHg7Ij4KPHJlY3QgZmlsbD0iI0M2RDhFMSIgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiLz4KPHBhdGggZmlsbD0iIzdGOTZBNiIgZD0iTTE1MC41LDE2MC4xTDE1MC41LDE2MC4xVjE1MmMwLDAsMjUuNCwwLjgsMzcuNC0xMS41YzAsMC0xNy41LTQuOS0xNC40LTM2LjljMy4xLTMxLjktMy45LTU5LjktMjkuNi01Ny41CgljMCwwLTExLjEtMTMuNC0zMy4yLTQuOWMtNy42LDIuOS0yOCwxMC4yLTI2LjksNTQuNGMxLDQ0LjItMTUuNyw0NC41LTE1LjcsNDQuNXM4LjYsMTIuNiwzNy45LDEyLjN2OC4ybDIyLjMsNjVsMjIuMi02NC45CglMMTUwLjUsMTYwLjF6Ii8+CjxwYXRoIGZpbGw9IiM3Rjk2QTYiIGQ9Ik0yMTAsMjU2bC00LjUtNTQuMmMtMS41LTgtNi42LTE0LjktMTMuOS0xOC41bC0yOC0xMy44Yy0xLjYtMC44LTMuMi0xLjctNC44LTIuNmw4LjgsMjYuMWwtMTIuNC0wLjkKCUwxMjgsMjI1LjZMMTAwLjcsMTkyTDg4LjQsMTkzbDktMjYuMWwtNS42LDIuOWwtMjcuNCwxMy41Yy03LjMsMy42LTEyLjUsMTAuNS0xMy45LDE4LjVMNDYsMjU2SDIxMHoiLz4KPC9zdmc+">
-                        <h5 class="u-text u-text-3">Phoebe Nelson</h5>
-                        <p class="u-text u-text-4">Advertising Manager</p>
-                    </div>
-                </div>
-                <div class="u-align-center u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                        <img alt="" class="u-expanded-width u-image u-image-default u-image-3" data-image-width="500"
-                             data-image-height="500"
-                             src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJtYW4iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBzdHlsZT0id2lkdGg6IDI1NnB4OyBoZWlnaHQ6IDI1NnB4OyI+CjxyZWN0IGZpbGw9IiNDNkQ4RTEiIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2Ii8+CjxwYXRoIGZpbGw9IiM3Rjk2QTYiIGQ9Ik0xNzIuNiw5My40YzExLjYtNDQuNy0xMS4yLTQ4LjYtMTEuNy00OC4xYy0yMi40LTMxLjMtOTAuMy0xNi44LTc3LjQsNDguMWMtMTMuMy0yLjQtMS44LDMxLjYsMy43LDMyLjEKCWMwLDAsMCwwLDAsMGMwLjIsMCwwLjMsMCwwLjUtMC4xYzE0LjQsNDkuNyw2Mi43LDUwLjIsODAuNywwQzE3Mi4zLDEyNy4zLDE4Ni41LDkzLjMsMTcyLjYsOTMuNHoiLz4KPHBhdGggZmlsbD0iIzdGOTZBNiIgZD0iTTIwNS40LDE3Ny45Yy0yNC02LjEtNDMuNS0xOS44LTQzLjUtMTkuOGwtMjAuNiw2NC44bC04LTIyLjhjMTkuNy0yNy41LTMwLjMtMjcuNS0xMC42LDBsLTgsMjIuOEw5NCwxNTguMQoJYzAsMC0xOS41LDEzLjctNDMuNSwxOS44QzMyLjcsMTgyLjUsMzAsMjU2LDMwLDI1NmgxOTZDMjI2LDI1NiwyMjMuMywxODIuNSwyMDUuNCwxNzcuOXoiLz4KPC9zdmc+Cg==">
-                        <h5 class="u-text u-text-5">Adrian Scold</h5>
-                        <p class="u-text u-text-6">Financial Director</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="u-align-center u-clearfix u-white u-section-4" id="sec-e648">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h5 class="u-text u-text-default u-text-1">the title</h5>
-        <h1 class="u-text u-text-default u-text-2">Iterative Methods</h1>
-        <p class="u-text u-text-3">Leverage agile frameworks to provide a robust synopsis for high level overviews.
-            Iterative approaches to corporate strategy foster collaborative thinking to further the overall value
-            proposition. Organically grow the holistic world view of
-            disruptive innovation.</p>
-    </div>
-</section>
-
-
-<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-2c21">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Beispieltext. Klicke, um das Textelement auszuwählen.</p>
-    </div>
-</footer>
-
-
 </body>
 </html>
