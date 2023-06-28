@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,24 @@ public class DashboardController {
      */
     @GetMapping("/dashboard")
     public final String home(final Model model,
+                             final Authentication authentication) {
+        DeckService.DeckDTO deck = service.getEmptyDTO();
+        model.addAttribute(deck);
+        String mail = authentication.getName();
+        User user = userService.findUserByEmail(mail);
+        model.addAttribute("username", user.getUsername());
+        return "dashboard";
+    }
+
+    /**
+     * Method to return the dashboard view
+     *
+     * @param model the model object
+     * @param authentication the object representing the authenticated user
+     * @return the String with the name of the view "dashboard"
+     */
+    @PostMapping("/dashboard")
+    public final String getDashboard(final Model model,
                              final Authentication authentication) {
         DeckService.DeckDTO deck = service.getEmptyDTO();
         model.addAttribute(deck);

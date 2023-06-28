@@ -49,6 +49,7 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .usernameParameter("email")
+                        .successForwardUrl("/dashboard")
                         .permitAll())
                 .logout((logout) -> logout.permitAll()
                         .logoutUrl("/logout")
