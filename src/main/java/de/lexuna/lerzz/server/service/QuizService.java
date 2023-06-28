@@ -147,7 +147,7 @@ public class QuizService {
      * @param quiz     the quiz object
      */
     public void end(User user, int cardId, int solution, Quiz quiz) {
-        McCard card = (McCard) quiz.getDeck().getCards().get(cardId);
+        McCard card = (McCard) quiz.getDeck().getCards().stream().filter(c-> c.getId() == cardId).findFirst().get();
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
 //            for (User player : quiz.getPlayer()) {
