@@ -1,6 +1,5 @@
 package de.lexuna.lerzz.server.controller;
 
-import de.lexuna.lerzz.model.Deck;
 import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.UserService;
@@ -8,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Controller class to handle dashboard related operations
@@ -33,7 +34,8 @@ public class DashboardController {
      * @return the String with the name of the view "dashboard"
      */
     @GetMapping("/dashboard")
-    public String home(Model model, Authentication authentication) {
+    public final String home(final Model model,
+                             final Authentication authentication) {
         DeckService.DeckDTO deck = service.getEmptyDTO();
         model.addAttribute(deck);
         String mail = authentication.getName();
@@ -46,12 +48,12 @@ public class DashboardController {
      * Method to delete a deck
      *
      * @param deckId the ID of the deck that should be deleted
-     * @param model the model object
      * @param authentication the object representing the authenticated user
      * @return the String with the name of the view "dashboard"
      */
     @DeleteMapping("delete/{id}")
-    public String deleteCardStack(@PathVariable("id") String deckId, Model model, Authentication authentication) {
+    public final String deleteCardStack(@PathVariable("id") final String deckId,
+                                        final Authentication authentication) {
         String mail = authentication.getName();
         User user = userService.findUserByEmail(mail);
         service.deleteDeck(deckId);
@@ -64,7 +66,8 @@ public class DashboardController {
      * @return a list of all DTO objects
      */
     @ModelAttribute("userDecks")
-    public List<DeckService.DeckDTO> getUserDecks(Authentication authentication) {
+    public final List<DeckService.DeckDTO> getUserDecks(
+            final Authentication authentication) {
         return service.asDTOs(this.service.getUserDecks(authentication.getName()));
     }
 
@@ -74,7 +77,8 @@ public class DashboardController {
      * @return a list of all DTO objects
      */
     @ModelAttribute("communityDecks")
-    public List<DeckService.DeckDTO> getCommunityDecks(Authentication authentication) {
+    public final List<DeckService.DeckDTO> getCommunityDecks(
+            final Authentication authentication) {
         return service.asDTOs(this.service.getCommunityDecks(authentication.getName()));
     }
 
