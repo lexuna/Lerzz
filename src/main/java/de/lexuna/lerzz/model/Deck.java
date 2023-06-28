@@ -55,6 +55,9 @@ public class Deck {
         Random rand = new Random();
         List<Card> randomCards = new ArrayList<>();
         Set<Integer> idSet = new HashSet<>();
+        if(this.cards.size() == nrOfQuestions) {
+            return this.cards;
+        }
         for (int i = 0; i < nrOfQuestions; i++) {
             int cardNr = rand.nextInt(0, this.cards.size() - 1);
             if (idSet.contains(cardNr)) {
