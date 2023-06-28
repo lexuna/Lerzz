@@ -41,27 +41,31 @@ public class StartsController {
     /**
      * Method to return the quiz statistics
      *
-     * @param deckId the ID of the deck with the questions of the quiz
-     * @param quizId the ID of the quiz
+     * @param deckId    the ID of the deck with the questions of the quiz
+     * @param quizId    the ID of the quiz
      * @param principal the principal object representing the current user
-     * @param model the model object with the data for the view
+     * @param model     the model object with the data for the view
      * @return the view name for displaying the quiz results
+     * @throws JsonProcessingException if an error while processing JSON occurs
      */
     @GetMapping("/deck/{deckId}/quiz/{quizId}/stats")
-    public String getStats(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Principal principal, Model model) throws JsonProcessingException {
+    public String getStats(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId,
+                           Principal principal, Model model) throws JsonProcessingException {
         Quiz quiz = service.getQuiz(quizId);
         quiz.finish(principal.getName());
 //        Quiz.Stats stats = quiz.getStats().get(principal.getName());
         if (quiz.getMode() == QuizMode.COOP) {
             String email = quiz.getOwner().getEmail();
-            List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(email)).collect(Collectors.toList());
+            List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(email))
+                    .collect(Collectors.toList());
             Quiz.Stats stats = quiz.getStats().get(email);
             model.addAttribute("stats", stats);
             model.addAttribute("time", quiz.getTime(email));
             model.addAttribute("answers", answers);
             model.addAttribute("deckId", deckId);
             model.addAttribute("cards", deckService.cardsAsDTOs(quiz.getQuestions()));
-            quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName())).forEach(p -> socketController.end(p.getEmail()));
+            quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName()))
+                    .forEach(p -> socketController.end(p.getEmail()));
             return "/quiz_results";
         } else {
             List<String> times = new ArrayList<>();
@@ -72,12 +76,12 @@ public class StartsController {
                     times.add(quiz.getTime(player.getEmail()));
                     rightAnswers.add(quiz.getStats().get(player.getEmail()).getRightAnswers());
                     users.add(player.getUsername());
-                    if(!player.getEmail().equals(principal.getName())) {
+                    if (!player.getEmail().equals(principal.getName())) {
                         Map<String, Object> map = new HashMap<>();
                         map.put("time", quiz.getTime(principal.getName()));
                         map.put("rightAnswer", quiz.getStats().get(principal.getName()).getRightAnswers());
                         map.put("user", userService.findUserByEmail(principal.getName()).getUsername());
-                        map.put("nr", quiz.getStats().values().stream().filter(s-> s.getEnd()!=null).count());
+                        map.put("nr", quiz.getStats().values().stream().filter(s -> s.getEnd() != null).count());
                         socketController.addStats(player.getEmail(), objectMapper.writeValueAsString(map));
                     }
                 }
@@ -89,18 +93,27 @@ public class StartsController {
         }
     }
 
+    /**
+     * gets the stats details in VS
+     * @param deckId    the ID of the deck with the questions of the quiz
+     * @param quizId    the ID of the quiz
+     * @param principal the principal object representing the current user
+     * @param model     the model object with the data for the view
+     * @return quiz_results
+     */
     @GetMapping("/deck/{deckId}/quiz/{quizId}/stats/details")
-    public String getDetails(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Principal principal, Model model) {
+    public String getDetails(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId,
+                             Principal principal, Model model) {
         Quiz quiz = service.getQuiz(quizId);
         quiz.finish(principal.getName());
         Quiz.Stats stats = quiz.getStats().get(principal.getName());
-        List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(principal.getName())).collect(Collectors.toList());
+        List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(principal.getName()))
+                .collect(Collectors.toList());
         model.addAttribute("stats", stats);
         model.addAttribute("time", quiz.getTime(principal.getName()));
         model.addAttribute("answers", answers);
         model.addAttribute("deckId", deckId);
         model.addAttribute("cards", deckService.cardsAsDTOs(quiz.getQuestions()));
-//        quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName())).forEach(p -> socketController.end(p.getEmail()));
         return "/quiz_results";
     }
 }

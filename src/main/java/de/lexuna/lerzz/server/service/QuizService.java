@@ -1,6 +1,11 @@
 package de.lexuna.lerzz.server.service;
 
-import de.lexuna.lerzz.model.*;
+import de.lexuna.lerzz.model.Card;
+import de.lexuna.lerzz.model.Deck;
+import de.lexuna.lerzz.model.McCard;
+import de.lexuna.lerzz.model.Quiz;
+import de.lexuna.lerzz.model.QuizMode;
+import de.lexuna.lerzz.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -98,7 +103,8 @@ public class QuizService {
      */
     public Card start(Quiz quiz) {
         quiz.setMode(quiz.getMode());
-        quiz.setPlayer(quiz.getPlayer().stream().map(i -> userService.findUserById(i.getId())).collect(Collectors.toList()));
+        quiz.setPlayer(quiz.getPlayer().stream().map(i -> userService.findUserById(i.getId()))
+                .collect(Collectors.toList()));
         quiz.getPlayer().forEach(p -> quiz.getPositions().add(1));
         return quiz.start();
     }
@@ -117,10 +123,10 @@ public class QuizService {
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
 //            for (User player : quiz.getPlayer()) {
-                boolean right = quiz.addAnswer(quiz.getOwner().getEmail(), card, answer);
-                if (right) {
-                    quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
-                }
+            boolean right = quiz.addAnswer(quiz.getOwner().getEmail(), card, answer);
+            if (right) {
+                quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
+            }
 //            }
         } else {
             boolean right = quiz.addAnswer(user.getEmail(), card, answer);
@@ -145,10 +151,10 @@ public class QuizService {
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
 //            for (User player : quiz.getPlayer()) {
-                boolean right = quiz.addAnswer( quiz.getOwner().getEmail(), card, answer);
-                if (right) {
-                    quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
-                }
+            boolean right = quiz.addAnswer(quiz.getOwner().getEmail(), card, answer);
+            if (right) {
+                quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
+            }
 //            }
         } else {
             boolean right = quiz.addAnswer(user.getEmail(), card, answer);
@@ -179,20 +185,24 @@ public class QuizService {
     }
 
     /**
-     * @param card
-     * @return
+     * gehts the quiz for the given Card
+     * @param card Card
+     * @return quiz
      */
     public Quiz getQuiz(DeckService.McCardDTO card) {
         return quizzesByOwner.get(card.getQuiz());
     }
 
+    /**
+     * gets the quiz where the given user is a player
+     *
+     * @param user player of the quiz
+     * @return quiz
+     */
     public Quiz getQuizForInvited(User user) {
         return quizzes.values().stream().filter(q -> q.getPlayer().contains(user)).findFirst().get();
     }
 
-    public Quiz getQuizByOwner(String mail) {
-        return quizzes.get(userService.findUserByEmail(mail).getId());
-    }
 
     /**
      * Class of a DTO representing a quiz

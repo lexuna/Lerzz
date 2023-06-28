@@ -1,6 +1,5 @@
 package de.lexuna.lerzz.server.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.lexuna.lerzz.model.Quiz;
 import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.QuizService;
