@@ -29,7 +29,7 @@ public class Quiz {
     private Deck deck;
     private List<Card> questions;
     private List<User> player = new ArrayList<>();
-    private QuizMode mode;
+    private QuizMode mode = QuizMode.COOP;
     private Instant begin;
     private final Map<String, Stats> stats = new HashMap<>();
     private final List<Answer> answers = new ArrayList<>();
