@@ -28,6 +28,7 @@ public class Deck {
     private String description;
     private Instant creationTime;
     private List<Card> cards = new ArrayList<>();
+    private int cardCount = 0;
 
     /**
      * @param userId of the author
@@ -43,6 +44,15 @@ public class Deck {
         this.name = name;
         this.description = description;
         this.creationTime = creationTime;
+    }
+
+    /**
+     * adds a new card and sets the id of that card
+     * @param card Card
+     */
+    public void addCard(Card card) {
+        card.setId(cardCount++);
+        cards.add(card);
     }
 
     /**

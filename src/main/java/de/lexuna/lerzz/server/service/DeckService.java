@@ -79,7 +79,7 @@ public class DeckService {
     public void addCard(String deckId, User user, McCardDTO cardDto) {
         Deck deck = getDeckById(deckId);
         int cardId = deck.getCards().size();
-        deck.getCards().add(new McCard(cardId, deck.getId(), cardDto.getQuestion(), user.getId(),
+        deck.addCard(new McCard(cardId, deck.getId(), cardDto.getQuestion(), user.getId(),
                 cardDto.getAnswers(), cardDto.getAnswers().get(cardDto.getSolution())));
         repo.save(deck);
     }
