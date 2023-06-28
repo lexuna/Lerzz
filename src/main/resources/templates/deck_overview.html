@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12" style="display: flex;align-content: flex-end;justify-content: flex-end;align-items: flex-end; margin-top: 15px">
-                                        <a th:href="@{/deck/{deckId}/create_quiz(deckId=${deck.id})}" class="btn btn-success">Quiz erstellen</a>
+                                        <button th:onclick="'window.location.href = \'' + @{/deck/{deckId}/create_quiz(deckId=${deck.id})} + '\''" class="btn btn-success" th:disabled="${#lists.size(deck.cards) < 10}">Quiz erstellen</button>
                                 </div>
                             </div>
                         </div>
