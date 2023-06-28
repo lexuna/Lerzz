@@ -18,5 +18,4 @@ public class LerzzServiceMain {
     public static void main(final String[] args) {
         SpringApplication.run(LerzzServiceMain.class, args);
     }
-
 }

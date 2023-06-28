@@ -51,7 +51,7 @@ public class LerzzUserDetailsService implements org.springframework.security.cor
      * @param roles the roles to retrieve authorities for
      * @return a list of authorities representing the specified roles
      */
-    private static List<GrantedAuthority> getAuthorities (List<String> roles) {
+    private static List<GrantedAuthority> getAuthorities(List<String> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));

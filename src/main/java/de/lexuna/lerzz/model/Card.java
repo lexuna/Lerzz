@@ -37,13 +37,12 @@ public abstract class Card {
     private String rightAnswer;
     private CardType type = CardType.MULTIPLE_CHOICE;
 
-
     /**
      * Checks if the given answer is correct.
      * @param answerText the text of the given answer
      * @return true if the given answer is correct
      */
-    public final boolean checkAnswer(final String answerText) {
+    public boolean checkAnswer(String answerText) {
         return rightAnswer.equals(answerText);
     }
 }

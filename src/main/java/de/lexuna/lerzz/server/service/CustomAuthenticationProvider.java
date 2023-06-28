@@ -23,6 +23,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserRepository userRepo;
 
+    /**
+     * Constructor
+     * @param encoder BCryptPasswordEncoder
+     */
     public CustomAuthenticationProvider(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
     }

@@ -2,7 +2,6 @@ package de.lexuna.lerzz.server.controller;
 
 
 import de.lexuna.lerzz.model.User;
-import de.lexuna.lerzz.server.service.UserAlreadyExistException;
 import de.lexuna.lerzz.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,7 @@ public class RegistrationController {
 //        user.setPassword(password);
         try {
             userService.registerNewUserAccount(user);
-        } catch (UserAlreadyExistException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "email already exists.");
             return "register";
