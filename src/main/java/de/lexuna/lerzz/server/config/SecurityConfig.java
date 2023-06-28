@@ -1,13 +1,20 @@
 package de.lexuna.lerzz.server.config;
 
 import de.lexuna.lerzz.server.service.LerzzUserDetailsService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.io.IOException;
 
 /**
  * Configuration class for Spring Security. Defines the authorization and authentication rules for the application,
@@ -48,8 +55,20 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/home")
                         .invalidateHttpSession(true))
                 .csrf().disable()
-                .httpBasic();
+                .httpBasic()
+                .authenticationEntryPoint(new NoPopupBasicAuthenticationEntryPoint());
         return http.build();
+    }
+
+    public class NoPopupBasicAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+        @Override
+        public void commence(HttpServletRequest request, HttpServletResponse response,
+                             AuthenticationException authException) throws IOException, ServletException {
+
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        }
+
     }
 
     /**
