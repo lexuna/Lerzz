@@ -51,11 +51,13 @@ public class StartsController {
     public String getStats(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, Principal principal, Model model) throws JsonProcessingException {
         Quiz quiz = service.getQuiz(quizId);
         quiz.finish(principal.getName());
-        Quiz.Stats stats = quiz.getStats().get(principal.getName());
-        List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(principal.getName())).collect(Collectors.toList());
+//        Quiz.Stats stats = quiz.getStats().get(principal.getName());
         if (quiz.getMode() == QuizMode.COOP) {
+            String email = quiz.getOwner().getEmail();
+            List<Quiz.Answer> answers = quiz.getAnswers().stream().filter(a -> a.getUserId().equals(email)).collect(Collectors.toList());
+            Quiz.Stats stats = quiz.getStats().get(email);
             model.addAttribute("stats", stats);
-            model.addAttribute("time", quiz.getTime(principal.getName()));
+            model.addAttribute("time", quiz.getTime(email));
             model.addAttribute("answers", answers);
             model.addAttribute("deckId", deckId);
             model.addAttribute("cards", deckService.cardsAsDTOs(quiz.getQuestions()));
@@ -98,7 +100,7 @@ public class StartsController {
         model.addAttribute("answers", answers);
         model.addAttribute("deckId", deckId);
         model.addAttribute("cards", deckService.cardsAsDTOs(quiz.getQuestions()));
-        quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName())).forEach(p -> socketController.end(p.getEmail()));
+//        quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName())).forEach(p -> socketController.end(p.getEmail()));
         return "/quiz_results";
     }
 }

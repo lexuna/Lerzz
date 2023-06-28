@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- *  Class to manage quizzes
+ * Class to manage quizzes
  */
 @Service
 public class QuizService {
@@ -33,7 +33,7 @@ public class QuizService {
      * Method to create a new quiz with a given owner and deck
      *
      * @param ownerMail the email of the quiz owner
-     * @param deckId the ID of the deck
+     * @param deckId    the ID of the deck
      * @return a new quiz
      */
     public Quiz getNewQuiz(String ownerMail, String deckId) {
@@ -106,47 +106,55 @@ public class QuizService {
     /**
      * Method to go to the next question of the quiz
      *
-     * @param user the user answering the quiz
-     * @param cardId the ID ot the current card
+     * @param user     the user answering the quiz
+     * @param cardId   the ID ot the current card
      * @param solution the chosen answer
-     * @param quiz the quiz object
+     * @param quiz     the quiz object
      * @return the card DTO of the next question
      */
     public DeckService.McCardDTO next(User user, int cardId, int solution, Quiz quiz) {
         McCard card = (McCard) quiz.getQuestion(cardId);
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
-            for (User player : quiz.getPlayer()) {
-                boolean right = quiz.addAnswer(player.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
-                if (player.getEmail().equals(quiz.getOwner().getEmail()) && right) {
-                    quiz.getStats().get(user.getEmail()).addRightAnswer();
+//            for (User player : quiz.getPlayer()) {
+                boolean right = quiz.addAnswer(quiz.getOwner().getEmail(), card, answer);
+                if (right) {
+                    quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
                 }
-            }
+//            }
         } else {
-            boolean right = quiz.addAnswer(user.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
-            if(right) {
+            boolean right = quiz.addAnswer(user.getEmail(), card, answer);
+            if (right) {
                 quiz.getStats().get(user.getEmail()).addRightAnswer();
             }
         }
-        updatePosition(user, quiz, card);
+        updatePosition(user, quiz);
         return deckService.asDTO(quiz.nextQuestion(card), quiz.getId());
     }
 
     /**
      * Method to end the quiz
      *
-     * @param user the user answering the quiz
-     * @param cardId the ID of the current card
+     * @param user     the user answering the quiz
+     * @param cardId   the ID of the current card
      * @param solution the chosen answer
-     * @param quiz the quiz object
+     * @param quiz     the quiz object
      */
     public void end(User user, int cardId, int solution, Quiz quiz) {
         McCard card = (McCard) quiz.getDeck().getCards().get(cardId);
         String answer = card.getAnswers().get(solution);
         if (quiz.getMode() == QuizMode.COOP) {
-            quiz.getPlayer().forEach(p -> quiz.addAnswer(p.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer));
+//            for (User player : quiz.getPlayer()) {
+                boolean right = quiz.addAnswer( quiz.getOwner().getEmail(), card, answer);
+                if (right) {
+                    quiz.getStats().get(quiz.getOwner().getEmail()).addRightAnswer();
+                }
+//            }
         } else {
-            quiz.addAnswer(user.getEmail(), quiz.getQuestions().indexOf(card), card.checkAnswer(answer), answer);
+            boolean right = quiz.addAnswer(user.getEmail(), card, answer);
+            if (right) {
+                quiz.getStats().get(user.getEmail()).addRightAnswer();
+            }
         }
     }
 
@@ -155,10 +163,9 @@ public class QuizService {
      *
      * @param user the user answering the quiz
      * @param quiz the quiz object
-     * @param card the current card
      */
-    public void updatePosition(User user, Quiz quiz, Card card) {
-        quiz.updatePosition(user, card);
+    public void updatePosition(User user, Quiz quiz) {
+        quiz.updatePosition(user);
     }
 
     /**
@@ -172,8 +179,6 @@ public class QuizService {
     }
 
     /**
-     *
-     *
      * @param card
      * @return
      */

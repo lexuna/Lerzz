@@ -62,9 +62,9 @@ public class Quiz {
         Answer answer = new Answer(userId, questions.indexOf(card),
                 card.getAnswers().indexOf(answerText),
                 card.checkAnswer(answerText));
-        if (answer.isRight()) {
-            stats.get(userId).rightAnswers += 1;
-        }
+//        if (answer.isRight()) {
+//            stats.get(userId).rightAnswers += 1;
+//        }
         answers.add(answer);
         return answer.isRight();
     }

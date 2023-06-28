@@ -53,7 +53,7 @@
                       </div>
                       <div class="mb-3 margin-0">
                         <div class="details-button right" style="padding: 10px">
-                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                          <button id="details0" class="btn btn-success" style="width: 100px; disabled: true" type="button">
                             Details
                           </button>
                         </div>
@@ -93,7 +93,7 @@
                       </div>
                       <div class="mb-3 margin-0">
                         <div class="details-button right" style="padding: 10px">
-                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                          <button id="details1" class="btn btn-success" style="width: 100px; disabled: true" type="button">
                             Details
                           </button>
                         </div>
@@ -133,7 +133,7 @@
                       </div>
                       <div class="mb-3 margin-0">
                         <div class="details-button right" style="padding: 10px">
-                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                          <button id="details2" class="btn btn-success" style="width: 100px; disabled: true" type="button">
                             Details
                           </button>
                         </div>
@@ -173,7 +173,7 @@
                       </div>
                       <div class="mb-3 margin-0">
                         <div class="details-button right" style="padding: 10px">
-                          <button id="details" class="btn btn-success" style="width: 100px" type="button">
+                          <button id="details3" class="btn btn-success" style="width: 100px; disabled: true" type="button">
                             Details
                           </button>
                         </div>
@@ -204,33 +204,6 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-   <script inline="javascript">
-      var details = document.getElementById("details");
-      details.addEventListener("click", loadDetails);
-      function loadDetails () {
-        window.location.href = window.location.href+'/details';
-      }
-
-      //Socket
-      var socket = new SockJS('/lerzz');
-      var client = Stomp.over(socket);
-      var sessionId = "";
-
-      client.connect({}, function(frame) {
-          var url = client.ws._transport.url;
-          url = url.replace("ws://localhost:8080/lerzz",  "");
-          url = url.replace("/websocket", "");
-          url = url.replace(/^[0-9]+\//, "");
-          console.log("Your current session is: " + url);
-          sessionId = url;
-
-          client.subscribe('/user/queue/quiz/newStats', function(response) {
-            var message = JSON.parse(response.body);
-            document.getElementById("user"+message.nr).textContent = message.user;
-            document.getElementById("time"+message.nr).textContent = message.time;
-            document.getElementById("answers"+message.nr).textContent = message.rightAnswer+"/10";
-          });
-      });
-    </script> 
+    <script type="text/javascript" th:src="@{~/js/stats.js}"></script>
   </body>
 </html>

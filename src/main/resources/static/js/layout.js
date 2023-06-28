@@ -66,13 +66,13 @@ function simulateInvitation() {
 }
 
 //Socket
-var socket = new SockJS('/lerzz');
+var socket = new SockJS('/lerzz/invite');
 var client = Stomp.over(socket);
 var sessionId = "";
 
 client.connect({}, function(frame) {
     var url = client.ws._transport.url;
-    url = url.replace("ws://localhost:8080/lerzz",  "");
+    url = url.replace("ws://localhost:8080/lerzz/invite",  "");
     url = url.replace("/websocket", "");
     url = url.replace(/^[0-9]+\//, "");
     console.log("Your current session is: " + url);

@@ -49,10 +49,11 @@ public class QuizRestController {
     @PostMapping("/invite")
     public final void invite(@RequestBody final String payload, final Principal principal)
             throws JsonProcessingException {
-        Quiz quiz = service.getQuiz(userService.findUserByEmail(principal.getName()).getId());
+        User user = userService.findUserByEmail(principal.getName());
+        Quiz quiz = service.getQuiz(user.getId());
         Map<String, String> map = new HashMap<>();
         map.put("quiz", quiz.getDeck().getName());
-        map.put("owner", principal.getName());
+        map.put("owner", user.getUsername());
         map.put("quizId", quiz.getId());
         socketController.invite(objectMapper.writeValueAsString(map), userService.findUserByName(payload).getEmail());
     }
@@ -103,12 +104,14 @@ public class QuizRestController {
     @PostMapping("/invitationAccepted")
     public final void invitationAccepted(@RequestBody final String payload, final Principal principal)
             throws JsonProcessingException {
-        Quiz quiz = service.getQuiz(userService.findUserByEmail(payload).getId());
-        quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
+        Quiz quiz = service.getQuiz(userService.findUserByName(payload).getId());
+//        quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
         Map<String, String> map = new HashMap<>();
         map.put("player", userService.findUserByEmail(principal.getName()).getUsername());
         map.put("count", quiz.getPlayer().size() + "");
-        socketController.invitationAccepted(objectMapper.writeValueAsString(map), payload);
+        for (User player : quiz.getPlayer()) {
+            socketController.invitationAccepted(objectMapper.writeValueAsString(map), player.getEmail());
+        }
     }
 
     /**

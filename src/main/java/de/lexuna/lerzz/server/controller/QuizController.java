@@ -56,9 +56,12 @@ public class QuizController {
      * @return create_quiz
      */
     @GetMapping("/join/{ownerId}")
-    public final String joinQuiz(@PathVariable("ownerId") final String ownerId, final Model model) {
-        QuizService.QuizDTO quiz = service.toDTO(service.getQuiz(ownerId));
-        model.addAttribute("quiz", quiz);
+    public final String joinQuiz(@PathVariable("ownerId") final String ownerId, final Model model,
+                                 final Principal principal) {
+        Quiz quiz = service.getQuiz(ownerId);
+        quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
+        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+        model.addAttribute("quiz", quizDTO);
         return "/create_quiz";
     }
 
