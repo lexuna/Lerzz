@@ -1,6 +1,7 @@
 package de.lexuna.lerzz.server.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,7 +19,8 @@ public class ControllerConfig implements WebMvcConfigurer {
      * @param registry the {@link ViewControllerRegistry} to register view controllers with
      */
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public final void addViewControllers(
+            final ViewControllerRegistry registry) {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
@@ -30,5 +32,18 @@ public class ControllerConfig implements WebMvcConfigurer {
 
 //        registry.addViewController("/edit_stack").setViewName("edit_stack");
 
+    }
+
+    /**
+     * Method to configure the Cross-Origin Resource Sharing for specific endpoints
+     *
+     * @param registry the CORS-object to add cors-configuration
+     */
+    @Override
+    public final void addCorsMappings(final CorsRegistry registry) {
+        registry.addMapping("/deck/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST")
+                .allowedHeaders("*");
     }
 }

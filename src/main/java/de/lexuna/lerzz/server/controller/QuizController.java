@@ -1,34 +1,24 @@
 package de.lexuna.lerzz.server.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.lexuna.lerzz.model.Card;
-import de.lexuna.lerzz.model.Deck;
 import de.lexuna.lerzz.model.Quiz;
-import de.lexuna.lerzz.model.User;
 import de.lexuna.lerzz.server.service.DeckService;
 import de.lexuna.lerzz.server.service.QuizService;
 import de.lexuna.lerzz.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
+/**
+ * Controller class to handle quiz operations
+ */
 @Controller
-//@SessionAttributes({"quiz"})
 public class QuizController {
 
-
-    private ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private QuizService service;
     @Autowired
@@ -40,8 +30,17 @@ public class QuizController {
     @Autowired
     private WebSocketController socketController;
 
+    /**
+     * Method to create a quiz out of a deck
+     *
+     * @param deckId         the ID of the deck
+     * @param model          the Model object for the view
+     * @param authentication the object representing the authenticated user
+     * @return String with the name of the view "/create_quiz"
+     */
     @GetMapping("deck/{deckId}/create_quiz")
-    public String createQuiz(@PathVariable("deckId") String deckId, Model model, Authentication authentication) {
+    public final String createQuiz(@PathVariable("deckId") final String deckId, final Model model,
+                                   final Authentication authentication) {
         String mail = authentication.getName();
         QuizService.QuizDTO quiz = service.toDTO(service.getNewQuiz(mail, deckId));
         model.addAttribute("quiz", quiz);
@@ -49,72 +48,45 @@ public class QuizController {
         return "/create_quiz";
     }
 
+    /**
+     * controller for join a quiz
+     * @param ownerId String
+     * @param model Model
+     * @return create_quiz
+     */
     @GetMapping("/join/{ownerId}")
-    public String joinQuiz( @PathVariable("ownerId") String ownerId, Model model) {
-        QuizService.QuizDTO quiz = service.toDTO(service.getQuiz(ownerId));
-        model.addAttribute("quiz", quiz);
+    public final String joinQuiz(@PathVariable("ownerId") final String ownerId, final Model model,
+                                 final Principal principal) {
+        Quiz quiz = service.getQuiz(ownerId);
+        quiz.getPlayer().add(userService.findUserByEmail(principal.getName()));
+        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+        model.addAttribute("quiz", quizDTO);
         return "/create_quiz";
     }
 
-//    @PostMapping("deck/{deckId}/quiz/{quizId}")
-//    public String quiz(@PathVariable("deckId") String deckId, Model model) {
-//        QuizService.QuizDTO quiz = (QuizService.QuizDTO) model.getAttribute("quiz");
-////        DeckService.McCardDTO card;
-//        DeckService.McCardDTO cardDto = deckService.asDTO(service.start(quiz), quiz.getOwnerId());
-//        model.addAttribute("questionCount", service.getQuestionCount(quiz));
-//        model.addAttribute("card", cardDto);
-//        quiz.setStarted(true);
-//        socketController.updatePositions(service.getQuiz(cardDto).getPositions(), quiz.getOwnerId());
-//        return "redirect:/quiz/" + quiz.getId();
-//    }
-
-    @PostMapping("deck/{deckId}/quiz/{quizId}")
-    public String quiz(@PathVariable("deckId") String deckId, @PathVariable("quizId") String quizId, @ModelAttribute DeckService.McCardDTO cardDto, Model model, Principal principal) {
-//        QuizService.QuizDTO quiz = (QuizService.QuizDTO) model.getAttribute("quiz");
-//        DeckService.McCardDTO card;
-        QuizService.QuizDTO quizDTO = service.toDTO(service.getQuiz(quizId));
+    /**
+     * Method to start the quiz and return the view
+     *
+     * @param deckId    the ID of the deck
+     * @param quizId    the ID of the quiz
+     * @param model     Model
+     * @param principal the object representing the authenticated user
+     * @return String with the name of the view "/quiz"
+     */
+    @GetMapping("deck/{deckId}/quiz/{quizId}")
+    public final String quiz(@PathVariable("deckId") final String deckId, @PathVariable("quizId") final String quizId,
+                             final Model model, final Principal principal) {
         Quiz quiz = service.getQuiz(quizId);
-//        if (quizDTO.isStarted()) {
-//            cardDto = service.next(userService.findUserByEmail(principal.getName()), cardDto, deckId, quizId);
-//            model.addAttribute("questionCount", service.getQuestionCount(quizDTO));
-//            model.addAttribute("card", cardDto);
-//            model.addAttribute("quiz", quizDTO);
-//        } else {
-            cardDto = deckService.asDTO(service.start(quizDTO), quizDTO.getOwnerId());
-            model.addAttribute("questionCount", quiz.getQuestions().size());
-//            model.addAttribute("card", cardDto);
-            model.addAttribute("quiz", quizDTO);
-//            model.addAttribute("questionNr", 1);
-//            quizDTO.setStarted(true);
-//        }
-//        socketController.updatePositions(quiz.getPositions(), quizDTO.getOwnerId());
+        QuizService.QuizDTO quizDTO = service.toDTO(quiz);
+        if (quiz.getOwner().getEmail().equals(principal.getName())) {
+            service.start(quiz);
+            quiz.getPlayer().stream().filter(p -> !p.getEmail().equals(principal.getName()))
+                    .forEach(p -> socketController.start(p.getEmail(), deckId, quizId));
+        }
+        model.addAttribute("questionCount", quiz.getQuestions().size());
+        model.addAttribute("quiz", quizDTO);
         return "/quiz";
     }
 
-//    @PostMapping("/next")
-//    public DeckService.McCardDTO next(@RequestBody String payload, Model model, Principal principal, @Header("deckId") String deckId) throws JsonProcessingException {
-//        DeckService.McCardDTO card = objectMapper.readValue(payload, DeckService.McCardDTO.class);
-//        DeckService.McCardDTO next = service.next(userService.findUserByEmail(principal.getName()), card, deckId);
-////        messagingTemplate.convertAndSendToUser(principal.getName(), "/secured/user/queue", objectMapper.writeValueAsString(next));
-////        messagingTemplate.convertAndSend( "/topic/next", next);
-//        Quiz quiz = service.updatePosition(principal.getName(), card);
-//        quiz.getPlayer().forEach(p -> socketController.updatePositions(quiz.getPositions(), quiz.getOwner().getId()));
-//        model.addAttribute("card", next);
-//        return next;
-//    }
 
-//    @PostMapping("/next")
-//    @ResponseBody
-//    public String next(@RequestBody String payload) throws JsonProcessingException {
-//        Map<String, Object> map = objectMapper.readValue(payload, Map.class);
-//        String deckId = (String) map.get("deckId");
-//        String quizId = (String) map.get("quizId");
-//        int cardId = (int) map.get("cardId");
-//        int questionNr = Integer.parseInt((String) map.get("questionNr"));
-//        int solution = (int) map.get("solution");
-//
-//        DeckService.McCardDTO card = deckService.asDTO(service.getQuiz(quizId).getQuestions().get(questionNr));
-////        model.addAttribute("card", card);
-//        return objectMapper.writeValueAsString(card);
-//    }
 }

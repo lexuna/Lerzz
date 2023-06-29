@@ -85,8 +85,8 @@
                         </div>
                     </div>
                 </div>
-                <div th:each="player : ${quiz.invited}" class="container-right list-group">
-                    <a class="list-group-item list-group-item-action">
+                <div class="container-right list-group">
+                    <a th:each="player : ${quiz.invited}" class="list-group-item list-group-item-action">
                         <div class="row">
                             <div class="left User-icon-list">
                                 <svg style="width:24px; height:24px;">
@@ -110,20 +110,9 @@
 <script class="u-script" type="text/javascript" th:src="@{~/js/index.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/jquery.js}" defer=""></script>
 <script class="u-script" type="text/javascript" th:src="@{~/js/nicepage.js}" defer=""></script>
+<script th:src="@{~/js/quiz.js}"></script>
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script th:src="@{~/js/socket.js}"></script>
-<script th:src="@{~/js/quiz.js}"></script>
-
-
-<script th:inline="javascript">
-          var card = /*[[${card}]]*/ null;
-          var quiz = /*[[${quiz}]]*/ null;
-          var next = document.getElementById('next');
-          next.addEventListener('click', function(){
-            loadNext(quiz.deckId, quiz.id);
-          });
-  </script>
 </body>
 </html>

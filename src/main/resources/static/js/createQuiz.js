@@ -1,3 +1,10 @@
+function changeMode(mode) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/changeMode", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(mode);
+}
+
 function invite(name) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/invite", true);
@@ -12,16 +19,10 @@ window.onload = function() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var message = JSON.parse(xhttp.responseText);
-
-            document.getElementById('invited0').textContent = message[0];
-            if(message.length>=2) {
-                document.getElementById('invited1').textContent = message[1];
-            }
-            if(message.length>=3) {
-                document.getElementById('invited2').textContent = message[2];
-            }
-            if(message.length>=4) {
-                document.getElementById('invited3').textContent = message[3];
+            
+            for(var i=0; i<message.length; i++) {
+                document.getElementById('invited'+i).textContent = message[i];
+                document.getElementById('invited'+i+'Parent').classList.remove("hidden");
             }
         }
     };
@@ -49,9 +50,30 @@ client.connect({}, function(frame) {
     sessionId = url;
 
     client.subscribe('/user/queue/quiz/invitationAccepted', function(response) {
-            var message = response.body;
-            // Verarbeite die empfangene Nachricht
-            console.log(message);
-            document.getElementById('invited1').textContent = message;
+        var message = JSON.parse(response.body);
+        // Verarbeite die empfangene Nachricht
+        console.log(message);
+        document.getElementById('invited'+message.count).textContent = message.player;
+        document.getElementById('invited'+message.count+'Parent').classList.remove("hidden");
     });
+
+    client.subscribe('/user/queue/quiz/start', function(response) {
+        const currentUrl = window.location.host;
+        const newUrl = currentUrl + response.body;
+        window.location.href = response.body;
+    });
+});
+
+var invitationButton = document.getElementById('invite');
+var invitation = document.getElementById('invitation');
+invitationButton.addEventListener('click', function (){
+    invite(invitation.value);
+});
+var coopMode = document.getElementById('coopMode');
+var vsMode = document.getElementById('vsMode');
+coopMode.addEventListener('click', function (){
+    changeMode('COOP');
+});
+vsMode.addEventListener('click', function (){
+    changeMode('VS');
 });

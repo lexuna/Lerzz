@@ -1,6 +1,16 @@
 package de.lexuna.lerzz.model;
 
+/**
+ * Quiz game modes
+ */
 public enum QuizMode {
-    
-    VS, COOP;
+
+    /**
+     * Competitive Mode
+     */
+    VS,
+    /**
+     * coop mode
+     */
+    COOP;
 }

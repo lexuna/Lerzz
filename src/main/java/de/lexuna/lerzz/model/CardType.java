@@ -11,5 +11,12 @@ package de.lexuna.lerzz.model;
  * Additional values can be added to this enumeration if needed in the future.
  */
 public enum CardType {
-    SIMPLE, MULTIPLE_CHOICE
+    /**
+     * a question with free text answer
+     */
+    SIMPLE,
+    /**
+     * a multiple/single choise question
+     */
+    MULTIPLE_CHOICE
 }

@@ -1,8 +1,12 @@
 package de.lexuna.lerzz.model;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import java.util.List;
 
 /**
  * The Card class represents a card in a deck of cards used for a game.
@@ -33,14 +37,11 @@ public abstract class Card {
     private String rightAnswer;
     private CardType type = CardType.MULTIPLE_CHOICE;
 
-    public Card(int id, String deckId, String question, String author, String rightAnswer) {
-        this.id = id;
-        this.deckId = deckId;
-        this.question = question;
-        this.author = author;
-        this.rightAnswer = rightAnswer;
-    }
-
+    /**
+     * Checks if the given answer is correct.
+     * @param answerText the text of the given answer
+     * @return true if the given answer is correct
+     */
     public boolean checkAnswer(String answerText) {
         return rightAnswer.equals(answerText);
     }
